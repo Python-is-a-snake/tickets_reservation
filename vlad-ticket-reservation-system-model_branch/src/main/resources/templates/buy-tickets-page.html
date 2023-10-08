@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Cinemagic | Tickets</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <base href="/">
+  <link th:href="@{css/styles.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+
+  <main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section class="py-5">
+      <div class="container">
+        <h3>Session for <span th:text="${movie.title}">Title</span></h3>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item"> <h5><b>When: </b><i th:text="${#temporals.format(movieSession.sessionDateTime, 'EEEE, dd.MM.yyyy, HH:mm')}"></i></h5></li>
+        <li class="list-group-item"> <h5><b>Hall: </b><i th:text="${hall.type}"></i> "<span th:text="${hall.name}"></span>"</h5></li>
+        </ul>
+        <div class="container">
+          <table class="table table-sm table-responsive-sm">
+            <thead>
+            <tr>
+              <th colspan="20">
+                <img th:src="@{assets/cinema-screen.png}" alt="screen"/>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${places}">
+              <th scope="row" th:text="${entry.key}">Row</th>
+              <td th:each="place : ${entry.value}" th:with="placeId = ${place.id}">
+                <form method="post" th:href="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id}, placeId=${place.id})}">
+
+<!--                  <button type="submit" class="btn btn-primary" th:text="${place.number}" th:name="placeId" th:value="${place.id}"-->
+<!--                          th:classappend="${#lists.contains(takenPlaces, place)} ? 'disabled'">Submit</button>-->
+                  <button type="submit" class="btn btn-danger disabled" th:text="${place.number}" th:name="placeId" th:value="${place.id}"
+                          th:if="${#lists.contains(takenPlaces, place)}">Submit</button>
+
+                  <button type="submit" class="btn btn-primary" th:text="${place.number}" th:name="placeId" th:value="${place.id}"
+                          th:if="${not #lists.contains(takenPlaces, place)}">Submit</button>
+                </form>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

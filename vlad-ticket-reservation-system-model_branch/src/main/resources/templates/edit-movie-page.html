@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Cinemagic | Edit Movie</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <base href="/">
+  <link th:href="@{css/styles.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+<main class="flex-shrink-0">
+  <!-- Form to edit movie -->
+  <form role="form" method="post" th:action="@{/movies/edit/{movieId}(movieId=${movie.id})}" th:object="${movie}">
+    <input type="hidden" th:field="*{id}">
+    <div class="container">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="title">Title</label>
+          <input type="text"
+                 class="form-control"
+                 id="title"
+                 name="title"
+                 th:field="*{title}"
+                 placeholder="Movie Title">
+          <p th:if="${#fields.hasErrors('title')}" class="text-danger" th:errors="*{title}"></p>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="description">Description</label>
+          <input type="text"
+                 class="form-control"
+                 id="description"
+                 name="description"
+                 th:field="*{description}"
+                 placeholder="Movie Description">
+          <p th:if="${#fields.hasErrors('description')}" class="text-danger" th:errors="*{description}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="genre">Genre</label>
+          <input type="text"
+                 class="form-control"
+                 id="genre"
+                 name="genre"
+                 th:field="*{genre}"
+                 placeholder="Genre">
+          <p th:if="${#fields.hasErrors('genre')}" class="text-danger" th:errors="*{genre}"></p>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="director">Director</label>
+          <input type="text"
+                 class="form-control"
+                 id="director"
+                 name="director"
+                 th:field="*{director}"
+                 placeholder="Director">
+          <p th:if="${#fields.hasErrors('director')}" class="text-danger" th:errors="*{director}"></p>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="actors">Actors</label>
+          <input type="text"
+                 class="form-control"
+                 id="actors"
+                 name="actors"
+                 th:field="*{actors}"
+                 placeholder="Actors">
+          <p th:if="${#fields.hasErrors('actors')}" class="text-danger" th:errors="*{actors}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="duration">Duration</label>
+          <input type="text"
+                 class="form-control"
+                 id="duration"
+                 name="duration"
+                 th:field="*{duration}"
+                 placeholder="Duration(in minutes)">
+          <p th:if="${#fields.hasErrors('duration')}" class="text-danger" th:errors="*{duration}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="country">Country</label>
+          <input type="text"
+                 class="form-control"
+                 id="country"
+                 name="country"
+                 th:field="*{country}"
+                 placeholder="Country">
+          <p th:if="${#fields.hasErrors('country')}" class="text-danger" th:errors="*{country}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="releaseDate">Release Date</label>
+          <input type="date"
+                 class="form-control"
+                 id="releaseDate"
+                 name="releaseDate"
+                 th:field="*{releaseDate}">
+          <p th:if="${#fields.hasErrors('releaseDate')}" class="text-danger" th:errors="*{releaseDate}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="posterUrl">Poster Url</label>
+          <input type="text"
+                 class="form-control"
+                 id="posterUrl"
+                 name="posterUrl"
+                 th:field="*{posterUrl}"
+                 placeholder="Poster Url">
+          <p th:if="${#fields.hasErrors('posterUrl')}" class="text-danger" th:errors="*{posterUrl}"></p>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="posterUrl">Trailer Url</label>
+          <input type="text"
+                 class="form-control"
+                 id="trailerUrl"
+                 name="trailerUrl"
+                 th:field="*{trailerUrl}"
+                 placeholder="Trailer Url (Embedded)">
+          <p th:if="${#fields.hasErrors('trailerUrl')}" class="text-danger" th:errors="*{trailerUrl}"></p>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Edit movie</button>
+    </div>
+  </form>
+</main>
+</div>
+</body>
+</html>

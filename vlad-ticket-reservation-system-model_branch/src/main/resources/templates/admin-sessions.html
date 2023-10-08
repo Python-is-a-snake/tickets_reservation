@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Cinemagic | Movies</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <base href="/">
+  <link th:href="@{css/styles.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+
+  <main class="flex-shrink-0">
+    <!-- Page Content-->
+    <section class="py-5">
+      <div class="container">
+        <h3>Sessions</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Hall Type</th>
+            <th scope="col">Hall Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Available</th>
+            <th scope="col"><b>View</b></th>
+<!--            <th scope="col"><b>Edit</b></th>-->
+            <th scope="col"><b>Delete</b></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:if="${#lists.isEmpty(movieSessions)}">
+            <td colspan="9" class="text-center table-warning">NO SESSIONS WERE FOUND!</td>
+          </tr>
+          <tr th:each="movieSession : ${movieSessions}">
+            <td th:text="${movieSession.movie.title}">Movie Title</td>
+            <td th:text="${movieSession.hall.type}">Hall Type</td>
+            <td th:text="${movieSession.hall.name}">Hall name</td>
+            <td th:text="${#temporals.format(movieSession.sessionDateTime, 'dd/MM/yyyy')}">DATE</td>
+            <td th:text="${#temporals.format(movieSession.sessionDateTime, 'HH:mm')}">TIME</td>
+            <td th:if="${not movieSession.available}"><button class="btn btn-danger"></button></td>
+            <td th:if="${movieSession.available}"><button class="btn btn-success"></button></td>
+            <td>
+              <form method="get" th:action="@{/movies/{movieId}(movieId=${movieSession.movie.id})}">
+                <button type="submit" class="btn btn-warning">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </form>
+            </td>
+<!--            <td>-->
+<!--              <form method="get" th:action="@{/sessions/edit/{sessionId}(sessionId=${movieSession.id})}">-->
+<!--                <button type="submit" class="btn btn-info">-->
+<!--                  <i class='fa fa-edit'></i>-->
+<!--                </button>-->
+<!--              </form>-->
+<!--            </td>-->
+            <td>
+              <form method="post" th:action="@{/sessions/delete/{sessionId}(sessionId=${movieSession.id})}">
+                <button type="submit" class="btn btn-danger">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Cinemagic | Edit Session</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <base href="/">
+  <link th:href="@{css/styles.css}" rel="stylesheet">
+</head>
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+
+  <div class="container">
+    <main class="flex-shrink-0">
+      <form action="/sessions/edit" method="post" th:object="${sessionDto}">
+        <input type="hidden" th:field="*{id}" /> <!-- Hidden field to store the session ID -->
+        <div class="form-group col-md-6">
+          <label for="movie">Movie:</label>
+          <select id="movie" name="movieId" class="form-select">
+            <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.title}"></option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="hall">Hall:</label>
+          <select id="hall" name="hallId" class="form-select">
+            <option th:each="hall : ${halls}" th:value="${hall.id}" th:text="${hall.name}"></option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sessionDateTime">Session Date and Time:</label>
+          <input type="datetime-local" id="sessionDateTime" name="sessionDateTime" class="form-control"
+                 th:field="*{sessionDateTime}" th:value="${sessionDto.sessionDateTime}"/>
+          <p th:if="${#fields.hasErrors('sessionDateTime')}" class="text-danger" th:errors="*{sessionDateTime}"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Session</button>
+      </form>
+    </main>
+  </div>
+</div>
+</body>
+</html>

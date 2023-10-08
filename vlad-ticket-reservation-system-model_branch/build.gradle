@@ -1,0 +1,99 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.7'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'io.freefair.lombok' version "8.0.1"
+}
+
+group = 'com.trs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Web starter (web)
+    implementation "org.springframework.boot:spring-boot-starter-web"
+
+    // == UI ==
+    // starter
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // layouts - https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect
+    implementation "nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1"
+    // bootstrap core - https://mvnrepository.com/artifact/org.webjars/bootstrap
+    implementation "org.webjars:bootstrap:5.2.3"
+    // bootstrap icons - https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-icons
+    implementation "org.webjars.npm:bootstrap-icons:1.5.0"
+
+
+    // == Validation ==
+    // starter - https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
+    implementation "org.springframework.boot:spring-boot-starter-validation:3.0.4"
+    // https://mvnrepository.com/artifact/javax.validation/validation-api
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
+
+    // == Database ==
+    // JPA starter (hibernate, repositories, etc.)
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    // migrations
+    implementation "org.flywaydb:flyway-mysql"
+    implementation "org.flywaydb:flyway-core"
+    // mariadb driver
+    runtimeOnly "org.mariadb.jdbc:mariadb-java-client"
+    // h2 database for testing
+    testRuntimeOnly "com.h2database:h2"
+
+    // == MapStruct ==
+    // core
+    implementation "org.mapstruct:mapstruct:1.5.5.Final"
+    // annotation processor
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+    // binding with lombok
+    // WARN: note sure we need it
+    // annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+
+    // == Other ==
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+    runtimeOnly "org.springframework.boot:spring-boot-starter-actuator"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    // gradle plugin - https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-gradle-plugin
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:3.0.7"
+
+    // == Security ==
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation "org.springframework.boot:spring-boot-starter-security"
+    //  Temporary explicit version to fix Thymeleaf bug
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+    //implementation 'org.springframework.security:spring-security-test'
+
+
+    // == oAuth2 ==
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-oauth2-client
+    //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '3.1.0'
+
+    // == JWT ==
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+    //implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
+    //runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
+    //runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+
+    // == Mailbox Validator ==
+    // https://mvnrepository.com/artifact/com.mailboxvalidator/mailboxvalidator-java
+    implementation group: 'com.mailboxvalidator', name: 'mailboxvalidator-java', version: '1.1.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

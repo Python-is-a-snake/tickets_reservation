@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cinemagic | Movies</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <base href="/">
+    <link th:href="@{css/styles.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+
+    <main class="flex-shrink-0">
+        <!-- Page Content-->
+        <section class="py-5">
+            <div class="container">
+                <h3>My Profile</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">Email: <i th:text="${user.username}"></i></li>
+                    <li class="list-group-item">Registration date: <i th:text="${#temporals.format(user.registrationDate, 'dd.MM,yyyy')}"></i></li>
+                </ul>
+                <hr>
+
+                <h3>My Tickets</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Hall</th>
+                        <th scope="col">Hall Type</th>
+                        <th scope="col">Session Time</th>
+                        <th scope="col">Session Date</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Place(Row | Num)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(tickets)}">
+                        <td colspan="6" class="text-center table-warning">YOU HAVE NO TICKETS :(</td>
+                    </tr>
+                    <tr th:if="${not #lists.isEmpty(tickets)}" th:each="ticket : ${tickets}">
+                        <td th:text="${ticket.session.movie.title}">Mark</td>
+                        <td th:text="${ticket.session.hall.name}">Otto</td>
+                        <td th:text="${ticket.session.hall.type}">Otto</td>
+                        <td th:text="${#temporals.format(ticket.session.sessionDateTime, 'EEEE, dd.MM.yyyy')}">@mdo</td>
+                        <td th:text="${#temporals.format(ticket.session.sessionDateTime, 'HH:mm')}">Session Time</td>
+                        <td th:text="${ticket.price}">@mdo</td>
+                        <td><span th:text="${ticket.place.row}"></span> | <span th:text="${ticket.place.number}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+</body>
+</html>
