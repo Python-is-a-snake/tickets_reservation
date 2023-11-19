@@ -3,6 +3,9 @@ package com.trs.tickets.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,7 +25,7 @@ public class Ticket extends BaseEntity {
     @ManyToOne(optional = false)
     private Place place;
 
-    @ManyToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
     private Session session;
 
     @Column(nullable = false)

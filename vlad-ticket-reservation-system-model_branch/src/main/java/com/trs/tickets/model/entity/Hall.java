@@ -17,7 +17,6 @@ import java.util.*;
 @AllArgsConstructor
 @Entity
 @JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class)
-// TODO jMentor: remove when DTOs are implemented
 public class Hall extends BaseEntity {
 
     @Column(nullable = false)

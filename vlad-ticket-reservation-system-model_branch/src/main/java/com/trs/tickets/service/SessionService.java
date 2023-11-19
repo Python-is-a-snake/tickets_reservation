@@ -27,6 +27,7 @@ public class SessionService {
     private final HallRepository hallRepository;
     private final TicketRepository ticketRepository;
     private final SessionMapper sessionMapper;
+    private final TicketService ticketService;
 
     public List<Session> getAllSessions() {
         return sessionRepository.findAll();
@@ -57,9 +58,12 @@ public class SessionService {
         var entity = sessionRepository.save(sessionMapper.convert(sessionDto));
         return sessionMapper.convert(entity);
     }
-    public void deleteSession(Long id) {
-        ticketRepository.findAllBySessionId(id).forEach(ticketRepository::delete);
-        sessionRepository.deleteById(id);
+
+    public void deleteSession(Long sessionId) {
+        ticketRepository.deleteTicketsBySessionId(sessionId);
+
+        sessionRepository.deleteById(sessionId);
     }
+
 
 }

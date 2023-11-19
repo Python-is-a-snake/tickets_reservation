@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @MappedSuperclass
 @Getter
-@Setter // TODO jMentor: remove setter
+@Setter
 public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
