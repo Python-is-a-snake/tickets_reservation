@@ -66,7 +66,7 @@ public class SessionController {
 
         ticket.setSessionId(session.getId());
         ticket.setPlaceId(place.getId());
-        ticket.setPrice(new BigDecimal(100));
+        ticket.setPrice(place.getPlaceType().getPrice());
         ticket.setUserId(user.getId());
 
         model.addAttribute("movieSession", session);

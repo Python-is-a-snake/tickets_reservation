@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <!-- Head content... -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Day of the Week');
+      data.addColumn('number', 'Total Sales');
+
+      // Thymeleaf dynamic data insertion
+      var salesByDayOfWeek = /*[[${salesByDayOfWeek}]]*/ 'default';
+
+      var rows = [];
+      for (var dayOfWeek in salesByDayOfWeek) {
+        if (salesByDayOfWeek.hasOwnProperty(dayOfWeek)) {
+          rows.push([dayOfWeek, salesByDayOfWeek[dayOfWeek]]);
+        }
+      }
+      data.addRows(rows);
+
+      var options = {
+        title: 'Ticket Sales by Day of the Week',
+        hAxis: {title: 'Day of the Week', titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0}
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('dayOfWeekChart'));
+
+      chart.draw(data, options);
+    }
+    /*]]>*/
+  </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+  <main class="flex-shrink-0">
+    <section class="py-5">
+      <div id="dayOfWeekChart" style="width: 900px; height: 500px;"></div>
+      <hr>
+    </section>
+  </main>
+</div>
+</body>
+</html>

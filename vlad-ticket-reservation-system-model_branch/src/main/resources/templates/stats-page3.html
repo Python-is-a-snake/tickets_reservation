@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <!-- Head content... -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Duration Range');
+            data.addColumn('number', 'Total Sales');
+
+            // Thymeleaf dynamic data insertion
+            var salesByDuration = /*[[${salesByDuration}]]*/ 'default';
+
+            var rows = [];
+            for (var durationRange in salesByDuration) {
+                if (salesByDuration.hasOwnProperty(durationRange)) {
+                    rows.push([durationRange, salesByDuration[durationRange]]);
+                }
+            }
+            data.addRows(rows);
+
+            var options = {
+                title: 'Ticket Sales by Movie Duration',
+                hAxis: {title: 'Duration Range', titleTextStyle: {color: '#333'}},
+                vAxis: {minValue: 0}
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('durationChart'));
+
+            chart.draw(data, options);
+        }
+        /*]]>*/
+    </script>
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+    <main class="flex-shrink-0">
+        <section class="py-5">
+            <div id="durationChart" style="width: 900px; height: 500px;"></div>
+            <hr>
+        </section>
+    </main>
+</div>
+</body>
+</html>

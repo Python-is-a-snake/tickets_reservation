@@ -3,7 +3,6 @@ package com.trs.tickets.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -43,6 +42,7 @@ public class Ticket extends BaseEntity {
         if (purchaseDate == null) {
             purchaseDate = LocalDateTime.now();
         }
+        price = place.getPlaceType().getPrice();
     }
 
     @Override

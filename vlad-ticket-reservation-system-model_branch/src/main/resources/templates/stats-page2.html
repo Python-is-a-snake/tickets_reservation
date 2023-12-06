@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cinemagic | Movies</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <base href="/">
+    <link th:href="@{css/styles.css}" rel="stylesheet">
+
+<!--    GOOGLE CHARTS-->
+
+<!--    CHART 2-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        google.charts.load('current', {'packages':['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawRevenueChart);
+
+        function drawRevenueChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Movie Title');
+            data.addColumn('number', 'Total Revenue');
+
+            // Thymeleaf dynamic data insertion
+            var revenueData = /*[[${revenueData}]]*/ 'default';
+            var chartData = [];
+            for (var movie in revenueData) {
+                if (revenueData.hasOwnProperty(movie)) {
+                    chartData.push([movie, parseFloat(revenueData[movie])]);
+                }
+            }
+            data.addRows(chartData);
+
+            var options = {
+                title: 'Total Revenue by Movie',
+                hAxis: {title: 'Movies'},
+                vAxis: {title: 'Total Revenue'},
+                legend: { position: 'none' }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+        /*]]>*/
+    </script>
+
+
+</head>
+
+<body class="d-flex flex-column h-100">
+<div layout:fragment="content">
+
+
+    <main class="flex-shrink-0">
+        <!-- Page Content-->
+        <section class="py-5">
+
+            <div id="chart_div"></div>
+
+            <hr>
+
+        </section>
+
+    </main>
+</div>
+</body>
+</html>
