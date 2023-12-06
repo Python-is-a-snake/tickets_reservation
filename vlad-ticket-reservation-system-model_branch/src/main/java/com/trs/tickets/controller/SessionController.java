@@ -45,7 +45,8 @@ public class SessionController {
         model.addAttribute("movie", movie);
         model.addAttribute("hall", hall);
 
-        Map<Integer, List<Place>> places = hall.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
+//        Map<Integer, List<Place>> places = hall.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
+        Map<Integer, List<Place>> places = session.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
         model.addAttribute("places", places);
 
         List<Place> takenPlaces = ticketService.findTakenPlacesByHallId(hall.getId());

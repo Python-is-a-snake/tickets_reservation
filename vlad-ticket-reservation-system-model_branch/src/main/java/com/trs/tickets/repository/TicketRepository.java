@@ -24,4 +24,9 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Modifying
     @Transactional
     void deleteTicketsBySessionId(@Param("sessionId") Long sessionId);
+
+    @Query("DELETE FROM Place p WHERE p.session.id = :sessionId")
+    @Modifying
+    @Transactional
+    void deletePlacesBySessionId(@Param("sessionId") Long sessionId);
 }

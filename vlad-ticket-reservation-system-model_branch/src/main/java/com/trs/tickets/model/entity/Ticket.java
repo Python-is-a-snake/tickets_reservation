@@ -22,7 +22,8 @@ public class Ticket extends BaseEntity {
     @ManyToOne(optional = false)
     private User user;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Place place;
 
     @ManyToOne(cascade = CascadeType.REMOVE, optional = false)

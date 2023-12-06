@@ -1,10 +1,10 @@
 package com.trs.tickets.mappers;
 
-import com.trs.tickets.model.dto.PlaceDto;
-import com.trs.tickets.model.dto.SessionDto;
 import com.trs.tickets.model.dto.TicketDto;
-import com.trs.tickets.model.entity.*;
-import com.trs.tickets.repository.TicketRepository;
+import com.trs.tickets.model.entity.Place;
+import com.trs.tickets.model.entity.Session;
+import com.trs.tickets.model.entity.Ticket;
+import com.trs.tickets.model.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -29,7 +29,7 @@ public interface TicketMapper extends GenericMapper<Ticket, TicketDto> {
         return session.getId();
     }
 
-    default Ticket convertToTicket(TicketDto ticketDto, Session session, User user, Place place){
+    default Ticket convertToTicket(TicketDto ticketDto, Session session, User user, Place place) {
         Ticket ticket = new Ticket();
         ticket.setUser(user);
         ticket.setSession(session);

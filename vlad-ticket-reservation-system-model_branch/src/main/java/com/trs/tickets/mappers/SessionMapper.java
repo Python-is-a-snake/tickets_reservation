@@ -1,7 +1,6 @@
 package com.trs.tickets.mappers;
 
 import com.trs.tickets.model.dto.SessionDto;
-import com.trs.tickets.model.entity.Cinema;
 import com.trs.tickets.model.entity.Hall;
 import com.trs.tickets.model.entity.Movie;
 import com.trs.tickets.model.entity.Session;

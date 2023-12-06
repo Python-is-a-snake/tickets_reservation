@@ -14,8 +14,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 public class Place extends BaseEntity {
+//    @ManyToOne(optional = false)
+//    private Hall hall;
+
     @ManyToOne(optional = false)
-    private Hall hall;
+    private Session session;
 
     @Column(nullable = false)
     private Integer row;
@@ -26,7 +29,6 @@ public class Place extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private PlaceType placeType;
-
 
     @Override
     public int hashCode() {

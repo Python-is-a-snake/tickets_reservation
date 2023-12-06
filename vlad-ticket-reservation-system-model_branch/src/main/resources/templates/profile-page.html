@@ -46,7 +46,7 @@
                     </thead>
                     <tbody>
                     <tr th:if="${#lists.isEmpty(tickets)}">
-                        <td colspan="6" class="text-center table-warning">YOU HAVE NO TICKETS :(</td>
+                        <td colspan="7" class="text-center table-warning">YOU HAVE NO TICKETS :(</td>
                     </tr>
                     <tr th:if="${not #lists.isEmpty(tickets)}" th:each="ticket : ${tickets}">
                         <td th:text="${ticket.session.movie.title}">Mark</td>

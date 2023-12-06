@@ -11,8 +11,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 public class PlaceDto extends BaseDto {
-    private Long      hallId;
-    private Integer   row;
-    private Integer   number;
+    //    private Long      hallId;
+    private Long sessionId;
+
+    private Integer row;
+    private Integer number;
     private PlaceType placeType;
 }

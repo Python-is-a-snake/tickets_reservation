@@ -29,9 +29,9 @@ public class Hall extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private HallType type;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "hall")
-    private List<Place> places = new ArrayList<>();
+//    @ToString.Exclude
+//    @OneToMany(mappedBy = "hall")
+//    private List<Place> places = new ArrayList<>();
 
     @Override
     public int hashCode() {

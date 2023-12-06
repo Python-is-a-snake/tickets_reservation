@@ -3,9 +3,13 @@ package com.trs.tickets.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -25,6 +29,11 @@ public class Session extends BaseEntity {
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime sessionDateTime;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Place> places = new ArrayList<>();
 
     public boolean isAvailable() {
         return LocalDateTime.now().isBefore(sessionDateTime);

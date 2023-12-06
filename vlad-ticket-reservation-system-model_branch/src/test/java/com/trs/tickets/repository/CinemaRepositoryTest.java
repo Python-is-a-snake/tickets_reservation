@@ -25,7 +25,7 @@ class CinemaRepositoryTest {
         cinema.setName("Planeta-Kino");
         cinema.setAddress("Kyiv, Ukraine");
         cinema.setEmail("kyiv@planeta-kino.ua");
-        cinema.setPhone("093123345"); //WHY IT WORKED WITHOUT PHONE
+        cinema.setPhone("093123345");
 
         Cinema saved = cinemaRepository.saveAndFlush(cinema);
         assertNotNull(saved.getId());

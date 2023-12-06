@@ -24,5 +24,5 @@ public class HallDto extends BaseDto {
     @Enumerated(value = EnumType.STRING)
     private HallType type;
 
-    private List<PlaceDto> places = new ArrayList<>();
+//    private List<PlaceDto> places = new ArrayList<>();
 }

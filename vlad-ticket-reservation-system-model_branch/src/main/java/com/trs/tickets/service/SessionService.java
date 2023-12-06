@@ -1,12 +1,11 @@
 package com.trs.tickets.service;
 
 import com.trs.tickets.mappers.SessionMapper;
-import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.model.dto.SessionDto;
 import com.trs.tickets.model.entity.Hall;
 import com.trs.tickets.model.entity.Movie;
+import com.trs.tickets.model.entity.Place;
 import com.trs.tickets.model.entity.Session;
-import com.trs.tickets.model.entity.Ticket;
 import com.trs.tickets.repository.HallRepository;
 import com.trs.tickets.repository.MovieRepository;
 import com.trs.tickets.repository.SessionRepository;
@@ -28,6 +27,7 @@ public class SessionService {
     private final TicketRepository ticketRepository;
     private final SessionMapper sessionMapper;
     private final TicketService ticketService;
+    private final PlaceService placeService;
 
     public List<Session> getAllSessions() {
         return sessionRepository.findAll();
@@ -49,8 +49,15 @@ public class SessionService {
         Movie movie = movieRepository.findById(movieId).get();
         Hall hall = hallRepository.findById(hallId).get();
         Session session = sessionMapper.convert(sessionDto);
+
         session.setMovie(movie);
         session.setHall(hall);
+
+        sessionRepository.save(session);
+
+        List<Place> places = placeService.initPlaces(session, hall.getType());
+        session.setPlaces(places);
+
         return sessionRepository.save(session);
     }
 
@@ -61,6 +68,7 @@ public class SessionService {
 
     public void deleteSession(Long sessionId) {
         ticketRepository.deleteTicketsBySessionId(sessionId);
+        ticketRepository.deletePlacesBySessionId(sessionId);
 
         sessionRepository.deleteById(sessionId);
     }

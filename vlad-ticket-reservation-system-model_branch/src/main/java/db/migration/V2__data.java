@@ -2,10 +2,7 @@ package db.migration;
 
 import com.trs.tickets.model.HallType;
 import com.trs.tickets.model.PlaceType;
-import com.trs.tickets.model.dto.CinemaDto;
-import com.trs.tickets.model.dto.HallDto;
-import com.trs.tickets.model.dto.MovieDto;
-import com.trs.tickets.model.dto.PlaceDto;
+import com.trs.tickets.model.dto.*;
 import db.MySqlParameterSource;
 import lombok.SneakyThrows;
 import org.flywaydb.core.api.migration.BaseJavaMigration;
@@ -19,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,9 +25,10 @@ public class V2__data extends BaseJavaMigration {
 
     private static final String INSERT_CINEMA = "INSERT INTO cinema (name, address, phone, email) VALUES (:name, :address, :phone, :email)";
     private static final String INSERT_HALL = "INSERT INTO hall (name, type, cinema_id) VALUES (:name, :type, :cinemaId)";
-    private static final String INSERT_PLACE = "INSERT INTO place (number, place_type, row, hall_id) VALUES (:number, :placeType, :row, :hallId)";
+    private static final String INSERT_PLACE = "INSERT INTO place (number, place_type, row, session_id) VALUES (:number, :placeType, :row, :sessionId)";
     private static final String INSERT_MOVIE = "INSERT INTO movie (actors, country, description, director, duration, genre, poster_url, release_date, title, trailer_url) " +
                                                "values (:actors, :country, :description, :director, :duration, :genre, :posterUrl, :releaseDate, :title, :trailerUrl)";
+    private static final String INSERT_SESSION = "INSERT INTO session (movie_id, hall_id, session_date_time) VALUES (:movieId, :hallId, :sessionDateTime)";
 
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -39,10 +38,12 @@ public class V2__data extends BaseJavaMigration {
         jdbcTemplate = new NamedParameterJdbcTemplate(new SingleConnectionDataSource(context.getConnection(), true));
 
         long cinemaId = addCinema(new CinemaDto("Kyiv Cinema Hall", "Kyiv, Avenue, 12", "(098) 765-43-21", "hall1@kyivcinema.com", List.of()));
-        addHall(new HallDto(cinemaId, "2D Hall", HallType.HALL_2D, List.of()));
-        addHall(new HallDto(cinemaId, "3D Hall", HallType.HALL_3D, List.of()));
-        addHall(new HallDto(cinemaId, "IMAX Hall", HallType.HALL_IMAX, List.of()));
+
+        long hallId = addHall(new HallDto(cinemaId, "2D Hall", HallType.HALL_2D));
+        addHall(new HallDto(cinemaId, "3D Hall", HallType.HALL_3D));
+        addHall(new HallDto(cinemaId, "IMAX Hall", HallType.HALL_IMAX));
         addMovies();
+        addSession(new SessionDto(1L, hallId, LocalDateTime.now().plusDays(10), List.of()));
     }
 
     private long addCinema(CinemaDto cinemaDto) {
@@ -52,18 +53,29 @@ public class V2__data extends BaseJavaMigration {
         return Objects.requireNonNull(keyHolder.getKeyAs(BigInteger.class)).longValue();
     }
 
-    private void addHall(HallDto hallDto) {
+    private long addHall(HallDto hallDto) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(INSERT_HALL, MySqlParameterSource.of(hallDto), keyHolder);
 
-        long hallId = Objects.requireNonNull(keyHolder.getKeyAs(BigInteger.class)).longValue();
+        return Objects.requireNonNull(keyHolder.getKeyAs(BigInteger.class)).longValue(); //hallId
 
-        List<PlaceDto> places = getPlaces(hallId);
+//        List<PlaceDto> places = getPlaces(hallId);
+//        SqlParameterSource[] batchPlaces = MySqlParameterSource.createBatch(places);
+//        jdbcTemplate.batchUpdate(INSERT_PLACE, batchPlaces);
+    }
+
+    private void addSession(SessionDto sessionDto){
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(INSERT_SESSION, MySqlParameterSource.of(sessionDto), keyHolder);
+
+        long sessionId = Objects.requireNonNull(keyHolder.getKeyAs(BigInteger.class)).longValue();
+
+        List<PlaceDto> places = getPlaces(sessionId);
         SqlParameterSource[] batchPlaces = MySqlParameterSource.createBatch(places);
         jdbcTemplate.batchUpdate(INSERT_PLACE, batchPlaces);
     }
 
-    private List<PlaceDto> getPlaces(long hallId) {
+    private List<PlaceDto> getPlaces(long sessionId) {
         List<PlaceDto> places = new ArrayList<>();
 
         for (int row = 1; row <= 8; row++) {
@@ -76,7 +88,7 @@ public class V2__data extends BaseJavaMigration {
                     placeType = PlaceType.VIP;
                 }
 
-                places.add(new PlaceDto(hallId, row, num, placeType));
+                places.add(new PlaceDto(sessionId, row, num, placeType));
             }
         }
 
