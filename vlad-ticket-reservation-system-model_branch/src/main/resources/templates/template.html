@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
     <meta content="" name="description">
     <meta content="" name="author">
-    <title>Template</title>
+    <title>Cinemagic</title>
     <!-- Favicon-->
     <link rel="icon" th:href="@{assets/favicon.ico}" type="image/x-icon">
     <!-- Bootstrap icons-->
@@ -84,6 +84,18 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/all">View users</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" >View Statistic Charts</a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                            <li><a class="dropdown-item" th:href="@{/statistic/1}">Films Popularity</a></li>
+                            <li><a class="dropdown-item" th:href="@{/statistic/2}">Revenue By Movie</a></li>
+                            <li><a class="dropdown-item" th:href="@{/statistic/3}">Sales By Duration</a></li>
+                            <li><a class="dropdown-item" th:href="@{/statistic/4}">Hall Utilization</a></li>
+                            <li><a class="dropdown-item" th:href="@{/statistic/5}">Popularity By Daytime</a></li>
+                            <li><a class="dropdown-item" th:href="@{/statistic/6}">Sales By Day Of The Week</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>

@@ -13253,3 +13253,850 @@ java.lang.ClassCastException: class java.math.BigDecimal cannot be cast to class
 20:16:23.594 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
 20:16:32.102 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
 20:16:32.592 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+08:57:48.056 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+08:57:48.108 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 18404 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+08:57:48.108 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+08:57:48.109 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+08:57:48.373 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+08:57:48.373 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+08:57:49.371 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:57:49.452 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 7 JPA repository interfaces.
+08:57:50.080 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+08:57:50.090 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+08:57:50.090 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+08:57:50.091 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+08:57:50.166 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+08:57:50.167 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1793 ms
+08:57:50.446 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+08:57:50.447 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+08:57:50.447 INFO  o.f.c.i.license.VersionPrinter - 
+08:57:50.524 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+08:57:50.563 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+08:57:50.598 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.025s)
+08:57:50.606 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+08:57:50.607 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+08:57:50.681 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:57:50.750 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+08:57:51.088 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:57:51.101 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@183c2027
+08:57:51.102 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:57:51.148 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+08:57:52.128 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+08:57:52.141 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:57:53.069 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:57:53.491 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+08:57:53.551 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1354713a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@37396ce0, org.springframework.security.web.context.SecurityContextHolderFilter@6d399034, org.springframework.security.web.header.HeaderWriterFilter@2e73777, org.springframework.security.web.authentication.logout.LogoutFilter@5be6766f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@67979885, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@487b903e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19afa03a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@50dc4701, org.springframework.security.web.access.ExceptionTranslationFilter@1e8ec85e, org.springframework.security.web.access.intercept.AuthorizationFilter@7274d872]
+08:57:53.914 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+08:57:53.959 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+08:57:53.975 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+08:57:53.988 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 6.224 seconds (process running for 6.954)
+08:58:01.887 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:58:01.888 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:58:01.889 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+08:58:06.622 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+08:58:07.204 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+08:59:49.615 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+08:59:49.656 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 8260 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+08:59:49.656 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+08:59:49.657 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+08:59:49.879 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+08:59:49.880 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+08:59:50.733 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+08:59:50.807 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 7 JPA repository interfaces.
+08:59:51.391 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+08:59:51.399 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+08:59:51.400 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+08:59:51.400 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+08:59:51.466 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+08:59:51.467 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1587 ms
+08:59:51.696 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+08:59:51.696 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+08:59:51.696 INFO  o.f.c.i.license.VersionPrinter - 
+08:59:51.751 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+08:59:51.774 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+08:59:51.795 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.014s)
+08:59:51.802 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+08:59:51.802 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+08:59:51.870 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+08:59:51.920 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+08:59:52.195 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+08:59:52.205 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@7f5f7c5b
+08:59:52.207 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+08:59:52.240 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+08:59:53.096 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+08:59:53.105 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+08:59:53.937 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+08:59:54.363 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+08:59:54.427 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@59a1d46c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@52bc7da9, org.springframework.security.web.context.SecurityContextHolderFilter@69dfbae3, org.springframework.security.web.header.HeaderWriterFilter@45d43c61, org.springframework.security.web.authentication.logout.LogoutFilter@2502718a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@724f6447, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@545792e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@45dd22e7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77194b46, org.springframework.security.web.access.ExceptionTranslationFilter@776cc0d0, org.springframework.security.web.access.intercept.AuthorizationFilter@54a07d0]
+08:59:54.796 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+08:59:54.843 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+08:59:54.870 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+08:59:54.882 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.512 seconds (process running for 6.156)
+08:59:55.474 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+08:59:55.475 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+08:59:55.476 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:00:03.242 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:00:03.751 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:00:51.588 INFO  com.trs.tickets.service.UserService - Finding User with username: ceo12345@gmail.com
+09:00:53.111 INFO  com.trs.tickets.service.UserService - Finding User with username: ceo12345@gmail.com
+09:02:05.278 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:02:05.318 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 2624 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:02:05.318 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:02:05.319 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:02:05.537 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:02:05.538 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:02:06.400 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:02:06.471 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 64 ms. Found 7 JPA repository interfaces.
+09:02:07.037 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:02:07.047 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:02:07.047 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:02:07.048 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:02:07.127 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:02:07.127 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1585 ms
+09:02:07.364 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:02:07.364 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:02:07.364 INFO  o.f.c.i.license.VersionPrinter - 
+09:02:07.420 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:02:07.439 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:02:07.460 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.014s)
+09:02:07.466 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:02:07.466 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:02:07.530 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:02:07.579 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:02:07.846 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:02:07.855 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@193b6c6a
+09:02:07.857 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:02:07.890 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:02:08.753 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:02:08.762 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:02:09.568 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:02:09.968 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:02:10.027 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2be739da, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@285246a4, org.springframework.security.web.context.SecurityContextHolderFilter@192530c5, org.springframework.security.web.header.HeaderWriterFilter@2a1a3a0c, org.springframework.security.web.authentication.logout.LogoutFilter@7a9aba6b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@19fe5223, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@564e4b91, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d963fd6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67cd63fc, org.springframework.security.web.access.ExceptionTranslationFilter@591abe84, org.springframework.security.web.access.intercept.AuthorizationFilter@1a0a2cd]
+09:02:10.385 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:02:10.430 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:02:10.446 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:02:10.459 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.43 seconds (process running for 6.09)
+09:02:10.761 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:02:10.761 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:02:10.762 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:02:23.761 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:02:24.240 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:04:56.170 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:04:56.207 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 8076 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:04:56.207 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:04:56.208 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:04:56.421 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:04:56.421 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:04:57.284 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:04:57.355 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 7 JPA repository interfaces.
+09:04:57.954 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:04:57.962 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:04:57.962 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:04:57.962 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:04:58.029 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:04:58.029 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1608 ms
+09:04:58.299 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:04:58.299 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:04:58.299 INFO  o.f.c.i.license.VersionPrinter - 
+09:04:58.362 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:04:58.388 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:04:58.411 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.017s)
+09:04:58.419 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:04:58.420 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:04:58.492 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:04:58.549 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:04:58.849 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:04:58.860 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@366c34e3
+09:04:58.861 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:04:58.894 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:04:59.777 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:04:59.787 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:05:00.609 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:05:01.028 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:05:01.087 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@52fddb0c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2e73777, org.springframework.security.web.context.SecurityContextHolderFilter@2d54d0b1, org.springframework.security.web.header.HeaderWriterFilter@3e467a0a, org.springframework.security.web.authentication.logout.LogoutFilter@40e314af, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5e424fac, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@46b2d08c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7afb9600, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3904f7f1, org.springframework.security.web.access.ExceptionTranslationFilter@3c6d0f1b, org.springframework.security.web.access.intercept.AuthorizationFilter@4847a4c3]
+09:05:01.450 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:05:01.495 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:05:01.510 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:05:01.523 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.611 seconds (process running for 6.214)
+09:05:01.842 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:05:01.842 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:05:01.843 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:05:10.779 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:05:11.273 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:08:30.413 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:08:30.457 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 17048 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:08:30.457 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:08:30.458 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:08:30.676 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:08:30.677 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:08:31.570 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:08:31.648 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 7 JPA repository interfaces.
+09:08:32.320 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:08:32.329 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:08:32.329 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:08:32.329 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:08:32.403 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:08:32.403 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1726 ms
+09:08:32.647 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:08:32.647 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:08:32.647 INFO  o.f.c.i.license.VersionPrinter - 
+09:08:32.706 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:08:32.727 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:08:32.749 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.016s)
+09:08:32.757 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:08:32.757 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:08:32.825 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:08:32.877 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:08:33.230 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:08:33.241 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@20705fe1
+09:08:33.243 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:08:33.275 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:08:34.144 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:08:34.154 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:08:34.979 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:08:35.392 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:08:35.454 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34e100cb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ee2506d, org.springframework.security.web.context.SecurityContextHolderFilter@71a33415, org.springframework.security.web.header.HeaderWriterFilter@4f3963c3, org.springframework.security.web.authentication.logout.LogoutFilter@24c4ddee, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6620445, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@df8a6a5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@d3586a3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4525b69c, org.springframework.security.web.access.ExceptionTranslationFilter@61ba2273, org.springframework.security.web.access.intercept.AuthorizationFilter@393ed218]
+09:08:35.815 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:08:35.862 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:08:35.879 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:08:35.893 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.746 seconds (process running for 6.414)
+09:08:36.153 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:08:36.153 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:08:36.155 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+09:08:51.609 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:08:52.091 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:09:00.959 ERROR org.thymeleaf.TemplateEngine - [THYMELEAF][http-nio-5550-exec-10] Exception processing template "stats-page5": An error happened during template parsing (template: "class path resource [templates/stats-page5.html]" - line 63, col 13)
+org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/stats-page5.html]" - line 63, col 13)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:239)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parseStandalone(AbstractMarkupTemplateParser.java:100)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:666)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1103)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1077)
+	at org.thymeleaf.spring6.view.ThymeleafView.renderFragment(ThymeleafView.java:372)
+	at org.thymeleaf.spring6.view.ThymeleafView.render(ThymeleafView.java:192)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1415)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1159)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:425)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:285)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:78)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:124)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:268)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:169)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.attoparser.ParseException: (Line = 63, Column = 13) Incomplete structure: "<div id="chart_div" style="width: 900px; height: 500px;></div>
+            <hr>
+
+        </section>
+
+    </main>
+</div>
+</body>
+</html>"
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:366)
+	at org.attoparser.MarkupParser.parse(MarkupParser.java:257)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:230)
+	... 116 common frames omitted
+09:09:00.964 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/stats-page5.html]" - line 63, col 13)] with root cause
+org.attoparser.ParseException: (Line = 63, Column = 13) Incomplete structure: "<div id="chart_div" style="width: 900px; height: 500px;></div>
+            <hr>
+
+        </section>
+
+    </main>
+</div>
+</body>
+</html>"
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:366)
+	at org.attoparser.MarkupParser.parse(MarkupParser.java:257)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:230)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parseStandalone(AbstractMarkupTemplateParser.java:100)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:666)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1103)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1077)
+	at org.thymeleaf.spring6.view.ThymeleafView.renderFragment(ThymeleafView.java:372)
+	at org.thymeleaf.spring6.view.ThymeleafView.render(ThymeleafView.java:192)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1415)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1159)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1098)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:425)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:285)
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:78)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:124)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:172)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:185)
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:268)
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:169)
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:133)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+09:14:05.399 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:14:05.440 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 10592 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:14:05.441 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:14:05.441 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:14:05.662 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:14:05.662 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:14:06.615 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:14:06.695 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 7 JPA repository interfaces.
+09:14:07.278 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:14:07.286 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:14:07.287 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:14:07.287 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:14:07.355 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:14:07.355 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1693 ms
+09:14:07.581 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:14:07.581 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:14:07.581 INFO  o.f.c.i.license.VersionPrinter - 
+09:14:07.645 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:14:07.668 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:14:07.688 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:14:07.694 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:14:07.695 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:14:07.765 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:14:07.816 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:14:08.105 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:14:08.115 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@5638dcad
+09:14:08.117 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:14:08.150 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:14:08.991 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:14:09.001 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:14:09.800 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:14:10.205 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:14:10.265 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@60e50324, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@68d3f707, org.springframework.security.web.context.SecurityContextHolderFilter@615c4ba8, org.springframework.security.web.header.HeaderWriterFilter@310e34d8, org.springframework.security.web.authentication.logout.LogoutFilter@6620445, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@43947b22, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@770ac8e5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@79c8df05, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3add9fcb, org.springframework.security.web.access.ExceptionTranslationFilter@1ca848cd, org.springframework.security.web.access.intercept.AuthorizationFilter@5e62d62f]
+09:14:10.615 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:14:10.658 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:14:10.674 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:14:10.687 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.537 seconds (process running for 6.193)
+09:14:11.228 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:14:11.228 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:14:11.230 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+09:14:23.274 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:14:23.766 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:15:02.220 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:15:02.259 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 18336 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:15:02.259 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:15:02.260 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:15:02.483 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:15:02.483 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:15:03.335 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:15:03.412 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 7 JPA repository interfaces.
+09:15:03.974 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:15:03.983 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:15:03.983 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:15:03.983 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:15:04.057 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:15:04.057 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1574 ms
+09:15:04.303 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:15:04.304 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:15:04.304 INFO  o.f.c.i.license.VersionPrinter - 
+09:15:04.367 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:15:04.389 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:15:04.419 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.021s)
+09:15:04.426 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:15:04.427 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:15:04.508 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:15:04.568 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:15:04.844 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:15:04.856 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@20705fe1
+09:15:04.857 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:15:04.889 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:15:05.739 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:15:05.749 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:15:06.554 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:15:06.974 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:15:07.048 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@34e100cb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1ee2506d, org.springframework.security.web.context.SecurityContextHolderFilter@71a33415, org.springframework.security.web.header.HeaderWriterFilter@4f3963c3, org.springframework.security.web.authentication.logout.LogoutFilter@24c4ddee, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6620445, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@df8a6a5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@d3586a3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4525b69c, org.springframework.security.web.access.ExceptionTranslationFilter@61ba2273, org.springframework.security.web.access.intercept.AuthorizationFilter@393ed218]
+09:15:07.431 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:15:07.477 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:15:07.493 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:15:07.504 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.538 seconds (process running for 6.196)
+09:15:08.094 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:15:08.095 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:15:08.097 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+09:15:25.268 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:15:25.738 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:20:45.111 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:20:45.152 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 8604 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:20:45.152 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:20:45.153 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:20:45.361 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:20:45.361 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:20:46.170 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:20:46.242 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 65 ms. Found 7 JPA repository interfaces.
+09:20:46.776 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:20:46.784 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:20:46.784 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:20:46.785 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:20:46.851 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:20:46.852 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1490 ms
+09:20:47.083 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:20:47.083 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:20:47.083 INFO  o.f.c.i.license.VersionPrinter - 
+09:20:47.144 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:20:47.167 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:20:47.188 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:20:47.194 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:20:47.195 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:20:47.256 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:20:47.305 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:20:47.570 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:20:47.579 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@2048b041
+09:20:47.580 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:20:47.611 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:20:48.405 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:20:48.415 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:20:49.188 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:20:49.583 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:20:49.646 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2928ef07, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7d9d3baa, org.springframework.security.web.context.SecurityContextHolderFilter@19fe5223, org.springframework.security.web.header.HeaderWriterFilter@3255bc9e, org.springframework.security.web.authentication.logout.LogoutFilter@3904f7f1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@34ed1261, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@44516022, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40e314af, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@b45d419, org.springframework.security.web.access.ExceptionTranslationFilter@59e91457, org.springframework.security.web.access.intercept.AuthorizationFilter@331ea151]
+09:20:50.000 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:20:50.042 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:20:50.057 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:20:50.069 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.209 seconds (process running for 5.818)
+09:20:50.597 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:20:50.597 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:20:50.598 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:21:04.244 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:21:04.734 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:24:23.248 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:24:23.286 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 16676 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:24:23.287 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:24:23.287 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:24:23.500 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:24:23.501 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:24:24.319 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:24:24.393 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 7 JPA repository interfaces.
+09:24:24.962 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:24:24.970 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:24:24.970 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:24:24.970 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:24:25.033 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:24:25.034 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1533 ms
+09:24:25.281 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:24:25.281 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:24:25.281 INFO  o.f.c.i.license.VersionPrinter - 
+09:24:25.342 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:24:25.365 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:24:25.386 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:24:25.393 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:24:25.393 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:24:25.459 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:24:25.508 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:24:25.763 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:24:25.773 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@38daeefb
+09:24:25.775 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:24:25.807 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:24:26.633 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:24:26.644 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:24:27.447 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:24:27.871 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:24:27.936 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@17e6ec50, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a4d081d, org.springframework.security.web.context.SecurityContextHolderFilter@36e2b77e, org.springframework.security.web.header.HeaderWriterFilter@745664dc, org.springframework.security.web.authentication.logout.LogoutFilter@3c6d0f1b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6e552ef2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f48cc3f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78b1c6ab, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@59e91457, org.springframework.security.web.access.ExceptionTranslationFilter@347296a, org.springframework.security.web.access.intercept.AuthorizationFilter@25aa7736]
+09:24:28.291 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:24:28.337 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:24:28.354 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:24:28.366 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.364 seconds (process running for 5.955)
+09:24:28.758 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:24:28.758 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:24:28.759 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:24:38.645 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:24:39.106 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:27:53.170 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:27:53.209 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 17896 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:27:53.209 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:27:53.210 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:27:53.423 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:27:53.423 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:27:54.234 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:27:54.307 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 7 JPA repository interfaces.
+09:27:54.841 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:27:54.851 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:27:54.852 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:27:54.852 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:27:54.929 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:27:54.929 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1505 ms
+09:27:55.201 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:27:55.201 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:27:55.201 INFO  o.f.c.i.license.VersionPrinter - 
+09:27:55.257 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:27:55.280 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:27:55.301 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:27:55.307 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:27:55.308 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:27:55.372 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:27:55.420 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:27:55.671 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:27:55.680 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@3b074316
+09:27:55.682 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:27:55.711 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:27:56.520 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:27:56.530 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:27:57.325 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:27:57.729 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:27:57.784 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@40e314af, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2be739da, org.springframework.security.web.context.SecurityContextHolderFilter@73db0513, org.springframework.security.web.header.HeaderWriterFilter@2f68af92, org.springframework.security.web.authentication.logout.LogoutFilter@2afc3908, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1a0a2cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6294a3b7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@564e4b91, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@285246a4, org.springframework.security.web.access.ExceptionTranslationFilter@eab392, org.springframework.security.web.access.intercept.AuthorizationFilter@10fa4729]
+09:27:58.116 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:27:58.159 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:27:58.174 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:27:58.186 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.265 seconds (process running for 5.858)
+09:27:58.653 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:27:58.654 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:27:58.655 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:28:19.906 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:28:19.948 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 15120 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:28:19.948 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:28:19.948 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:28:20.176 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:28:20.176 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:28:20.999 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:28:21.075 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 69 ms. Found 7 JPA repository interfaces.
+09:28:21.616 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:28:21.625 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:28:21.625 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:28:21.625 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:28:21.692 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:28:21.692 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1515 ms
+09:28:21.934 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:28:21.934 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:28:21.934 INFO  o.f.c.i.license.VersionPrinter - 
+09:28:21.996 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:28:22.017 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:28:22.038 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:28:22.044 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:28:22.044 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:28:22.111 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:28:22.160 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:28:22.428 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:28:22.438 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@1095db11
+09:28:22.440 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:28:22.469 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:28:23.292 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:28:23.301 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:28:24.088 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:28:24.485 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:28:24.541 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@30387e58, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5ea906e9, org.springframework.security.web.context.SecurityContextHolderFilter@71f5b0a2, org.springframework.security.web.header.HeaderWriterFilter@246a98de, org.springframework.security.web.authentication.logout.LogoutFilter@6dedf254, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2efb582f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@12e3202e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b061451, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16fed925, org.springframework.security.web.access.ExceptionTranslationFilter@6003fed5, org.springframework.security.web.access.intercept.AuthorizationFilter@1586f2e9]
+09:28:24.881 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:28:24.926 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:28:24.941 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:28:24.955 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.293 seconds (process running for 5.981)
+09:28:25.352 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:28:25.353 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:28:25.354 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:28:51.506 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:28:51.993 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:30:53.738 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:30:53.779 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 8928 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:30:53.780 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:30:53.780 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:30:53.993 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:30:53.993 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:30:54.799 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:30:54.888 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 7 JPA repository interfaces.
+09:30:56.055 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:30:56.064 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:30:56.064 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:30:56.065 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:30:56.164 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:30:56.165 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2172 ms
+09:30:56.444 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:30:56.444 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:30:56.444 INFO  o.f.c.i.license.VersionPrinter - 
+09:30:56.505 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:30:56.527 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:30:56.549 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.015s)
+09:30:56.554 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:30:56.555 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:30:56.619 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:30:56.671 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:30:56.957 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:30:56.970 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@5f062208
+09:30:56.972 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:30:57.007 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:30:57.828 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:30:57.837 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:30:58.603 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:30:58.981 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:30:59.040 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@28e08f5c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@66203182, org.springframework.security.web.context.SecurityContextHolderFilter@619c3beb, org.springframework.security.web.header.HeaderWriterFilter@34d05076, org.springframework.security.web.authentication.logout.LogoutFilter@10982a20, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@16d48d97, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4dcb8cc9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1bbca2b8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6af9e064, org.springframework.security.web.access.ExceptionTranslationFilter@4d79f259, org.springframework.security.web.access.intercept.AuthorizationFilter@573c7edd]
+09:30:59.403 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:30:59.455 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:30:59.473 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:30:59.487 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 6.013 seconds (process running for 6.638)
+09:30:59.779 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:30:59.779 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:30:59.780 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:31:25.798 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:31:25.838 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 6508 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:31:25.838 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:31:25.838 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:31:26.044 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:31:26.044 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:31:26.834 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:31:26.907 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 66 ms. Found 7 JPA repository interfaces.
+09:31:27.427 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:31:27.435 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:31:27.435 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:31:27.435 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:31:27.495 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:31:27.495 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1448 ms
+09:31:27.717 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:31:27.717 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:31:27.717 INFO  o.f.c.i.license.VersionPrinter - 
+09:31:27.769 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:31:27.791 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:31:27.810 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.014s)
+09:31:27.816 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:31:27.817 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:31:27.878 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:31:27.923 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:31:28.164 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:31:28.172 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@125162c4
+09:31:28.174 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:31:28.204 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:31:28.997 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:31:29.005 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:31:29.793 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:31:30.189 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:31:30.251 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@19afa03a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38362b0b, org.springframework.security.web.context.SecurityContextHolderFilter@5c7768ae, org.springframework.security.web.header.HeaderWriterFilter@712110b6, org.springframework.security.web.authentication.logout.LogoutFilter@1b6bc5e9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@51a004b7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e552ef2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@41b388b1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1cbf0760, org.springframework.security.web.access.ExceptionTranslationFilter@46b2d08c, org.springframework.security.web.access.intercept.AuthorizationFilter@3904f7f1]
+09:31:30.613 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:31:30.657 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:31:30.673 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:31:30.684 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.13 seconds (process running for 5.815)
+09:31:30.892 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:31:30.893 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:31:30.894 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:31:36.358 INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+09:31:36.398 INFO  com.trs.tickets.TicketsApplication - Starting TicketsApplication using Java 17.0.6 with PID 4820 (C:\Users\bigfp\IdeaProjects\trs-copy\vlad-ticket-reservation-system-model_branch\build\classes\java\main started by bigfp in C:\Users\bigfp\IdeaProjects\trs-copy)
+09:31:36.398 DEBUG com.trs.tickets.TicketsApplication - Running with Spring Boot v3.0.7, Spring v6.0.9
+09:31:36.398 INFO  com.trs.tickets.TicketsApplication - No active profile set, falling back to 1 default profile: "default"
+09:31:36.614 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:31:36.614 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:31:37.407 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:31:37.480 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 7 JPA repository interfaces.
+09:31:38.018 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 5550 (http)
+09:31:38.026 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-5550"]
+09:31:38.026 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:31:38.027 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.8]
+09:31:38.089 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:31:38.090 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1475 ms
+09:31:38.320 INFO  o.f.c.i.license.VersionPrinter - Flyway Community Edition 9.5.1 by Redgate
+09:31:38.320 INFO  o.f.c.i.license.VersionPrinter - See what's new here: https://flywaydb.org/documentation/learnmore/releaseNotes#9.5.1
+09:31:38.320 INFO  o.f.c.i.license.VersionPrinter - 
+09:31:38.380 INFO  o.f.c.i.d.base.BaseDatabaseType - Database: jdbc:mariadb://127.0.0.1/test3 (MariaDB 11.1)
+09:31:38.401 WARN  o.f.c.i.database.base.Database - Flyway upgrade recommended: MariaDB 11.1 is newer than this version of Flyway and support has not been tested. The latest supported version of MariaDB is 10.6.
+09:31:38.420 INFO  o.f.core.internal.command.DbValidate - Successfully validated 2 migrations (execution time 00:00.014s)
+09:31:38.427 INFO  o.f.core.internal.command.DbMigrate - Current version of schema `test3`: 2
+09:31:38.428 INFO  o.f.core.internal.command.DbMigrate - Schema `test3` is up to date. No migration necessary.
+09:31:38.492 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+09:31:38.539 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+09:31:38.797 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+09:31:38.806 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@59013a84
+09:31:38.808 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+09:31:38.838 INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+09:31:39.682 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+09:31:39.692 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:31:40.550 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+09:31:40.943 INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+09:31:41.002 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6fd40d62, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@8c65c76, org.springframework.security.web.context.SecurityContextHolderFilter@3240b1be, org.springframework.security.web.header.HeaderWriterFilter@382de65a, org.springframework.security.web.authentication.logout.LogoutFilter@7778493, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1bbca2b8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@40cb8bc4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@45fa2061, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7568b3d1, org.springframework.security.web.access.ExceptionTranslationFilter@644bb42c, org.springframework.security.web.access.intercept.AuthorizationFilter@4dcb8cc9]
+09:31:41.337 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:31:41.380 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-5550"]
+09:31:41.393 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 5550 (http) with context path ''
+09:31:41.406 INFO  com.trs.tickets.TicketsApplication - Started TicketsApplication in 5.288 seconds (process running for 6.148)
+09:31:41.847 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:31:41.847 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:31:41.849 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+09:31:51.965 INFO  com.trs.tickets.service.UserService - Loading User with username: ceo12345@gmail.com
+09:31:52.474 WARN  n.n.u.t.e.ExpressionProcessor - Fragment expression "template.html" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+09:33:03.298 INFO  com.trs.tickets.service.UserService - Finding User with username: ceo12345@gmail.com
+09:33:04.265 INFO  com.trs.tickets.service.UserService - Finding User with username: ceo12345@gmail.com

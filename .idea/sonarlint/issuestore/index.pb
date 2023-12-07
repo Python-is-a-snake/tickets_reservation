@@ -135,3 +135,16 @@ bvlad-ticket-reservation-system-model_branch/src/main/java/com/trs/tickets/model
 Tvlad-ticket-reservation-system-model_branch/src/main/java/db/migration/V2__data.java,0\4\04b3762adccb14741dba37ef8955e73e2bd2572e
 ì
 cvlad-ticket-reservation-system-model_branch/src/main/java/com/trs/tickets/service/PlaceService.java,0\3\0353cbd2bb00f685abf7773c5e0b19e2bd4008f1
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+ñ
+fvlad-ticket-reservation-system-model_branch/src/main/java/com/trs/tickets/model/entity/BaseEntity.java,f\d\fd00afe7471793119b1e5f91507c03c734cc5284
+:
+
+create.sql,c\4\c4e543c554b99ccccd987f50a97bdc2adf2ccccf
+î
+dvlad-ticket-reservation-system-model_branch/src/main/java/com/trs/tickets/service/ChartsService.java,b\e\be4b7c665bc38164635ede557a12137de8b5dba3
+ù
+mvlad-ticket-reservation-system-model_branch/src/main/java/com/trs/tickets/controller/TestPlotsController.java,d\c\dc0ef816640f58dbb2b8f8971fc234fe40ae2fae

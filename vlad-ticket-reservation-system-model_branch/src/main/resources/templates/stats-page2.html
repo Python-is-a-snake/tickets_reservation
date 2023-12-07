@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Cinemagic | Movies</title>
+    <title>Cinemagic | Stats</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
     <!-- Bootstrap icons-->
@@ -16,8 +16,9 @@
     <base href="/">
     <link th:href="@{css/styles.css}" rel="stylesheet">
 
-<!--    GOOGLE CHARTS-->
+<!--    STYLING-->
 
+<!--    GOOGLE CHARTS-->
 <!--    CHART 2-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" th:inline="javascript">
@@ -63,9 +64,10 @@
     <main class="flex-shrink-0">
         <!-- Page Content-->
         <section class="py-5">
-
-            <div id="chart_div"></div>
-
+            <hr>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <div id="chart_div" style="width: 900px; height: 500px;"></div>
+            </div>
             <hr>
 
         </section>
