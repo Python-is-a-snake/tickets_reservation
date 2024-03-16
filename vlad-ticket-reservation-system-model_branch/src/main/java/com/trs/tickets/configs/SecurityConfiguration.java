@@ -24,13 +24,17 @@ public class SecurityConfiguration {
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
+
         http.authorizeHttpRequests().requestMatchers(staticResources).permitAll();
 
-        http.authorizeHttpRequests().requestMatchers("/register", "/user/create").permitAll();
+        http.authorizeHttpRequests().requestMatchers("/register", "/movies/**",
+                "/", "/contact-us", "/pageable").permitAll();
 
         http.authorizeHttpRequests().anyRequest().authenticated();
+
         http.formLogin(login -> login
                 .loginPage("/login")
+                .defaultSuccessUrl("/movies", true)
                 .permitAll());
 
         http.logout().permitAll();

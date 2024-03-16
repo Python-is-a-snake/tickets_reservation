@@ -24,13 +24,7 @@ public class UserController {
     private final UserService userService;
     private final TicketService ticketService;
 
-    @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String allUsersPage(Model model, Authentication authentication) {
-        model.addAttribute("users", userService.getAllUsersExcept(authentication.getName()));
-        return "admin-users";
-    }
-
+    //REGISTRATION
     @PostMapping("/create")
     public String createUser(@Valid @ModelAttribute("userCreateDto") UserCreateDto userCreateDto, BindingResult bindingResult, Model model) {
         if (!userService.usernameIsUnique(userCreateDto.getUsername())) {
@@ -51,6 +45,25 @@ public class UserController {
         return "redirect:/login";
     }
 
+    //USER
+    @GetMapping("/profile")
+    public String profilePage(Model model, Authentication authentication) {
+        model.addAttribute("user", userService.getUserByUsername(authentication.getName()).get(0));
+        model.addAttribute("tickets", ticketService.findByUserName(authentication.getName()));
+        return "profile-page";
+    }
+
+    //ADMIN
+
+    //view all users page
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
+    public String allUsersPage(Model model, Authentication authentication) {
+        model.addAttribute("users", userService.getAllUsersExcept(authentication.getName()));
+        return "admin-users";
+    }
+
+    //search user by username
     @GetMapping("/search")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String getUsersByUsername(@RequestParam(name = "username", required = false) String username, Model model, Authentication authentication) {
@@ -58,6 +71,7 @@ public class UserController {
         return "admin-users";
     }
 
+    //make user an Admin
     @PostMapping("/set-admin/{id}")
     @PreAuthorize("hasAuthority('CEO')")
     public String setUserRoleAdmin(@PathVariable("id") Long id) {
@@ -65,6 +79,7 @@ public class UserController {
         return "redirect:/user/all";
     }
 
+    //remove Admin role from user
     @PostMapping("/remove-admin/{id}")
     @PreAuthorize("hasAuthority('CEO')")
     public String removeUserRoleAdmin(@PathVariable("id") Long id) {
@@ -72,17 +87,11 @@ public class UserController {
         return "redirect:/user/all";
     }
 
+    //delete user
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/user/all";
-    }
-
-    @GetMapping("/profile")
-    public String profilePage(Model model, Authentication authentication) {
-        model.addAttribute("user", userService.getUserByUsername(authentication.getName()).get(0));
-        model.addAttribute("tickets", ticketService.findByUserName(authentication.getName()));
-        return "profile-page";
     }
 }

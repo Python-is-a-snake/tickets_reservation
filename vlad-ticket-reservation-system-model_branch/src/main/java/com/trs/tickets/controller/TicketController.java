@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TicketController {
     private final TicketService ticketService;
 
+    //reserve ticket and go to Profile page
     @PostMapping("/buy")
-    public String purchaseTicket(@ModelAttribute("ticket") TicketDto ticketDto, Model model) {
+    public String purchaseTicket(@ModelAttribute("ticket") TicketDto ticketDto) {
 
         ticketService.addTicket(ticketDto, ticketDto.getPlaceId(), ticketDto.getSessionId(), ticketDto.getUserId());
 

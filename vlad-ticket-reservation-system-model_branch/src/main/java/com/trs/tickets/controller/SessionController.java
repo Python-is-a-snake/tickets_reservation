@@ -2,8 +2,12 @@ package com.trs.tickets.controller;
 
 import com.trs.tickets.mappers.SessionMapper;
 import com.trs.tickets.mappers.UserMapper;
-import com.trs.tickets.model.dto.*;
-import com.trs.tickets.model.entity.*;
+import com.trs.tickets.model.dto.MovieDto;
+import com.trs.tickets.model.dto.SessionDto;
+import com.trs.tickets.model.dto.TicketDto;
+import com.trs.tickets.model.dto.UserDto;
+import com.trs.tickets.model.entity.Hall;
+import com.trs.tickets.model.entity.Place;
 import com.trs.tickets.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,7 +35,11 @@ public class SessionController {
     private final UserMapper userMapper;
     private final SessionMapper sessionMapper;
 
+    // USER
+
+    //get page with seats display
     @GetMapping("/buy-tickets/{sessionId}")
+    @PreAuthorize("hasAuthority('USER')")
     public String getSessionPage(@PathVariable("sessionId") Long sessionId, Model model) {
         SessionDto session = sessionService.getSessionById(sessionId);
         MovieDto movie = movieService.getMovieById(session.getMovieId());
@@ -45,7 +49,6 @@ public class SessionController {
         model.addAttribute("movie", movie);
         model.addAttribute("hall", hall);
 
-//        Map<Integer, List<Place>> places = hall.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
         Map<Integer, List<Place>> places = session.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
         model.addAttribute("places", places);
 
@@ -54,7 +57,9 @@ public class SessionController {
         return "buy-tickets-page";
     }
 
+    //clicked on Place - go to purchase page
     @PostMapping("/buy-tickets/{sessionId}")
+    @PreAuthorize("hasAuthority('USER')")
     public String buyTicketPage(@PathVariable("sessionId") Long sessionId,
                                 @RequestParam(name = "placeId", required = false) Long placeId,
                                 Model model,
@@ -79,6 +84,17 @@ public class SessionController {
         return "ticket-purchase-page";
     }
 
+    // ADMIN
+
+    //view all Sessions page (with buttons to VIEW, EDIT, DELETE)
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
+    public String allSessionsAdminPage(Model model) {
+        model.addAttribute("movieSessions", sessionService.getAllSessions());
+        return "admin-sessions";
+    }
+
+    //view Session creation page
     @GetMapping("/create")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String createSession(Model model) {
@@ -89,6 +105,7 @@ public class SessionController {
         return "create-session-page";
     }
 
+    //create Session
     @PostMapping("/create")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String createSessionPost(@Valid @ModelAttribute("movieSession") SessionDto session,
@@ -105,6 +122,7 @@ public class SessionController {
         return "redirect:/movies";
     }
 
+    //view Session edit page
     @GetMapping("/edit/{sessionId}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String editSession(@PathVariable("sessionId") Long sessionId, Model model) {
@@ -115,6 +133,7 @@ public class SessionController {
         return "edit-session-page";
     }
 
+    //edit Session
     @PostMapping("/edit")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String updateSession(@ModelAttribute("sessionDto") SessionDto sessionDto) {
@@ -122,19 +141,12 @@ public class SessionController {
         return "redirect:/sessions";
     }
 
-
+    //delete Session
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String deleteSession(@PathVariable("id") Long id) {
         sessionService.deleteSession(id);
         return "redirect:/sessions/all";
-    }
-
-    @GetMapping("/all")
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String allSessionsAdminPage(Model model) {
-        model.addAttribute("movieSessions", sessionService.getAllSessions());
-        return "admin-sessions";
     }
 
 }

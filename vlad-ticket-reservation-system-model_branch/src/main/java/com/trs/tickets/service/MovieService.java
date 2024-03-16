@@ -8,6 +8,9 @@ import com.trs.tickets.repository.SessionRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.Session;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,9 +36,7 @@ public class MovieService {
 
     public MovieDto getMovieById(Long id) {
         Optional<Movie> movieOpt = movieRepository.findById(id);
-        if (movieOpt.isEmpty()) {
-            return null;
-        } else return movieMapper.convert(movieOpt.get());
+        return movieOpt.map(movieMapper::convert).orElse(null);
     }
 
     public MovieDto addMovie(MovieDto movieDTO) {
@@ -57,6 +58,12 @@ public class MovieService {
         List<Movie> entities = movies.stream().map(movieMapper::convert).toList();
         entities = movieRepository.saveAll(entities);
         return entities.stream().map(movieMapper::convert).toList();
+    }
+
+    public Page<Movie> getMoviesPage(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return movieRepository.findAll(pageable);
     }
 
 }
