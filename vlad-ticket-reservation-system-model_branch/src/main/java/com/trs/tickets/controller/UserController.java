@@ -83,8 +83,24 @@ public class UserController {
     //search user by username
     @GetMapping("/search")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String getUsersByUsername(@RequestParam(name = "username", required = false) String username, Model model, Authentication authentication) {
-        model.addAttribute("users", userService.getUserByUsernameExcept(username, authentication.getName()));
+    public String getUsersByUsername(Model model,
+                                     Authentication authentication,
+                                     @RequestParam(name = "username", required = false) String username,
+                                     @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                     @RequestParam(name = "size", defaultValue = "6") Integer size
+                                     ) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+        Page<UserDto> usersByUsernameExcept = userService.getUserByUsernameExcept(username, authentication.getName(), page, size);
+
+        model.addAttribute("users", usersByUsernameExcept);
+        model.addAttribute("movies", usersByUsernameExcept.getContent());
+        model.addAttribute("currentPage", usersByUsernameExcept.getNumber());
+        model.addAttribute("totalItems", usersByUsernameExcept.getTotalElements());
+        model.addAttribute("totalPages", usersByUsernameExcept.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "admin/admin-users";
     }
 

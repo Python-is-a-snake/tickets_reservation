@@ -73,9 +73,13 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsernameNotIn(List.of(username), pageable).map(userMapper::convert);
     }
 
-    public List<UserDto> getUserByUsernameExcept(String username, String currentUserName) {
+    public Page<UserDto> getUserByUsernameExcept(String username, String currentUserName, Integer page, Integer size) {
         log.info("Finding User with username: " + username + " except for " + currentUserName);
-        return userRepository.findByUsernameContainingIgnoreCase(username).stream().filter(user -> !user.getUsername().equals(currentUserName)).map(userMapper::convert).toList();
+//        return userRepository.findByUsernameContainingIgnoreCase(username).stream().filter(user -> !user.getUsername().equals(currentUserName)).map(userMapper::convert).toList();
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return userRepository.findByUsernameContainingIgnoreCaseAndUsernameNotIn(username, List.of(currentUserName),  pageable).map(userMapper::convert);
     }
 
     public void changeUserRole(Long id, Role role) {

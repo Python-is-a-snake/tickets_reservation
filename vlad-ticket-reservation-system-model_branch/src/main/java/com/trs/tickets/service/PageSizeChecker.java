@@ -15,7 +15,7 @@ public class PageSizeChecker {
     }
 
     public Integer checkSize(Integer size){
-        if(size == null || size < 0){
+        if(size == null || size <= 0){
             size = 6;
             return size;
         }
