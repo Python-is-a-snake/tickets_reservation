@@ -5,9 +5,10 @@ import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.model.entity.Movie;
 import com.trs.tickets.repository.MovieRepository;
 import com.trs.tickets.repository.SessionRepository;
+import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,9 +26,20 @@ public class MovieService {
     private final SessionService sessionService;
     private final MovieMapper     movieMapper;
 
-    public List<MovieDto> getMoviesByTitle(String title) {
+    public Page<MovieDto> getMovies(Integer page, Integer size) {
+
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return movieRepository.findAll(pageable).map(movieMapper::convert);
+    }
+
+    public Page<MovieDto> getMoviesByTitle(String title, Integer page, Integer size) {
         log.info("Finding Movie by title: " + title);
-        return movieRepository.findByTitleContainingIgnoreCase(title).stream().map(movieMapper::convert).toList();
+
+        Pageable pageable = PageRequest.of(page, size);
+
+        return movieRepository.findByTitleContainingIgnoreCase(title, pageable).map(movieMapper::convert);
     }
 
     public List<MovieDto> getAllMovies() {
@@ -60,10 +72,5 @@ public class MovieService {
         return entities.stream().map(movieMapper::convert).toList();
     }
 
-    public Page<Movie> getMoviesPage(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size);
-
-        return movieRepository.findAll(pageable);
-    }
 
 }

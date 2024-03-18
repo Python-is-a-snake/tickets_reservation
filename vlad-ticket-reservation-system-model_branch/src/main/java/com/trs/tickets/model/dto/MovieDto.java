@@ -2,9 +2,7 @@ package com.trs.tickets.model.dto;
 
 import com.trs.tickets.model.entity.Session;
 import com.trs.tickets.model.entity.User;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
@@ -40,6 +38,8 @@ public class MovieDto extends BaseDto {
     private String    actors;
 
     @NotNull(message = "Duration can not be empty")
+    @Min(message = "Duration must be longer than 0 mins", value = 0)
+    @Max(message = "Duration must be not longer than 900 mins", value = 900)
     private Integer   duration;
 
     @NotEmpty(message = "Country can not be empty")

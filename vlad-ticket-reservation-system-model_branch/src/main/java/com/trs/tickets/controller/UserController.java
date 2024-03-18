@@ -2,11 +2,14 @@ package com.trs.tickets.controller;
 
 import com.trs.tickets.configs.Role;
 import com.trs.tickets.model.dto.UserCreateDto;
+import com.trs.tickets.model.dto.UserDto;
+import com.trs.tickets.service.PageSizeChecker;
 import com.trs.tickets.service.TicketService;
 import com.trs.tickets.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ public class UserController {
 
     private final UserService userService;
     private final TicketService ticketService;
+    private final PageSizeChecker pageSizeChecker;
+
 
     //REGISTRATION
     @PostMapping("/create")
@@ -58,8 +63,21 @@ public class UserController {
     //view all users page
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String allUsersPage(Model model, Authentication authentication) {
-        model.addAttribute("users", userService.getAllUsersExcept(authentication.getName()));
+    public String allUsersPage(Model model,
+                               Authentication authentication,
+                               @RequestParam(name = "page", defaultValue = "0") Integer page,
+                               @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+        Page<UserDto> allUsersExcept = userService.getAllUsersExcept(authentication.getName(), page, size);
+
+        model.addAttribute("users",allUsersExcept.getContent());
+        model.addAttribute("currentPage", allUsersExcept.getNumber());
+        model.addAttribute("totalItems", allUsersExcept.getTotalElements());
+        model.addAttribute("totalPages", allUsersExcept.getTotalPages());
+        model.addAttribute("pageSize", size);
         return "admin-users";
     }
 

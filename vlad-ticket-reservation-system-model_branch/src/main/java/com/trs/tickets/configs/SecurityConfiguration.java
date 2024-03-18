@@ -18,6 +18,8 @@ public class SecurityConfiguration {
             "/images/**",
             "/fonts/**",
             "/scripts/**",
+            "/webjars/**",
+            "/js/**"
     };
 
     @Bean
@@ -28,13 +30,13 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests().requestMatchers(staticResources).permitAll();
 
         http.authorizeHttpRequests().requestMatchers("/register", "/movies/**",
-                "/", "/contact-us", "/pageable").permitAll();
+                "/", "/contact-us", "/error").permitAll();
 
         http.authorizeHttpRequests().anyRequest().authenticated();
 
         http.formLogin(login -> login
                 .loginPage("/login")
-                .defaultSuccessUrl("/movies", true)
+//                .defaultSuccessUrl("/movies", true)
                 .permitAll());
 
         http.logout().permitAll();

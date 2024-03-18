@@ -12,12 +12,17 @@ import com.trs.tickets.repository.TicketRepository;
 import com.trs.tickets.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.util.Streamable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -61,9 +66,11 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).isEmpty();
     }
 
-    public List<UserDto> getAllUsersExcept(String username) {
+    public Page<UserDto> getAllUsersExcept(String username, Integer page, Integer size) {
+//        List<UserDto> list = userRepository.findAll().stream().filter(user -> !user.getUsername().equals(username)).map(userMapper::convert).toList();
 
-        return userRepository.findAll().stream().filter(user -> !user.getUsername().equals(username)).map(userMapper::convert).toList();
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findByUsernameNotIn(List.of(username), pageable).map(userMapper::convert);
     }
 
     public List<UserDto> getUserByUsernameExcept(String username, String currentUserName) {

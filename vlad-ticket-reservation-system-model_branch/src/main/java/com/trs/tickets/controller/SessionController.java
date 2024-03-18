@@ -8,9 +8,11 @@ import com.trs.tickets.model.dto.TicketDto;
 import com.trs.tickets.model.dto.UserDto;
 import com.trs.tickets.model.entity.Hall;
 import com.trs.tickets.model.entity.Place;
+import com.trs.tickets.model.entity.Session;
 import com.trs.tickets.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -34,6 +36,10 @@ public class SessionController {
     private final UserService userService;
     private final UserMapper userMapper;
     private final SessionMapper sessionMapper;
+
+
+    private final PageSizeChecker pageSizeChecker;
+
 
     // USER
 
@@ -89,8 +95,21 @@ public class SessionController {
     //view all Sessions page (with buttons to VIEW, EDIT, DELETE)
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String allSessionsAdminPage(Model model) {
-        model.addAttribute("movieSessions", sessionService.getAllSessions());
+    public String allSessionsAdminPage(Model model,
+                                       @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                       @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+        Page<Session> sessionPage = sessionService.getAllSessions(page, size);
+
+        model.addAttribute("movieSessions", sessionPage.getContent());
+        model.addAttribute("currentPage", sessionPage.getNumber());
+        model.addAttribute("totalItems", sessionPage.getTotalElements());
+        model.addAttribute("totalPages", sessionPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "admin-sessions";
     }
 

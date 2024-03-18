@@ -12,6 +12,9 @@ import com.trs.tickets.repository.SessionRepository;
 import com.trs.tickets.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +32,10 @@ public class SessionService {
     private final TicketService ticketService;
     private final PlaceService placeService;
 
-    public List<Session> getAllSessions() {
-        return sessionRepository.findAll();
+    public Page<Session> getAllSessions(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return sessionRepository.findAll(pageable);
     }
 
     public SessionDto getSessionById(Long id) {

@@ -1,13 +1,11 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.MovieDto;
-import com.trs.tickets.model.entity.Movie;
 import com.trs.tickets.service.MovieService;
+import com.trs.tickets.service.PageSizeChecker;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 
 @Controller
@@ -24,39 +21,98 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
+    private final PageSizeChecker pageSizeChecker;
 
     //USER & Anonymous User
 
     //view All movies - MAIN PAGE
     @GetMapping
-    public String getAllMovies(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
-        return "movies-page";
+    public String getAllMovies(Model model,
+                               @RequestParam(name = "page", defaultValue = "0") Integer page,
+                               @RequestParam(name = "size", defaultValue = "6") Integer size
+                               ) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+        Page<MovieDto> moviesPage = movieService.getMovies(page, size);
+
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("currentPage", moviesPage.getNumber());
+        model.addAttribute("totalItems", moviesPage.getTotalElements());
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
+        return "main/movies-page";
     }
 
     //view All movies with SEARCH - MAIN PAGE
     @GetMapping("/search")
-    public String getMoviesByTitle(@RequestParam(name = "title", required = false) String title, Model model) {
-        model.addAttribute("movies", movieService.getMoviesByTitle(title));
-        return "movies-page";
+    public String getMoviesByTitle(Model model,
+                                   @RequestParam(name = "title", required = false) String title,
+                                   @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                   @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+
+        Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
+
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("currentPage", moviesPage.getNumber());
+        model.addAttribute("totalItems", moviesPage.getTotalElements());
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
+        return "main/movies-page";
     }
 
 
     //ADMIN
 
-    //view all Movies admin page (with buttons to VIEW, EDIT, DELETE)
+
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String getAllMoviesAdminPage(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
+    public String getMoviesAdminPage(Model model,
+                                            @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                            @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+
+        Page<MovieDto> moviesPage = movieService.getMovies(page, size);
+
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("currentPage", moviesPage.getNumber());
+        model.addAttribute("totalItems", moviesPage.getTotalElements());
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "admin-movies";
     }
 
     //view all Movies admin page with SEARCH by Movie title (with buttons to VIEW, EDIT, DELETE)
     @GetMapping("/all/search")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String getMoviesByTitleAdminPage(@RequestParam(name = "title", required = false) String title, Model model) {
-        model.addAttribute("movies", movieService.getMoviesByTitle(title));
+    public String getMoviesByTitleAdminPage(Model model,
+                                            @RequestParam(name = "title", required = false) String title,
+                                            @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                            @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeChecker.checkPage(page);
+        size = pageSizeChecker.checkSize(size);
+
+
+        Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
+
+        model.addAttribute("movies", moviesPage.getContent());
+        model.addAttribute("currentPage", moviesPage.getNumber());
+        model.addAttribute("totalItems", moviesPage.getTotalElements());
+        model.addAttribute("totalPages", moviesPage.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "admin-movies";
     }
 
@@ -118,21 +174,5 @@ public class MovieController {
     public String deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
         return "redirect:/movies";
-    }
-
-
-    @GetMapping("/pageable")
-    public String getPagedMovies(Model model, @RequestParam(name = "page", defaultValue = "0") Integer page,
-                                 @RequestParam(name = "size", defaultValue = "6") Integer size){
-
-        Page<Movie> moviesPage = movieService.getMoviesPage(page, size);
-
-        model.addAttribute("movies", moviesPage.getContent());
-        model.addAttribute("currentPage", moviesPage.getNumber());
-        model.addAttribute("totalItems", moviesPage.getTotalElements());
-        model.addAttribute("totalPages", moviesPage.getTotalPages());
-        model.addAttribute("pageSize", size);
-
-        return "movies-paged";
     }
 }
