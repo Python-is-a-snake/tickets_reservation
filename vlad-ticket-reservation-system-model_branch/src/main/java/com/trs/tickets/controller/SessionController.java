@@ -37,9 +37,7 @@ public class SessionController {
     private final UserMapper userMapper;
     private final SessionMapper sessionMapper;
 
-
     private final PageSizeChecker pageSizeChecker;
-
 
     // USER
 
@@ -60,7 +58,7 @@ public class SessionController {
 
         List<Place> takenPlaces = ticketService.findTakenPlacesByHallId(hall.getId());
         model.addAttribute("takenPlaces", takenPlaces);
-        return "buy-tickets-page";
+        return "buy-ticket/buy-tickets-page";
     }
 
     //clicked on Place - go to purchase page
@@ -87,7 +85,7 @@ public class SessionController {
         model.addAttribute("ticket", ticket);
         model.addAttribute("user", user);
 
-        return "ticket-purchase-page";
+        return "buy-ticket/ticket-purchase-page";
     }
 
     // ADMIN
@@ -110,7 +108,7 @@ public class SessionController {
         model.addAttribute("totalPages", sessionPage.getTotalPages());
         model.addAttribute("pageSize", size);
 
-        return "admin-sessions";
+        return "admin/admin-sessions";
     }
 
     //view Session creation page
@@ -121,7 +119,7 @@ public class SessionController {
         model.addAttribute("movieSession", session);
         model.addAttribute("halls", hallService.getAllHalls());
         model.addAttribute("movies", movieService.getAllMovies());
-        return "create-session-page";
+        return "admin/create-session-page";
     }
 
     //create Session
@@ -134,7 +132,7 @@ public class SessionController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("movieSession", session);
-            return "create-session-page";
+            return "admin/create-session-page";
         }
 
         sessionService.createSession(movieId, hallId, session);
@@ -149,7 +147,7 @@ public class SessionController {
         model.addAttribute("sessionDto", sessionDto);
         model.addAttribute("movies", movieService.getAllMovies());
         model.addAttribute("halls", hallService.getAllHalls());
-        return "edit-session-page";
+        return "admin/edit-session-page";
     }
 
     //edit Session

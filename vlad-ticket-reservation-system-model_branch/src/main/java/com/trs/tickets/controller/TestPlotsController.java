@@ -33,41 +33,41 @@ public class TestPlotsController {
 
         model.addAttribute("filmData", chartData);
 
-        return "stats-page";
+        return "plot/stats-page";
     }
 
     @GetMapping("/2")
     public String movieRevenue(Model model) {
         Map<String, BigDecimal> revenueData = chartsService.getTotalRevenueByMovie();
         model.addAttribute("revenueData", revenueData);
-        return "stats-page2";
+        return "plot/stats-page2";
     }
 
     @GetMapping("/3")
     public String movieSales(Model model) {
         Map<String, Long> salesByDuration = chartsService.getTicketSalesByDuration();
         model.addAttribute("salesByDuration", salesByDuration);
-        return "stats-page3";
+        return "plot/stats-page3";
     }
 
     @GetMapping("/4")
     public String hallUtilization(Model model) {
         Map<String, Double> utilizationData = chartsService.getHallUtilizationRates();
         model.addAttribute("utilizationData", utilizationData);
-        return "stats-page4";
+        return "plot/stats-page4";
     }
 
     @GetMapping("/5")
     public String popularityByTimeSlot(Model model) {
         Map<String, Integer> timeSlotData = chartsService.getTicketCountsByTimeSlot();
         model.addAttribute("timeSlotData", timeSlotData);
-        return "stats-page5";
+        return "plot/stats-page5";
     }
     @GetMapping("/6")
     public String ticketSalesByDayOfWeek(Model model) {
         Map<String, Long> salesByDayOfWeek = chartsService.getTicketSalesByDayOfWeek();
         model.addAttribute("salesByDayOfWeek", salesByDayOfWeek);
-        return "stats-page6";
+        return "plot/stats-page6";
     }
 
 

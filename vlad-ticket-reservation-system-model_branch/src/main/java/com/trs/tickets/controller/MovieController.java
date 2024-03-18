@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 @Controller
 @RequestMapping("/movies")
 @RequiredArgsConstructor
@@ -56,7 +55,6 @@ public class MovieController {
         page = pageSizeChecker.checkPage(page);
         size = pageSizeChecker.checkSize(size);
 
-
         Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
 
         model.addAttribute("movies", moviesPage.getContent());
@@ -68,9 +66,7 @@ public class MovieController {
         return "main/movies-page";
     }
 
-
     //ADMIN
-
 
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
@@ -90,7 +86,7 @@ public class MovieController {
         model.addAttribute("totalPages", moviesPage.getTotalPages());
         model.addAttribute("pageSize", size);
 
-        return "admin-movies";
+        return "admin/admin-movies";
     }
 
     //view all Movies admin page with SEARCH by Movie title (with buttons to VIEW, EDIT, DELETE)
@@ -113,9 +109,8 @@ public class MovieController {
         model.addAttribute("totalPages", moviesPage.getTotalPages());
         model.addAttribute("pageSize", size);
 
-        return "admin-movies";
+        return "admin/admin-movies";
     }
-
 
     //
     @GetMapping("/{id}")
@@ -124,7 +119,7 @@ public class MovieController {
         model.addAttribute("movie", movie);
 
         model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
-        return "id-movie-page";
+        return "movie-session/id-movie-page";
     }
 
     @GetMapping("/create")
@@ -132,7 +127,7 @@ public class MovieController {
     public String createMovie(Model model) {
         MovieDto movie = new MovieDto();
         model.addAttribute("movie", movie);
-        return "create-movie-page";
+        return "admin/create-movie-page";
     }
 
     @PostMapping("/create")
@@ -140,7 +135,7 @@ public class MovieController {
     public String createMoviePost(@Valid @ModelAttribute("movie") MovieDto movie, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("movie", movie);
-            return "create-movie-page";
+            return "admin/create-movie-page";
         }
         movieService.addMovie(movie);
         return "redirect:/movies";
@@ -151,7 +146,7 @@ public class MovieController {
     public String editMovie(@PathVariable("id") Long id, Model model) {
         MovieDto movie = movieService.getMovieById(id);
         model.addAttribute("movie", movie);
-        return "edit-movie-page";
+        return "admin/edit-movie-page";
     }
 
     @PostMapping("/edit/{id}")
@@ -159,7 +154,7 @@ public class MovieController {
     public String editMoviePost(@PathVariable("id") Long id, @Valid @ModelAttribute("movie") MovieDto movie,
                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "edit-movie-page";
+            return "admin/edit-movie-page";
         }
 
         LocalDate date = LocalDate.parse(String.valueOf(movie.getReleaseDate()), DateTimeFormatter.ofPattern("yyyy-MM-dd"));

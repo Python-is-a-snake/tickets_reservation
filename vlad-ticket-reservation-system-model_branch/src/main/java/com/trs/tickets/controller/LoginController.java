@@ -1,7 +1,6 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.UserCreateDto;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class LoginController {
 
-
     @GetMapping("/login")
-    public String loginPage(Model model, HttpServletRequest request) {
-
-        return "login-page";
+    public String loginPage() {
+        return "account/login-page";
     }
 
     @PostMapping("/login")
@@ -28,7 +25,7 @@ public class LoginController {
     public String registrationPage(Model model) {
         UserCreateDto userCreateDto = new UserCreateDto();
         model.addAttribute("userCreateDto", userCreateDto);
-        return "register-page";
+        return "account/register-page";
     }
 
 }

@@ -12,16 +12,11 @@ public class MainController {
 
     @GetMapping("/access-denied")
     public String accessDeniedPage() {
-        return "access-denied-page";
+        return "error/access-denied-page";
     }
 
     @GetMapping("/contact-us")
     public String contactUsPage() {
         return "contact-us-page";
-    }
-
-    @GetMapping("/test")
-    public String testPage() {
-        return "admin-users";
     }
 }

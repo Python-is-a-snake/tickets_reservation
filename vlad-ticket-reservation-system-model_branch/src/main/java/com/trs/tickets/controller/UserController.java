@@ -28,7 +28,6 @@ public class UserController {
     private final TicketService ticketService;
     private final PageSizeChecker pageSizeChecker;
 
-
     //REGISTRATION
     @PostMapping("/create")
     public String createUser(@Valid @ModelAttribute("userCreateDto") UserCreateDto userCreateDto, BindingResult bindingResult, Model model) {
@@ -43,7 +42,7 @@ public class UserController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userCreateDto", userCreateDto);
-            return "register-page";
+            return "account/register-page";
         }
 
         userService.addUser(userCreateDto);
@@ -55,7 +54,7 @@ public class UserController {
     public String profilePage(Model model, Authentication authentication) {
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()).get(0));
         model.addAttribute("tickets", ticketService.findByUserName(authentication.getName()));
-        return "profile-page";
+        return "account/profile-page";
     }
 
     //ADMIN
@@ -78,7 +77,7 @@ public class UserController {
         model.addAttribute("totalItems", allUsersExcept.getTotalElements());
         model.addAttribute("totalPages", allUsersExcept.getTotalPages());
         model.addAttribute("pageSize", size);
-        return "admin-users";
+        return "admin/admin-users";
     }
 
     //search user by username
@@ -86,7 +85,7 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String getUsersByUsername(@RequestParam(name = "username", required = false) String username, Model model, Authentication authentication) {
         model.addAttribute("users", userService.getUserByUsernameExcept(username, authentication.getName()));
-        return "admin-users";
+        return "admin/admin-users";
     }
 
     //make user an Admin
