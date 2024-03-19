@@ -1,7 +1,6 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.configs.Role;
-import com.trs.tickets.model.dto.TicketDto;
 import com.trs.tickets.model.dto.UserCreateDto;
 import com.trs.tickets.model.dto.UserDto;
 import com.trs.tickets.model.entity.Ticket;

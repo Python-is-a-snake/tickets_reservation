@@ -93,7 +93,7 @@ class MovieControllerTest {
     void testAddMovie_returnsAddedMovie() throws Exception {
         testMovie.setTitle("New Title");
 
-        given(movieService.addMovie(any(MovieDto.class))).willReturn(testMovie);
+        given(movieService.createMovie(any(MovieDto.class))).willReturn(testMovie);
 
         mockMvc.perform(post("/api/movies")
                         .accept(MediaType.APPLICATION_JSON)
@@ -101,7 +101,7 @@ class MovieControllerTest {
                         .content(objectMapper.writeValueAsString(testMovie)))
                 .andExpect(jsonPath("$.title", is(testMovie.getTitle())));
 
-        verify(movieService).addMovie(movieCaptor.capture());
+        verify(movieService).createMovie(movieCaptor.capture());
         assertEquals(testMovie, movieCaptor.getValue());
     }
 

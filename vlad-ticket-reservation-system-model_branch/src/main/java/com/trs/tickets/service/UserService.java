@@ -7,6 +7,7 @@ import com.trs.tickets.mappers.UserCreateDtoMapper;
 import com.trs.tickets.mappers.UserMapper;
 import com.trs.tickets.model.dto.UserCreateDto;
 import com.trs.tickets.model.dto.UserDto;
+import com.trs.tickets.model.entity.Ticket;
 import com.trs.tickets.model.entity.User;
 import com.trs.tickets.repository.TicketRepository;
 import com.trs.tickets.repository.UserRepository;
@@ -46,8 +47,11 @@ public class UserService implements UserDetailsService {
         return userMapper.convert(userRepository.save(user));
     }
 
+    //todo: fix constraint failure with session id
     public void deleteUser(Long id) {
-        ticketRepository.findAllByUserId(id).forEach(ticketRepository::delete);
+        List<Ticket> ticketsByUserId = ticketRepository.findAllByUserId(id);
+        ticketRepository.deleteAll(ticketsByUserId);
+        ticketRepository.flush();
         userRepository.deleteById(id);
     }
 

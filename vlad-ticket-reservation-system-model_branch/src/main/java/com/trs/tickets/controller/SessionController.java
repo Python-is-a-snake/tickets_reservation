@@ -34,8 +34,6 @@ public class SessionController {
     private final TicketService ticketService;
     private final PlaceService placeService;
     private final UserService userService;
-    private final UserMapper userMapper;
-    private final SessionMapper sessionMapper;
 
     private final PageSizeCheckerService pageSizeCheckerService;
 

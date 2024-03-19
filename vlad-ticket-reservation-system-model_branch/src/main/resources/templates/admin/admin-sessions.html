@@ -24,6 +24,27 @@
     <section class="py-5">
       <div class="container">
         <h3>Sessions</h3>
+
+        <div th:if="${totalPages > 1}" class="row text-center">
+
+          <p></p>
+
+          <h6>Found <span th:text="${totalItems}">count</span> Sessions!</h6>
+
+          <h6>Displaying <div class="dropdown d-inline-block">
+            <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
+                    data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">page size</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <a th:if="${totalItems >= 4}" th:href="@{/sessions/all(page=${currentPage}, size=${4})}" class="dropdown-item" type="button">4</a>
+              <a th:if="${totalItems >= 6}" th:href="@{/sessions/all(page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
+              <a th:if="${totalItems >= 8}" th:href="@{/sessions/all(page=${currentPage}, size=${8})}" class="dropdown-item" type="button">8</a>
+              <a th:if="${totalItems >= 12}" th:href="@{/sessions/all(page=${currentPage}, size=${12})}" class="dropdown-item" type="button">12</a>
+              <a th:if="${totalItems >= 20}" th:href="@{/sessions/all(page=${currentPage}, size=${20})}" class="dropdown-item" type="button">20</a>
+            </div>
+          </div> sessions per page!</h6>
+
+        </div>
+
         <table class="table table-hover">
           <thead>
           <tr>

@@ -5,8 +5,6 @@ import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.model.entity.Movie;
 import com.trs.tickets.repository.MovieRepository;
 import com.trs.tickets.repository.SessionRepository;
-import jakarta.validation.Valid;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,11 +24,15 @@ public class MovieService {
     private final SessionService sessionService;
     private final MovieMapper     movieMapper;
 
-    public Page<MovieDto> getMovies(Integer page, Integer size) {
+    public Page<MovieDto> getAllMovies(Integer page, Integer size) {
 
         Pageable pageable = PageRequest.of(page, size);
 
         return movieRepository.findAll(pageable).map(movieMapper::convert);
+    }
+
+    public List<MovieDto> getAllMovies() {
+        return movieRepository.findAll().stream().map(movieMapper::convert).toList();
     }
 
     public Page<MovieDto> getMoviesByTitle(String title, Integer page, Integer size) {
@@ -41,16 +43,12 @@ public class MovieService {
         return movieRepository.findByTitleContainingIgnoreCase(title, pageable).map(movieMapper::convert);
     }
 
-    public List<MovieDto> getAllMovies() {
-        return movieRepository.findAll().stream().map(movieMapper::convert).toList();
-    }
-
     public MovieDto getMovieById(Long id) {
         Optional<Movie> movieOpt = movieRepository.findById(id);
         return movieOpt.map(movieMapper::convert).orElse(null);
     }
 
-    public MovieDto addMovie(MovieDto movieDTO) {
+    public MovieDto createMovie(MovieDto movieDTO) {
         var entity = movieRepository.save(movieMapper.convert(movieDTO));
         return movieMapper.convert(entity);
     }

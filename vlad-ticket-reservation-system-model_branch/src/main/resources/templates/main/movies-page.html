@@ -15,6 +15,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <base href="/">
     <link th:href="@{css/styles.css}" rel="stylesheet">
+
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -30,6 +31,26 @@
                     <h1 class="fw-bolder">CINEMAGIC</h1>
                     <p class="lead fw-normal text-muted mb-0">Movies magic starts here!</p>
                     <hr>
+
+                    <div th:if="${totalPages > 1}" class="row text-center">
+
+                        <h5 class="col">Found <span th:text="${totalItems}">count</span> Movies!</h5>
+
+                        <h5 class="col">Displaying <div class="dropdown d-inline-block">
+                                <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">page size</button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <a th:if="${totalItems >= 4}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${4})}"
+                                       class="dropdown-item" type="button">4</a>
+                                    <a th:if="${totalItems >= 6}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
+                                    <a th:if="${totalItems >= 8}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${8})}" class="dropdown-item" type="button">8</a>
+                                    <a th:if="${totalItems >= 12}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${12})}" class="dropdown-item" type="button">12</a>
+                                </div>
+                            </div> movies per page!</h5>
+
+                        <hr>
+                    </div>
 
                     <!-- No movies found alert-->
                     <div class="alert alert-warning text-center" role="alert" th:if="${#lists.isEmpty(movies)}">
@@ -69,13 +90,13 @@
                         <!--FIRST PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : 'enadled'}">
                             <a class="page-link"
-                               th:href="@{/movies(page=${0}, size=${pageSize})}"
+                               th:href="@{/movies(title=${title == null ? '' : title}, page=${0}, size=${pageSize})}"
                                tabindex="-1">First</a>
                         </li>
                         <!--PREVIOUS PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : 'enadled'}">
                             <a class="page-link"
-                               th:href="@{/movies(page=${currentPage - 1}, size=${pageSize})}"
+                               th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage - 1}, size=${pageSize})}"
                                tabindex="-1">Previous</a>
                         </li>
 
@@ -85,7 +106,7 @@
                         <th:block th:if="${totalPages <= 10}">
                             <li class="page-item" th:each="i: ${#numbers.sequence(0, totalPages - 1)}">
                                 <a th:classappend="${currentPage == i ? 'active' : ''}"
-                                   th:href="@{/movies(page=${i}, size=${pageSize})}"
+                                   th:href="@{/movies(title=${title == null ? '' : title}, page=${i}, size=${pageSize})}"
                                    class="page-link">[[${i+1}]]</a>
                             </li>
                         </th:block>
@@ -97,33 +118,33 @@
 
                                 <li class="page-item" th:each="i: ${#numbers.sequence(0, 4)}">
                                     <a th:classappend="${currentPage == i ? 'active' : ''}"
-                                       th:href="@{/movies(page=${i}, size=${pageSize})}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${i}, size=${pageSize})}"
                                        class="page-link">[[${i+1}]]</a>
                                 </li>
 
-                                <a th:href="@{/movies(page=${5}, size=${pageSize})}"
+                                <a th:href="@{/movies(title=${title == null ? '' : title}, page=${5}, size=${pageSize})}"
                                    class="page-link enabled">...</a>
 
                                 <li class="page-item" th:each="i: ${#numbers.sequence(totalPages - 5, totalPages - 1)}">
                                     <a th:classappend="${currentPage == i ? 'active' : ''}"
-                                       th:href="@{/movies(page=${i}, size=${pageSize})}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${i}, size=${pageSize})}"
                                        class="page-link">[[${i+1}]]</a>
                                 </li>
                             </th:block>
 
                             <th:block th:if="${currentPage > 4 && currentPage <= totalPages - 6}">
 
-                                <a th:href="@{/movies(page=${currentPage - 5}, size=${pageSize})}"
+                                <a th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage - 5}, size=${pageSize})}"
                                    class="page-link enabled">...</a>
 
                                 <li class="page-item"
                                     th:each="i: ${#numbers.sequence(currentPage - 4, currentPage + 4)}">
                                     <a th:classappend="${currentPage == i ? 'active' : ''}"
-                                       th:href="@{/movies(page=${i}, size=${pageSize})}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${i}, size=${pageSize})}"
                                        class="page-link">[[${i+1}]]</a>
                                 </li>
 
-                                <a th:href="@{/movies(page=${currentPage + 5}, size=${pageSize})}"
+                                <a th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage + 5}, size=${pageSize})}"
                                    class="page-link enabled">...</a>
                             </th:block>
 
@@ -131,12 +152,12 @@
 
                         <!--NEXT PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage + 1 < totalPages ? 'enabled' : 'disabled'}">
-                            <a class="page-link" th:href="@{/movies(page=${currentPage + 1}, size=${pageSize})}">Next</a>
+                            <a class="page-link" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage + 1}, size=${pageSize})}">Next</a>
                         </li>
 
                         <!--LAST PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage + 1 < totalPages ? 'enabled' : 'disabled'}">
-                            <a class="page-link" th:href="@{/movies(page=${totalPages - 1}, size=${pageSize})}">Last</a>
+                            <a class="page-link" th:href="@{/movies(title=${title == null ? '' : title}, page=${totalPages - 1}, size=${pageSize})}">Last</a>
                         </li>
 
                     </ul>

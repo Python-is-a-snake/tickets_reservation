@@ -29,7 +29,7 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests().requestMatchers(staticResources).permitAll();
 
-        http.authorizeHttpRequests().requestMatchers("/register", "/movies/**", "/user/create",
+        http.authorizeHttpRequests().requestMatchers("/register", "/movies/**",
                 "/", "/contact-us", "/error").permitAll();
 
         http.authorizeHttpRequests().anyRequest().authenticated();
