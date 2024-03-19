@@ -2,7 +2,7 @@ package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.service.MovieService;
-import com.trs.tickets.service.PageSizeChecker;
+import com.trs.tickets.service.PageSizeCheckerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
-    private final PageSizeChecker pageSizeChecker;
+    private final PageSizeCheckerService pageSizeCheckerService;
 
     //USER & Anonymous User
 
@@ -31,8 +31,8 @@ public class MovieController {
                                @RequestParam(name = "size", defaultValue = "6") Integer size
                                ) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
         Page<MovieDto> moviesPage = movieService.getMovies(page, size);
 
@@ -52,8 +52,8 @@ public class MovieController {
                                    @RequestParam(name = "page", defaultValue = "0") Integer page,
                                    @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
         Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
 
@@ -74,8 +74,8 @@ public class MovieController {
                                             @RequestParam(name = "page", defaultValue = "0") Integer page,
                                             @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
 
         Page<MovieDto> moviesPage = movieService.getMovies(page, size);
@@ -97,8 +97,8 @@ public class MovieController {
                                             @RequestParam(name = "page", defaultValue = "0") Integer page,
                                             @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
 
         Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);

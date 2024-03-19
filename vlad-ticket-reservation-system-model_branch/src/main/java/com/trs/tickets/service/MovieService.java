@@ -28,7 +28,6 @@ public class MovieService {
 
     public Page<MovieDto> getMovies(Integer page, Integer size) {
 
-
         Pageable pageable = PageRequest.of(page, size);
 
         return movieRepository.findAll(pageable).map(movieMapper::convert);

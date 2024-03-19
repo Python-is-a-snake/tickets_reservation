@@ -12,9 +12,11 @@ import org.hibernate.validator.constraints.Length;
 @AllArgsConstructor
 public class UserCreateDto {
     @Email
+    @NotBlank(message = "Can not be blank")
+    @Length(min = 6, max = 120, message = "Too short email, should be more than 3 characters")
     String username;
 
     @NotBlank(message = "Can not be blank")
-    @Length(min = 6, max = 120, message = "Too short password, should be more than 6 characters")
+    @Length(min = 3, max = 120, message = "Too short password, should be more than 6 characters")
     String password;
 }

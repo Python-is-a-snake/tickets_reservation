@@ -3,7 +3,7 @@ package com.trs.tickets.controller;
 import com.trs.tickets.configs.Role;
 import com.trs.tickets.model.dto.UserCreateDto;
 import com.trs.tickets.model.dto.UserDto;
-import com.trs.tickets.service.PageSizeChecker;
+import com.trs.tickets.service.PageSizeCheckerService;
 import com.trs.tickets.service.TicketService;
 import com.trs.tickets.service.UserService;
 import jakarta.validation.Valid;
@@ -26,7 +26,7 @@ public class UserController {
 
     private final UserService userService;
     private final TicketService ticketService;
-    private final PageSizeChecker pageSizeChecker;
+    private final PageSizeCheckerService pageSizeCheckerService;
 
     //REGISTRATION
     @PostMapping("/create")
@@ -35,13 +35,14 @@ public class UserController {
             bindingResult.addError(new FieldError("userCreateDto", "username", "This username is already in use!"));
         }
 
-        //Validate Email using Mailbox Validation
-        if (!userService.isEmailCorrect(userCreateDto)) {
-            bindingResult.addError(new FieldError("userCreateDto", "username", "Incorrect Email!"));
-        }
+
+//        if (!userCreateDto.getUsername().isBlank() && !userService.isEmailCorrect(userCreateDto)) {//        Validate Email using Mailbox Validation
+//            bindingResult.addError(new FieldError("userCreateDto", "username", "Incorrect Email!"));
+//        }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("userCreateDto", userCreateDto);
+            model.addAttribute("bindingResult", bindingResult);
             return "account/register-page";
         }
 
@@ -67,8 +68,8 @@ public class UserController {
                                @RequestParam(name = "page", defaultValue = "0") Integer page,
                                @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
         Page<UserDto> allUsersExcept = userService.getAllUsersExcept(authentication.getName(), page, size);
 
@@ -90,8 +91,8 @@ public class UserController {
                                      @RequestParam(name = "size", defaultValue = "6") Integer size
                                      ) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
         Page<UserDto> usersByUsernameExcept = userService.getUserByUsernameExcept(username, authentication.getName(), page, size);
 
         model.addAttribute("users", usersByUsernameExcept);

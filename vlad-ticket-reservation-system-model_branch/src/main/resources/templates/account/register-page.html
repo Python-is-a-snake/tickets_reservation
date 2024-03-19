@@ -37,7 +37,7 @@
                 </div>
                 <!--                REGISTRATION FORM-->
                 <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-                    <form style="width: 23rem;" th:action="@{/user/create}" method="post" th:object="${userCreateDto}">
+                    <form style="width: 23rem;" th:action="@{/user/create}" th:href="@{/user/create}" method="post" th:object="${userCreateDto}">
 
                         <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register</h3>
                         <!--Already registered alert-->
@@ -47,7 +47,7 @@
                                    th:field="*{username}"/>
                             <label class="form-label" for="username">Email</label>
                         </div>
-                        <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></p>
+                        <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}" th:value="${bindingResult.getFieldError('username')}"></p>
 
                         <div class="form-outline mb-4">
                             <input type="password" id="password" class="form-control form-control-lg" name="password"

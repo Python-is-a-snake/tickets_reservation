@@ -2,18 +2,18 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
       layout:decorate="template.html">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Cinemagic | Buy Ticket</title>
-  <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
-  <!-- Bootstrap icons-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- Core theme CSS (includes Bootstrap)-->
-  <base href="/">
-  <link th:href="@{css/styles.css}" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cinemagic | Buy Ticket</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <base href="/">
+    <link th:href="@{css/styles.css}" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -24,11 +24,17 @@
         <section class="py-5">
             <div class="container">
                 <h3>Ticket to "<span th:text="${movie.title}">Title</span>"</h3>
-                <h4><b>Price: </b><i th:text="${#numbers.formatDecimal(ticket.price, 1, 'DEFAULT', 2, 'DEFAULT')}"></i> <span>&#8372;</span></h4>
+                <h4><b>Price: </b><i th:text="${#numbers.formatDecimal(ticket.price, 1, 'DEFAULT', 2, 'DEFAULT')}"></i>
+                    <span>&#8372;</span></h4>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><h5><b>When: </b><i th:text="${#temporals.format(movieSession.sessionDateTime, 'EEEE, dd.MM.yyyy, HH:mm')}"></i></h5></li>
-                    <li class="list-group-item"><h5><b>Hall: </b><i th:text="${hall.type}"></i> "<span th:text="${hall.name}"></span>"</h5></li>
-                    <li class="list-group-item"><h5><b>Place: </b> Row: <i th:text="${place.row}"></i> | Number: <span th:text="${place.number}"></span> | Type: <span th:text="${place.placeType}"></span></h5>                    </li>
+                    <li class="list-group-item"><h5><b>When: </b><i
+                            th:text="${#temporals.format(movieSession.sessionDateTime, 'EEEE, dd.MM.yyyy, HH:mm')}"></i>
+                    </h5></li>
+                    <li class="list-group-item"><h5><b>Hall: </b><i th:text="${hall.type}"></i> "<span
+                            th:text="${hall.name}"></span>"</h5></li>
+                    <li class="list-group-item"><h5><b>Place: </b> Row: <i th:text="${place.row}"></i> | Number: <span
+                            th:text="${place.number}"></span> | Type: <span th:text="${place.placeType}"></span></h5>
+                    </li>
                     <li class="list-group-item"><h5><b>For: </b> <i th:text="${user.username}"></i></h5></li>
                 </ul>
                 <form th:action="@{/tickets/buy}" method="post" th:object="${ticket}">
@@ -39,6 +45,19 @@
 
                     <button type="submit" class="btn btn-success">Reserve Ticket</button>
                     <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button>
+                </form>
+
+                <form th:action="@{/paypal/payment/create}" method="post" th:object="${ticket}">
+<!--                    <input type="hidden" th:field="*{userId}" th:value="${ticket.userId}">-->
+<!--                    <input type="hidden" th:field="*{placeId}" th:value="${ticket.placeId}">-->
+<!--                    <input type="hidden" th:field="*{sessionId}" th:value="${ticket.sessionId}">-->
+<!--                    <input type="hidden" th:field="*{price}" th:value="${ticket.price}">-->
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">
+                            Pay with Paypal
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>

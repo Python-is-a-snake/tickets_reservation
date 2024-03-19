@@ -1,9 +1,9 @@
 package com.trs.tickets.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class PageSizeChecker {
+@Service
+public class PageSizeCheckerService {
 
     public Integer checkPage(Integer page){
         if(page == null || page < 0){

@@ -37,7 +37,7 @@ public class SessionController {
     private final UserMapper userMapper;
     private final SessionMapper sessionMapper;
 
-    private final PageSizeChecker pageSizeChecker;
+    private final PageSizeCheckerService pageSizeCheckerService;
 
     // USER
 
@@ -97,8 +97,8 @@ public class SessionController {
                                        @RequestParam(name = "page", defaultValue = "0") Integer page,
                                        @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
-        page = pageSizeChecker.checkPage(page);
-        size = pageSizeChecker.checkSize(size);
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
 
         Page<Session> sessionPage = sessionService.getAllSessions(page, size);
 
