@@ -70,7 +70,7 @@ public class SessionController {
                                 Authentication authentication) {
         SessionDto session = sessionService.getSessionById(sessionId);
         Place place = placeService.getPlaceById(placeId);
-        UserDto user = userService.getUserByUsername(authentication.getName()).get(0);
+        UserDto user = userService.getUserByUsername(authentication.getName());
         TicketDto ticket = new TicketDto();
 
         ticket.setSessionId(session.getId());

@@ -14,6 +14,9 @@ import com.trs.tickets.repository.SessionRepository;
 import com.trs.tickets.repository.TicketRepository;
 import com.trs.tickets.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,7 +50,7 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    public List<Place> findTakenPlacesByHallId(Long hallId){
+    public List<Place> findTakenPlacesByHallId(Long hallId) {
         return ticketRepository.findAllPlacesByHallId(hallId);
     }
 
@@ -59,8 +62,10 @@ public class TicketService {
         ticketRepository.deleteById(id);
     }
 
-    public List<Ticket> findByUserName(String userName){
-        return ticketRepository.findByUserUsername(userName);
+    public Page<Ticket> findByUserName(String userName, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+        return ticketRepository.findByUserUsername(userName, pageable);
     }
 
 //    public String generateTicketCode() { todo: Implement in future

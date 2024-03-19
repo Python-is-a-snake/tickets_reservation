@@ -1,8 +1,10 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.configs.Role;
+import com.trs.tickets.model.dto.TicketDto;
 import com.trs.tickets.model.dto.UserCreateDto;
 import com.trs.tickets.model.dto.UserDto;
+import com.trs.tickets.model.entity.Ticket;
 import com.trs.tickets.service.PageSizeCheckerService;
 import com.trs.tickets.service.TicketService;
 import com.trs.tickets.service.UserService;
@@ -34,12 +36,9 @@ public class UserController {
         if (!userService.usernameIsUnique(userCreateDto.getUsername())) {
             bindingResult.addError(new FieldError("userCreateDto", "username", "This username is already in use!"));
         }
-
-
 //        if (!userCreateDto.getUsername().isBlank() && !userService.isEmailCorrect(userCreateDto)) {//        Validate Email using Mailbox Validation
 //            bindingResult.addError(new FieldError("userCreateDto", "username", "Incorrect Email!"));
 //        }
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("userCreateDto", userCreateDto);
             model.addAttribute("bindingResult", bindingResult);
@@ -52,9 +51,21 @@ public class UserController {
 
     //USER
     @GetMapping("/profile")
-    public String profilePage(Model model, Authentication authentication) {
-        model.addAttribute("user", userService.getUserByUsername(authentication.getName()).get(0));
-        model.addAttribute("tickets", ticketService.findByUserName(authentication.getName()));
+    public String profilePage(Model model, Authentication authentication,
+                              @RequestParam(name = "page", defaultValue = "0") Integer page,
+                              @RequestParam(name = "size", defaultValue = "6") Integer size) {
+
+        page = pageSizeCheckerService.checkPage(page);
+        size = pageSizeCheckerService.checkSize(size);
+
+        Page<Ticket> ticketsByUserNamePage = ticketService.findByUserName(authentication.getName(), page, size);
+
+        model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+        model.addAttribute("tickets", ticketsByUserNamePage.getContent());
+        model.addAttribute("currentPage", ticketsByUserNamePage.getNumber());
+        model.addAttribute("totalItems", ticketsByUserNamePage.getTotalElements());
+        model.addAttribute("totalPages", ticketsByUserNamePage.getTotalPages());
+        model.addAttribute("pageSize", size);
         return "account/profile-page";
     }
 

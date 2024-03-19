@@ -57,9 +57,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).map(user -> new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), List.of(user.getRole()))).orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 
-    public List<UserDto> getUserByUsername(String username) {
+    public UserDto getUserByUsername(String username) {
         log.info("Finding User with username: " + username);
-        return userRepository.findByUsernameContainingIgnoreCase(username).stream().map(userMapper::convert).toList();
+        User user = userRepository.findByUsernameContainingIgnoreCase(username);
+        return userMapper.convert(user);
     }
 
     public boolean usernameIsUnique(String username) {
