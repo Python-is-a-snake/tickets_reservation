@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
             "JOIN s.hall h " +
             "GROUP BY h.name")
     List<Map<String, Object>> countSessionsByHall();
+
+    List<Session> findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime localDateTime);
 
 
 }

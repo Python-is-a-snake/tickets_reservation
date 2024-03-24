@@ -38,7 +38,7 @@
 
                         <h5 class="col">Displaying <div class="dropdown d-inline-block">
                                 <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
-                                        data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">page size</button>
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size</button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                     <a th:if="${totalItems >= 4}"
                                        th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${4})}"
@@ -48,7 +48,6 @@
                                     <a th:if="${totalItems >= 12}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${12})}" class="dropdown-item" type="button">12</a>
                                 </div>
                             </div> movies per page!</h5>
-
                         <hr>
                     </div>
 

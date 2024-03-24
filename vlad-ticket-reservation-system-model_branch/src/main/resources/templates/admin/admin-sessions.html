@@ -33,7 +33,7 @@
 
           <h6>Displaying <div class="dropdown d-inline-block">
             <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
-                    data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">page size</button>
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <a th:if="${totalItems >= 4}" th:href="@{/sessions/all(page=${currentPage}, size=${4})}" class="dropdown-item" type="button">4</a>
               <a th:if="${totalItems >= 6}" th:href="@{/sessions/all(page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
@@ -72,7 +72,7 @@
             <td th:if="${not movieSession.available}"><button class="btn btn-danger"></button></td>
             <td th:if="${movieSession.available}"><button class="btn btn-success"></button></td>
             <td>
-              <form method="get" th:action="@{/sessions/all/{movieId}(movieId=${movieSession.movie.id})}">
+              <form method="get" th:action="@{/sessions/buy-tickets/{movieId}(movieId=${movieSession.movie.id})}">
                 <button type="submit" class="btn btn-warning">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>

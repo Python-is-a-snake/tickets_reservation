@@ -32,6 +32,26 @@
 
                 <h3>My Tickets</h3>
 
+                <div th:if="${totalPages > 1}" class="row text-center">
+
+                    <p></p>
+
+                    <h6>You have <span th:text="${totalItems}">count</span> tickets!</h6>
+
+                    <h6>Displaying <div class="dropdown d-inline-block">
+                        <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a th:if="${totalItems >= 4}" th:href="@{/user/profile(page=${currentPage}, size=${4})}" class="dropdown-item" type="button">4</a>
+                            <a th:if="${totalItems >= 6}" th:href="@{/user/profile(page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
+                            <a th:if="${totalItems >= 8}" th:href="@{/user/profile(page=${currentPage}, size=${8})}" class="dropdown-item" type="button">8</a>
+                            <a th:if="${totalItems >= 12}" th:href="@{/user/profile(page=${currentPage}, size=${12})}" class="dropdown-item" type="button">12</a>
+                            <a th:if="${totalItems >= 20}" th:href="@{/user/profile(page=${currentPage}, size=${20})}" class="dropdown-item" type="button">20</a>
+                        </div>
+                    </div> tickets per page!</h6>
+
+                </div>
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -49,12 +69,12 @@
                         <td colspan="7" class="text-center table-warning">YOU HAVE NO TICKETS :(</td>
                     </tr>
                     <tr th:if="${not #lists.isEmpty(tickets)}" th:each="ticket : ${tickets}">
-                        <td th:text="${ticket.session.movie.title}">Mark</td>
-                        <td th:text="${ticket.session.hall.name}">Otto</td>
-                        <td th:text="${ticket.session.hall.type}">Otto</td>
-                        <td th:text="${#temporals.format(ticket.session.sessionDateTime, 'EEEE, dd.MM.yyyy')}">@mdo</td>
+                        <td th:text="${ticket.session.movie.title}">Movie Title</td>
+                        <td th:text="${ticket.session.hall.name}">Hall Name</td>
+                        <td th:text="${ticket.session.hall.type}">Hall Type</td>
+                        <td th:text="${#temporals.format(ticket.session.sessionDateTime, 'EEEE, dd.MM.yyyy')}">Session Date</td>
                         <td th:text="${#temporals.format(ticket.session.sessionDateTime, 'HH:mm')}">Session Time</td>
-                        <td th:text="${ticket.price}">@mdo</td>
+                        <td th:text="${ticket.price}">Price</td>
                         <td><span th:text="${ticket.place.row}"></span> | <span th:text="${ticket.place.number}"></span></td>
                     </tr>
                     </tbody>
@@ -115,7 +135,8 @@
                                 <a th:href="@{/user/profile(page=${currentPage - 5}, size=${pageSize})}"
                                    class="page-link enabled">...</a>
 
-                                <li class="page-item" th:each="i: ${#numbers.sequence(currentPage - 4, currentPage + 4)}">
+                                <li class="page-item"
+                                    th:each="i: ${#numbers.sequence(currentPage - 4, currentPage + 4)}">
                                     <a th:classappend="${currentPage == i ? 'active' : ''}"
                                        th:href="@{/user/profile(page=${i}, size=${pageSize})}"
                                        class="page-link">[[${i+1}]]</a>

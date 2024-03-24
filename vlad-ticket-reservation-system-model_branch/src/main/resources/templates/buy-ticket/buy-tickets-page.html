@@ -23,7 +23,7 @@
     <!-- Page Content-->
     <section class="py-5">
       <div class="container">
-        <h3>Session for <span th:text="${movie.title}">Title</span></h3>
+        <h3>Session for "<span th:text="${movie.title}">Title</span>"</h3>
         <ul class="list-group list-group-flush">
         <li class="list-group-item"> <h5><b>When: </b><i th:text="${#temporals.format(movieSession.sessionDateTime, 'EEEE, dd.MM.yyyy, HH:mm')}"></i></h5></li>
         <li class="list-group-item"> <h5><b>Hall: </b><i th:text="${hall.type}"></i> "<span th:text="${hall.name}"></span>"</h5></li>

@@ -1,7 +1,5 @@
 package com.trs.tickets.controller;
 
-import com.trs.tickets.mappers.SessionMapper;
-import com.trs.tickets.mappers.UserMapper;
 import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.model.dto.SessionDto;
 import com.trs.tickets.model.dto.TicketDto;
@@ -13,13 +11,19 @@ import com.trs.tickets.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,7 +45,7 @@ public class SessionController {
 
     //get page with seats display
     @GetMapping("/buy-tickets/{sessionId}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'CEO')")
     public String getSessionPage(@PathVariable("sessionId") Long sessionId, Model model) {
         SessionDto session = sessionService.getSessionById(sessionId);
         MovieDto movie = movieService.getMovieById(session.getMovieId());
@@ -61,11 +65,20 @@ public class SessionController {
 
     //clicked on Place - go to purchase page
     @PostMapping("/buy-tickets/{sessionId}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAnyAuthority('CEO', 'ADMIN', 'USER')")
     public String buyTicketPage(@PathVariable("sessionId") Long sessionId,
                                 @RequestParam(name = "placeId", required = false) Long placeId,
                                 Model model,
                                 Authentication authentication) {
+
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+        for(GrantedAuthority authority : authorities){
+            if(authority.getAuthority().equals("CEO") || authority.getAuthority().equals("ADMIN")){
+                throw new AccessDeniedException("Admin or CEO can not buy a ticket!");
+            }
+        }
+
         SessionDto session = sessionService.getSessionById(sessionId);
         Place place = placeService.getPlaceById(placeId);
         UserDto user = userService.getUserByUsername(authentication.getName());
@@ -128,8 +141,16 @@ public class SessionController {
                                   @RequestParam("hallId") Long hallId,
                                   BindingResult bindingResult, Model model) {
 
+        if(session.getSessionDateTime() == null){
+            bindingResult.addError(new FieldError("movieSession", "sessionDateTime", "Session Date and Time can not be empty!"));
+        }else if(session.getSessionDateTime().isBefore(LocalDateTime.now())){
+            bindingResult.addError(new FieldError("movieSession","sessionDateTime", "Session Date and Time must be in future time!"));
+        }
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("movieSession", session);
+            model.addAttribute("halls", hallService.getAllHalls());
+            model.addAttribute("movies", movieService.getAllMovies());
             return "admin/create-session-page";
         }
 
@@ -163,5 +184,6 @@ public class SessionController {
         sessionService.deleteSession(id);
         return "redirect:/sessions/all";
     }
+
 
 }

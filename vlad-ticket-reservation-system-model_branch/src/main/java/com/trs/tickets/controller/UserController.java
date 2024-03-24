@@ -1,13 +1,11 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.configs.Role;
-import com.trs.tickets.model.dto.UserCreateDto;
 import com.trs.tickets.model.dto.UserDto;
 import com.trs.tickets.model.entity.Ticket;
 import com.trs.tickets.service.PageSizeCheckerService;
 import com.trs.tickets.service.TicketService;
 import com.trs.tickets.service.UserService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -15,8 +13,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -28,25 +24,6 @@ public class UserController {
     private final UserService userService;
     private final TicketService ticketService;
     private final PageSizeCheckerService pageSizeCheckerService;
-
-    //REGISTRATION
-    @PostMapping("/create")
-    public String createUser(@Valid @ModelAttribute("userCreateDto") UserCreateDto userCreateDto, BindingResult bindingResult, Model model) {
-        if (!userService.usernameIsUnique(userCreateDto.getUsername())) {
-            bindingResult.addError(new FieldError("userCreateDto", "username", "This username is already in use!"));
-        }
-//        if (!userCreateDto.getUsername().isBlank() && !userService.isEmailCorrect(userCreateDto)) {//        Validate Email using Mailbox Validation
-//            bindingResult.addError(new FieldError("userCreateDto", "username", "Incorrect Email!"));
-//        }
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("userCreateDto", userCreateDto);
-            model.addAttribute("bindingResult", bindingResult);
-            return "account/register-page";
-        }
-
-        userService.addUser(userCreateDto);
-        return "redirect:/login";
-    }
 
     //USER
     @GetMapping("/profile")

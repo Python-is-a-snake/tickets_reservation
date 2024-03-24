@@ -18,8 +18,6 @@ public class PayPalConfig {
 
     @Bean
     public APIContext apiContext(){
-//        return new APIContext(clientId, clientSecret, mode);
-        return new APIContext("AXlyCOAHPLVnQncPXl5AJnnCwECILK4q0k0quKedqED3bQwSKNeefQDrNf6LespGutO9j-D1XqXbiAEC",
-                "EIaBqugZwDjD2n6y08Emf1BkiD9dNVd_kfLCERLmUvitRuGhLmGINY4RSSyXDSNEg7Jzzrvb4kWqL4ZL", "sandbox");
+        return new APIContext(clientId, clientSecret, mode);
     }
 }

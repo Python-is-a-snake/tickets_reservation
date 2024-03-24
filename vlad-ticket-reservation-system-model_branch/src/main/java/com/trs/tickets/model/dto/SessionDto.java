@@ -17,7 +17,6 @@ public class SessionDto extends BaseDto {
     private Long movieId;
     private Long hallId;
 
-    @NotNull(message = "Session date and time can not be empty")
     private LocalDateTime sessionDateTime;
 
     private List<Place> places;

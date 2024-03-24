@@ -54,29 +54,7 @@ public class MovieController {
         return "main/movies-page";
     }
 
-    //view All movies with SEARCH - MAIN PAGE
-//    @GetMapping("/search")
-//    public String getMoviesByTitle(Model model,
-//                                   @RequestParam(name = "title", required = false) String title,
-//                                   @RequestParam(name = "page", defaultValue = "0") Integer page,
-//                                   @RequestParam(name = "size", defaultValue = "6") Integer size) {
-//
-//        page = pageSizeCheckerService.checkPage(page);
-//        size = pageSizeCheckerService.checkSize(size);
-//
-//        Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
-//
-//        model.addAttribute("movies", moviesPage.getContent());
-//        model.addAttribute("currentPage", moviesPage.getNumber());
-//        model.addAttribute("totalItems", moviesPage.getTotalElements());
-//        model.addAttribute("totalPages", moviesPage.getTotalPages());
-//        model.addAttribute("pageSize", size);
-//
-//        return "main/movies-page";
-//    }
-
     //ADMIN
-
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String getMoviesAdminPage(Model model,
@@ -105,29 +83,6 @@ public class MovieController {
         return "admin/admin-movies";
     }
 
-    //view all Movies admin page with SEARCH by Movie title (with buttons to VIEW, EDIT, DELETE)
-//    @GetMapping("/all/search")
-//    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-//    public String getMoviesByTitleAdminPage(Model model,
-//                                            @RequestParam(name = "title", required = false) String title,
-//                                            @RequestParam(name = "page", defaultValue = "0") Integer page,
-//                                            @RequestParam(name = "size", defaultValue = "6") Integer size) {
-//
-//        page = pageSizeCheckerService.checkPage(page);
-//        size = pageSizeCheckerService.checkSize(size);
-//
-//
-//        Page<MovieDto> moviesPage = movieService.getMoviesByTitle(title, page, size);
-//
-//        model.addAttribute("movies", moviesPage.getContent());
-//        model.addAttribute("currentPage", moviesPage.getNumber());
-//        model.addAttribute("totalItems", moviesPage.getTotalElements());
-//        model.addAttribute("totalPages", moviesPage.getTotalPages());
-//        model.addAttribute("pageSize", size);
-//
-//        return "admin/admin-movies";
-//    }
-
     //
     @GetMapping("/{id}")
     public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
@@ -154,7 +109,7 @@ public class MovieController {
             return "admin/create-movie-page";
         }
         movieService.createMovie(movie);
-        return "redirect:/movies";
+        return "redirect:/movies/all";
     }
 
     @GetMapping("/edit/{id}")
@@ -177,13 +132,13 @@ public class MovieController {
         movie.setId(id);
         movie.setReleaseDate(date);
         movieService.updateMovie(movie);
-        return "redirect:/movies";
+        return "redirect:/movies/all";
     }
 
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
-        return "redirect:/movies";
+        return "redirect:/movies/all";
     }
 }

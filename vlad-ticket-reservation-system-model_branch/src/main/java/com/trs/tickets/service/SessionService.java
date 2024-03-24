@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,5 +79,10 @@ public class SessionService {
         sessionRepository.deleteById(sessionId);
     }
 
+    public List<Session> getAllNotAvailableSessionsSortedByDateTime() {
+        List<Session> notAvailableSessionsOrderedByDateTime = sessionRepository.findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime.now());
+        notAvailableSessionsOrderedByDateTime.forEach(System.out::println);
+        return notAvailableSessionsOrderedByDateTime;
+    }
 
 }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cinemagic | Movies</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <base href="/">
+    <link th:href="@{css/styles.css}" rel="stylesheet">
+    <style>
+        /* Set height of rows to half the screen */
+        .half-screen {
+            height: 50vh;
+            overflow-y: auto;
+        }
+
+        /* Set fixed height for sections */
+        .section {
+            height: calc(50vh - 1rem); /* Adjust as needed */
+            overflow-y: auto;
+        }
+
+        .custom-container {
+            max-width: 1800px; /* Adjust as needed */
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container custom-container mt-4">
+        <div class="row half-screen">
+            <div class="col-md-3 section text-center">
+                <!-- Section 1 content -->
+                <h3>Unavailable Sessions</h3>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Date & Time</th>
+                        <th scope="col">View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(unavailableSessions)}">
+                        <td colspan="9" class="text-center table-success">All sessions are available</td>
+                    </tr>
+
+                    <tr th:each="movieSession : ${unavailableSessions}" th:classappend="${dateUtils.daysBetween(movieSession.sessionDateTime, #temporals.createNow()) > 30} ? 'table-danger' : 'table-warning'">
+                        <td th:text="${movieSession.movie.title}">Movie Title</td>
+                        <td>
+                            <span th:text="${#temporals.format(movieSession.sessionDateTime, 'dd/MM/yyyy')}">DATE</span>
+                            <span th:text="${#temporals.format(movieSession.sessionDateTime, 'HH:mm')}"> TIME</span>
+                        </td>
+
+                        <td>
+                            <form>
+
+                            </form>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 2 content -->
+                <h2 class="text-center">Section 2</h2>
+                <!-- Add your content here -->
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 3 content -->
+                <h2>Section 3</h2>
+                <!-- Add your content here -->
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 4 content -->
+                <h2>Section 4</h2>
+                <!-- Add your content here -->
+            </div>
+        </div>
+        <div class="row half-screen">
+            <div class="col-md-3 section">
+                <!-- Section 5 content -->
+                <h2>Section 5</h2>
+                <!-- Add your content here -->
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 6 content -->
+                <h2>Section 6</h2>
+                <!-- Add your content here -->
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 7 content -->
+                <h2>Section 7</h2>
+                <!-- Add your content here -->
+            </div>
+            <div class="col-md-3 section">
+                <!-- Section 8 content -->
+                <h2>Section 8</h2>
+                <!-- Add your content here -->
+            </div>
+        </div>
+    </div>
+
+    <!--    <div class="container mt-4">-->
+    <!--        <div class="row half-screen">-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 1 content &ndash;&gt;-->
+    <!--                <h3>Sessions</h3>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--                &lt;!&ndash; If content exceeds half the page, it will scroll &ndash;&gt;-->
+
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 2 content &ndash;&gt;-->
+    <!--                <h2>Section 2</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 3 content &ndash;&gt;-->
+    <!--                <h2>Section 3</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 4 content &ndash;&gt;-->
+    <!--                <h2>Section 4</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="row half-screen">-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 5 content &ndash;&gt;-->
+    <!--                <h2>Section 5</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 6 content &ndash;&gt;-->
+    <!--                <h2>Section 6</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 7 content &ndash;&gt;-->
+    <!--                <h2>Section 7</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--            <div class="col-md-3 section">-->
+    <!--                &lt;!&ndash; Section 8 content &ndash;&gt;-->
+    <!--                <h2>Section 8</h2>-->
+    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+</div>
+
+<!-- Bootstrap core JS-->
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script th:src="@{js/scripts.js}"></script>
+</body>
+</html>

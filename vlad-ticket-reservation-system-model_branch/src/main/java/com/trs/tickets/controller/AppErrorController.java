@@ -23,7 +23,15 @@ public class AppErrorController implements ErrorController {
             else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "error/error-500";
             }
+            else if(statusCode == HttpStatus.METHOD_NOT_ALLOWED.value()) {
+                return "error/access-denied-page";
+            }
         }
-        return "error";
+        return "error/error-500";
     }
+
+//    @GetMapping("/payment/error")
+//    public String paymentError() {
+//        return "paymentError";
+//    }
 }

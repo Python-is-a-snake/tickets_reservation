@@ -46,18 +46,14 @@
                     <button type="submit" class="btn btn-success">Reserve Ticket</button>
                     <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button>
                 </form>
-
+                <p></p>
                 <form th:action="@{/paypal/payment/create}" method="post" th:object="${ticket}">
-<!--                    <input type="hidden" th:field="*{userId}" th:value="${ticket.userId}">-->
-<!--                    <input type="hidden" th:field="*{placeId}" th:value="${ticket.placeId}">-->
-<!--                    <input type="hidden" th:field="*{sessionId}" th:value="${ticket.sessionId}">-->
-<!--                    <input type="hidden" th:field="*{price}" th:value="${ticket.price}">-->
+                    <!--                    <input type="hidden" th:field="*{userId}" th:value="${ticket.userId}">-->
+                    <input type="hidden" th:field="*{price}" th:value="${ticket.price}">
 
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary">
-                            Pay with Paypal
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Pay with Paypal
+                    </button>
                 </form>
             </div>
         </section>
