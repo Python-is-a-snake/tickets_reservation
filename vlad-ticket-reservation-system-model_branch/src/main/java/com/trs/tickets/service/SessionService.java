@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class SessionService {
     public Page<Session> getAllSessions(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
 
-        return sessionRepository.findAll(pageable);
+        return sessionRepository.findAllByOrderBySessionDateTimeDesc(pageable);
     }
 
     public SessionDto getSessionById(Long id) {
@@ -45,10 +46,6 @@ public class SessionService {
             return null;
         }
         else return sessionMapper.convert(session.get());
-    }
-
-    public Session addSession(Session session) {
-        return sessionRepository.save(session);
     }
 
     public Session createSession(Long movieId, Long hallId, SessionDto sessionDto) {

@@ -72,7 +72,7 @@
             <td th:if="${not movieSession.available}"><button class="btn btn-danger"></button></td>
             <td th:if="${movieSession.available}"><button class="btn btn-success"></button></td>
             <td>
-              <form method="get" th:action="@{/sessions/buy-tickets/{movieId}(movieId=${movieSession.movie.id})}">
+              <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
                 <button type="submit" class="btn btn-warning">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>

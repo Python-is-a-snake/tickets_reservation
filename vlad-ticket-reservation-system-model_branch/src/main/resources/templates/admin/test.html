@@ -64,10 +64,11 @@
                         </td>
 
                         <td>
-                            <form>
-
+                            <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
                             </form>
-
                         </td>
                     </tr>
                     </tbody>
