@@ -8,6 +8,7 @@ import com.trs.tickets.model.entity.Hall;
 import com.trs.tickets.model.entity.Place;
 import com.trs.tickets.model.entity.Session;
 import com.trs.tickets.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -180,9 +181,12 @@ public class SessionController {
     //delete Session
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
-    public String deleteSession(@PathVariable("id") Long id) {
+    public String deleteSession(@PathVariable("id") Long id, HttpServletRequest request) {
+
+        String referer = request.getHeader("Referer");
+
         sessionService.deleteSession(id);
-        return "redirect:/sessions/all";
+        return "redirect:"+ referer;
     }
 
 

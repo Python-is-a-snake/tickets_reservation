@@ -22,7 +22,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -40,6 +42,14 @@ public class UserService implements UserDetailsService {
 
     public UserDto getUserById(Long id) {
         return userRepository.findById(id).map(userMapper::convert).orElse(null);
+    }
+
+    public List<UserDto> getNewUsersOfThisMonth(){
+        LocalDate now = LocalDate.now();
+        LocalDate startOfMonth = now.withDayOfMonth(1);
+        LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth());
+
+        return userRepository.findAllByRegistrationDateBetween(startOfMonth, endOfMonth).stream().map(userMapper::convert).collect(Collectors.toList());
     }
 
     public UserDto addUser(UserCreateDto userCreateDto) {

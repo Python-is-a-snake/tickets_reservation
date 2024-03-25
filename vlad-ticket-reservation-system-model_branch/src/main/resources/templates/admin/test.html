@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="template.html" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      layout:decorate="template.html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,147 +21,241 @@
             overflow-y: auto;
         }
 
-        /* Set fixed height for sections */
+        /*!* Set fixed height for sections *!*/
+        /*.section {*/
+        /*    height: calc(50vh - 1rem); !* Adjust as needed *!*/
+        /*    overflow-y: auto;*/
+        /*}*/
+
+        /* Set fixed height for sections and make them flex containers */
         .section {
             height: calc(50vh - 1rem); /* Adjust as needed */
             overflow-y: auto;
         }
+
+        .section-content {
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center; /* Center items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        /* Style adjustments for the card to ensure it centers correctly */
+        .card {
+            margin: 0 auto; /* Center card horizontally */
+            display: flex; /* Use flex layout for the card itself */
+            flex-direction: column; /* Stack card contents vertically */
+            justify-content: center; /* Center card contents vertically */
+        }
+
 
         .custom-container {
             max-width: 1800px; /* Adjust as needed */
             margin-left: auto;
             margin-right: auto;
         }
+
     </style>
 </head>
 <body>
 <div layout:fragment="content">
-
-    <div class="container custom-container mt-4">
+    <div class="container custom-container mt-4 justify-content-center">
         <div class="row half-screen">
+            <!--            SECTION 1-->
             <div class="col-md-3 section text-center">
                 <!-- Section 1 content -->
-                <h3>Unavailable Sessions</h3>
 
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Movie</th>
-                        <th scope="col">Date & Time</th>
-                        <th scope="col">View</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${#lists.isEmpty(unavailableSessions)}">
-                        <td colspan="9" class="text-center table-success">All sessions are available</td>
-                    </tr>
+                <div class="section-content">
 
-                    <tr th:each="movieSession : ${unavailableSessions}" th:classappend="${dateUtils.daysBetween(movieSession.sessionDateTime, #temporals.createNow()) > 30} ? 'table-danger' : 'table-warning'">
-                        <td th:text="${movieSession.movie.title}">Movie Title</td>
-                        <td>
-                            <span th:text="${#temporals.format(movieSession.sessionDateTime, 'dd/MM/yyyy')}">DATE</span>
-                            <span th:text="${#temporals.format(movieSession.sessionDateTime, 'HH:mm')}"> TIME</span>
-                        </td>
+                    <h3 class="text-center">Unavailable Sessions</h3>
 
-                        <td>
-                            <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
-                                <button type="submit" class="btn btn-warning">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Movie</th>
+                            <th scope="col">Date & Time</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(unavailableSessions)}">
+                            <td colspan="9" class="text-center table-success">All sessions are available</td>
+                        </tr>
+
+                        <tr th:each="movieSession : ${unavailableSessions}"
+                            th:classappend="${dateUtils.daysBetween(movieSession.sessionDateTime, #temporals.createNow()) > 30} ? 'table-danger' : 'table-warning'">
+                            <td th:text="${movieSession.movie.title}">Movie Title</td>
+                            <td>
+                                <span th:text="${#temporals.format(movieSession.sessionDateTime, 'dd/MM/yyyy')}">DATE</span>
+                                <span th:text="${#temporals.format(movieSession.sessionDateTime, 'HH:mm')}"> TIME</span>
+                            </td>
+
+                            <td>
+                                <form method="post"
+                                      th:action="@{/sessions/delete/{sessionId}(sessionId=${movieSession.id})}">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
+
+            <!--            SECTION 2-->
             <div class="col-md-3 section">
                 <!-- Section 2 content -->
-                <h2 class="text-center">Section 2</h2>
-                <!-- Add your content here -->
+
+                <div class="section-content">
+
+                    <div class="card text-white mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-danger">
+                            <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+                        </div>
+                        <div class="card-body bg-danger">
+                            <h5 class="card-title">Total Movies - <span th:text="${totalMovies}"></span></h5>
+                            <p class="card-text">Currently system has <span th:text="${totalMovies}"></span> movies in
+                                total!</p>
+                        </div>
+                        <div class="card-footer bg-transparent text-danger"><a class="btn text-danger" href="/">View
+                            Charts
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                            </svg>
+                        </a>
+                        </div>
+                    </div>
+
+                    <div class="card text-white mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-warning">
+                            <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+                        </div>
+                        <div class="card-body bg-warning">
+                            <h5 class="card-title">Total Users - <span th:text="${totalUsers}"></span></h5>
+                            <p class="card-text">Currently system has <span th:text="${totalUsers}"></span> users in
+                                total!</p>
+                        </div>
+                        <div class="card-footer bg-transparent text-warning"><a class="btn text-warning" href="/"> View
+                            Charts
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                            </svg>
+                        </a>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+            <!--            SECTION 3-->
             <div class="col-md-3 section">
                 <!-- Section 3 content -->
-                <h2>Section 3</h2>
-                <!-- Add your content here -->
+
+                <div class="section-content">
+
+                    <div class="card text-white mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-info">
+                            <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+                        </div>
+                        <div class="card-body bg-info">
+                            <h5 class="card-title">Total Sessions - <span th:text="${totalSessions}"></span></h5>
+                            <p class="card-text">Currently system has <span th:text="${totalSessions}"></span> sessions
+                                in total!</p>
+                        </div>
+                        <div class="card-footer bg-transparent text-info"><a class="btn text-info" href="/">View Charts
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                            </svg>
+                        </a>
+                        </div>
+                    </div>
+
+                    <div class="card text-white mb-3" style="max-width: 18rem;">
+                        <div class="card-header bg-success">
+                            <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+                        </div>
+                        <div class="card-body bg-success">
+                            <h5 class="card-title">New Users - <span th:text="${newUsers}"></span></h5>
+                            <p class="card-text">This Month <span th:text="${newUsers}"></span> new users have
+                                registered!</p>
+                        </div>
+                        <div class="card-footer bg-transparent text-success"><a class="btn text-success" href="/"> View
+                            Charts
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+                            </svg>
+                        </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
+
+            <!--            SECTION 4-->
             <div class="col-md-3 section">
                 <!-- Section 4 content -->
-                <h2>Section 4</h2>
-                <!-- Add your content here -->
+                <h2 class="text-center">Section 4</h2>
+
+                <div class="section-content">
+
+                </div>
+
             </div>
         </div>
+
+        <!--        SECTION 5-->
         <div class="row half-screen">
             <div class="col-md-3 section">
                 <!-- Section 5 content -->
-                <h2>Section 5</h2>
-                <!-- Add your content here -->
+                <h2 class="text-center">Section 5</h2>
+
+                <div class="section-content">
+
+                </div>
+
             </div>
             <div class="col-md-3 section">
                 <!-- Section 6 content -->
-                <h2>Section 6</h2>
-                <!-- Add your content here -->
+                <h2 class="text-center">Section 6</h2>
+
+                <div class="section-content">
+
+                </div>
+
             </div>
+
+            <!--            SECTION 7-->
             <div class="col-md-3 section">
                 <!-- Section 7 content -->
-                <h2>Section 7</h2>
-                <!-- Add your content here -->
+                <h2 class="text-center">Section 7</h2>
+
+                <div class="section-content">
+
+                </div>
+
             </div>
+
+            <!--            SECTION 8-->
             <div class="col-md-3 section">
                 <!-- Section 8 content -->
-                <h2>Section 8</h2>
-                <!-- Add your content here -->
+                <h2 class="text-center">Section 8</h2>
+
+                <div class="section-content">
+
+                </div>
+
             </div>
         </div>
     </div>
-
-    <!--    <div class="container mt-4">-->
-    <!--        <div class="row half-screen">-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 1 content &ndash;&gt;-->
-    <!--                <h3>Sessions</h3>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--                &lt;!&ndash; If content exceeds half the page, it will scroll &ndash;&gt;-->
-
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 2 content &ndash;&gt;-->
-    <!--                <h2>Section 2</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 3 content &ndash;&gt;-->
-    <!--                <h2>Section 3</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 4 content &ndash;&gt;-->
-    <!--                <h2>Section 4</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div class="row half-screen">-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 5 content &ndash;&gt;-->
-    <!--                <h2>Section 5</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 6 content &ndash;&gt;-->
-    <!--                <h2>Section 6</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 7 content &ndash;&gt;-->
-    <!--                <h2>Section 7</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="col-md-3 section">-->
-    <!--                &lt;!&ndash; Section 8 content &ndash;&gt;-->
-    <!--                <h2>Section 8</h2>-->
-    <!--                &lt;!&ndash; Add your content here &ndash;&gt;-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
 
 </div>
 

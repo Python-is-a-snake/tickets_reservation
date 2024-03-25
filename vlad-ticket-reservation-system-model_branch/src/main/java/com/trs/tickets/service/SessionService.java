@@ -40,6 +40,10 @@ public class SessionService {
         return sessionRepository.findAllByOrderBySessionDateTimeDesc(pageable);
     }
 
+    public List<Session> getAllSessions() {
+        return sessionRepository.findAll();
+    }
+
     public SessionDto getSessionById(Long id) {
         Optional<Session> session = sessionRepository.findById(id);
         if(session.isEmpty()){
