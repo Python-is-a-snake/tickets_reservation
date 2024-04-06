@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class UserDto extends BaseDto {
     String username;
     Role role;
+    private Boolean isActive;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate registrationDate;
 }

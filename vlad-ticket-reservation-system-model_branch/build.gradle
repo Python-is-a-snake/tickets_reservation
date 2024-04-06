@@ -40,9 +40,10 @@ dependencies {
     implementation "org.webjars:bootstrap:5.2.3"
     // bootstrap icons - https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-icons
     implementation "org.webjars.npm:bootstrap-icons:1.5.0"
+    // Charts
     implementation 'org.webjars:chartjs:4.1.2'
 
-    implementation 'org.webjars:bootstrap:4.6.2'
+//    implementation 'org.webjars:bootstrap:4.6.2'
 //    implementation 'org.webjars:jquery:3.6.4'
 
 
@@ -88,23 +89,15 @@ dependencies {
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
     //implementation 'org.springframework.security:spring-security-test'
 
-
     // == oAuth2 ==
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-oauth2-client
     //implementation group: 'org.springframework.boot', name: 'spring-boot-starter-oauth2-client', version: '3.1.0'
-
-    // == JWT ==
-    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
-    //implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
-    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
-    //runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
-    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
-    //runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 
     // == Mailbox Validator ==
     // https://mvnrepository.com/artifact/com.mailboxvalidator/mailboxvalidator-java
     implementation group: 'com.mailboxvalidator', name: 'mailboxvalidator-java', version: '1.1.0'
 
+    // == PAYPAL ==
     implementation 'com.paypal.sdk:paypal-core:1.7.2'
     implementation 'com.paypal.sdk:rest-api-sdk:1.14.0'
 }

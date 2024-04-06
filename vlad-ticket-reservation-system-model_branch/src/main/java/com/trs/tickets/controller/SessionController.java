@@ -64,6 +64,25 @@ public class SessionController {
         return "buy-ticket/buy-tickets-page";
     }
 
+    @GetMapping("/new/{sessionId}")
+    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'CEO')")
+    public String getSessionPageNew(@PathVariable("sessionId") Long sessionId, Model model) {
+        SessionDto session = sessionService.getSessionById(sessionId);
+        MovieDto movie = movieService.getMovieById(session.getMovieId());
+        Hall hall = hallService.getHallById(session.getHallId());
+
+        model.addAttribute("movieSession", session);
+        model.addAttribute("movie", movie);
+        model.addAttribute("hall", hall);
+
+        Map<Integer, List<Place>> places = session.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
+        model.addAttribute("places", places);
+
+        List<Place> takenPlaces = ticketService.findTakenPlacesByHallId(hall.getId());
+        model.addAttribute("takenPlaces", takenPlaces);
+        return "buy-ticket/new";
+    }
+
     //clicked on Place - go to purchase page
     @PostMapping("/buy-tickets/{sessionId}")
     @PreAuthorize("hasAnyAuthority('CEO', 'ADMIN', 'USER')")
@@ -74,6 +93,8 @@ public class SessionController {
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
+
+        //CEO and Admins should NOT be able to buy ticket
         for(GrantedAuthority authority : authorities){
             if(authority.getAuthority().equals("CEO") || authority.getAuthority().equals("ADMIN")){
                 throw new AccessDeniedException("Admin or CEO can not buy a ticket!");

@@ -1,5 +1,10 @@
 package com.trs.tickets.service;
 
+import com.trs.tickets.model.dto.projection.MovieSessionsProjection;
+import com.trs.tickets.model.dto.projection.MoviesTicketsBoughtThisMonthProjection;
+import com.trs.tickets.model.dto.projection.SessionsByDayOfWeekProjection;
+import com.trs.tickets.model.dto.projection.TicketCountByHour;
+import com.trs.tickets.repository.ChartsRepository;
 import com.trs.tickets.repository.MovieRepository;
 import com.trs.tickets.repository.SessionRepository;
 import com.trs.tickets.repository.TicketRepository;
@@ -7,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +25,62 @@ public class ChartsService {
     private final SessionRepository sessionRepository;
     private final MovieRepository movieRepository;
 
+    private final ChartsRepository chartsRepository;
+
+
+    public List<MovieSessionsProjection> getMoviesSessionsCount() {
+        return chartsRepository.findMoviesAndSessionCounts();
+    }
+
+    public List<MoviesTicketsBoughtThisMonthProjection> findTicketsBoughtForMoviesThisMonth() {
+        final LocalDate now = LocalDate.now().plusDays(1);
+        final LocalDate startOfMonth = now.withDayOfMonth(1);
+        return chartsRepository.findTicketsBoughtForMoviesThisMonth(startOfMonth, now);
+    }
+
+    public List<TicketCountByHour> getTicketsCountByHour(){
+        return chartsRepository.findTicketsCountByHour();
+    }
+
+    public List<SessionsByDayOfWeekProjection> findSessionsForDaysOfWeek(){
+        final LocalDate now = LocalDate.now().plusDays(1);
+        final LocalDate startOfMonth = now.withDayOfMonth(1);
+        return chartsRepository.findSessionsForDaysOfWeek(startOfMonth, now);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //OLD
+    // ^
+    // |
     public Map<String, Integer> getFilmsTicketsData(){
         List<Map<String, Object>> results = ticketRepository.countTicketsByMovieTitle();
         Map<String, Integer> ticketCounts = new HashMap<>();

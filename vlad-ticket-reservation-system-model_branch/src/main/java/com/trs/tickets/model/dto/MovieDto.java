@@ -21,6 +21,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @SuperBuilder
 public class MovieDto extends BaseDto {
+
+//    @NonNull
+//    private Boolean isActive = true;
+
     @NotEmpty(message = "Title can not be empty")
     @Length(min = 3, message = "Too short")
     private String    title;

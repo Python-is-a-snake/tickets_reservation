@@ -56,9 +56,12 @@
         }
 
     </style>
+<!--    CHARTS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <div layout:fragment="content">
+
     <div class="container custom-container mt-4 justify-content-center">
         <div class="row half-screen">
             <!--            SECTION 1-->
@@ -83,7 +86,7 @@
                         </tr>
 
                         <tr th:each="movieSession : ${unavailableSessions}"
-                            th:classappend="${dateUtils.daysBetween(movieSession.sessionDateTime, #temporals.createNow()) > 30} ? 'table-danger' : 'table-warning'">
+                            th:classappend="${dateUtils.daysBetween(movieSession.sessionDateTime, #temporals.createNow()) > 3} ? 'table-danger' : 'table-warning'">
                             <td th:text="${movieSession.movie.title}">Movie Title</td>
                             <td>
                                 <span th:text="${#temporals.format(movieSession.sessionDateTime, 'dd/MM/yyyy')}">DATE</span>
@@ -201,34 +204,65 @@
             </div>
 
             <!--            SECTION 4-->
-            <div class="col-md-3 section">
+            <div class="col-md-3 section text-center">
                 <!-- Section 4 content -->
-                <h2 class="text-center">Section 4</h2>
+                <h2 class="text-center">Movies with most Sessions</h2>
 
                 <div class="section-content">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">Movie</th>
+                            <th scope="col">Sessions Amount</th>
+                            <th scope="col">View</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr th:each="movie : ${moviesWithMostSessions}">
+                            <td th:text="${movie.getTitle()}">Movie Title</td>
+                            <td th:text="${movie.getSessionCount()}">Sessions amount</td>
+
+                            <td>
+                                <form method="get" th:action="@{/movies/{movieId}(movieId=${movie.getId()})}">
+                                    <button type="submit" class="btn btn-info">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
                 </div>
 
             </div>
         </div>
 
-        <!--        SECTION 5-->
         <div class="row half-screen">
+            <!-- SECTION 5-->
             <div class="col-md-3 section">
                 <!-- Section 5 content -->
-                <h2 class="text-center">Section 5</h2>
-
+                <h2 class="text-center">Amount of sessions</h2>
+                <div>
+                    <canvas id="moviesSessionsCount" width="1000" height="1000"></canvas>
+                </div>
                 <div class="section-content">
 
                 </div>
 
             </div>
+            <!-- SECTION 6-->
             <div class="col-md-3 section">
                 <!-- Section 6 content -->
-                <h2 class="text-center">Section 6</h2>
+                <h2 class="text-center">Bought tickets this month</h2>
+                <p></p>
 
                 <div class="section-content">
-
+                    <p class="text-bg-warning" th:if="${chart_moviesSessionsCount.size() == 0}">
+                        <b>NO DATA!</b>
+                    </p>
+                    <canvas id="ticketsThisMonthCount" width="800" height="800"></canvas>
                 </div>
 
             </div>
@@ -236,10 +270,13 @@
             <!--            SECTION 7-->
             <div class="col-md-3 section">
                 <!-- Section 7 content -->
-                <h2 class="text-center">Section 7</h2>
+                <h2 class="text-center">Bought tickets by Session time</h2>
 
                 <div class="section-content">
-
+                    <p class="text-bg-warning" th:if="${chart_ticketsCountsByHour.size() == 0}">
+                        <b>NO DATA!</b>
+                    </p>
+                    <canvas id="ticketsCountByHour" width="800" height="800"></canvas>
                 </div>
 
             </div>
@@ -247,7 +284,7 @@
             <!--            SECTION 8-->
             <div class="col-md-3 section">
                 <!-- Section 8 content -->
-                <h2 class="text-center">Section 8</h2>
+                <h2 class="text-center">Sessions this Month</h2>
 
                 <div class="section-content">
 
@@ -256,6 +293,108 @@
             </div>
         </div>
     </div>
+
+    <script th:inline="javascript">
+        //Chart 1
+        const ctx1 = document.getElementById('moviesSessionsCount');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: /*[[${chart_moviesSessionsTitles}]]*/ ['Something went wrong!'],
+                datasets: [{
+                    label: '# of Sessions',
+                    data: /*[[${chart_moviesSessionsCount}]]*/ [0],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y:{
+                        beginAtZero: true,
+                        grace: '2%'
+                    }
+                }
+
+            }
+        });
+
+        //Chart 2
+        const ctx2 = document.getElementById('ticketsThisMonthCount').getContext('2d');
+        new Chart(ctx2, {
+            type: 'pie', // or 'line', 'pie', etc.
+            data: {
+                labels: /*[[${chart_ticketsThisMonthTitles}]]*/ ['Something went wrong!'],
+                datasets: [{
+                    label: 'Bought tickets: ',
+                    data: /*[[${chart_ticketsThisMonthCount}]]*/ [0],
+                    backgroundColor: poolColors(/*[[${chart_ticketsThisMonthCount.size()}]]*/),
+                    borderColor: poolColors(/*[[${chart_ticketsThisMonthCount.size()}]]*/),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+            }
+        });
+
+        //Chart 3
+        const ctx3 = document.getElementById('ticketsCountByHour').getContext('2d');
+        new Chart(ctx3, {
+            type: 'pie', // or 'line', 'pie', etc.
+            data: {
+                labels: /*[[${chart_moviesTicketsThisMonthTitles}]]*/ ['Something went wrong!'],
+                datasets: [{
+                    label: 'Bought tickets: ',
+                    data: /*[[${chart_ticketsCountsByHour}]]*/ [0],
+                    backgroundColor: poolColors(/*[[${chart_ticketsCountsByHour.size()}]]*/),
+                    borderColor: poolColors(/*[[${chart_ticketsCountsByHour.size()}]]*/),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+            }
+        });
+
+        const ctx4 = document.getElementById('sessionsForDaysOfWeek');
+        new Chart(ctx4, {
+            type: 'bar',
+            data: {
+                labels: /*[[${chart_sessionsForDaysOfWeekTitles}]]*/ ['Something went wrong!'],
+                datasets: [{
+                    label: '# of Sessions',
+                    data: /*[[${chart_sessionsForDaysOfWeekCount}]]*/ [0],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y:{
+                        beginAtZero: true,
+                        grace: '2%'
+                    }
+                }
+
+            }
+        });
+
+        // =======================
+        //dynamic colors generation
+        function dynamicColors() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgba(" + r + "," + g + "," + b + ", 0.7)";
+        }
+
+        function poolColors(a) {
+            var pool = [];
+            for(var i = 0; i < a; i++) {
+                pool.push(dynamicColors());
+            }
+            return pool;
+        }
+    </script>
 
 </div>
 

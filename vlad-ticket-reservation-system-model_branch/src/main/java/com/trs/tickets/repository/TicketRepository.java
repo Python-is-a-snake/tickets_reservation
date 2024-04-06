@@ -49,7 +49,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
             "GROUP BY m.title")
     List<Map<String, Object>> sumTicketSalesByMovie();
 
-
     // In TicketRepository.java
     @Query("SELECT new map(" +
             "CASE " +

@@ -4,9 +4,9 @@ import com.trs.tickets.configs.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -27,6 +27,9 @@ public class User extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @Column
+    private Boolean isActive;
 
     private LocalDate registrationDate;
 

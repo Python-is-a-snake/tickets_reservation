@@ -18,7 +18,7 @@ import java.util.Objects;
 @Entity
 public class Ticket extends BaseEntity {
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private User user;
 
     @ManyToOne(cascade = CascadeType.REMOVE, optional = false)

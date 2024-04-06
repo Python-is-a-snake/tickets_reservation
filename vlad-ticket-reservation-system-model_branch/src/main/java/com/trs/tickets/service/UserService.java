@@ -60,8 +60,8 @@ public class UserService implements UserDetailsService {
     //todo: fix constraint failure with session id
     public void deleteUser(Long id) {
         List<Ticket> ticketsByUserId = ticketRepository.findAllByUserId(id);
-        ticketRepository.deleteAll(ticketsByUserId);
-        ticketRepository.flush();
+//        ticketRepository.deleteAll(ticketsByUserId);
+//        ticketRepository.flush();
         userRepository.deleteById(id);
     }
 

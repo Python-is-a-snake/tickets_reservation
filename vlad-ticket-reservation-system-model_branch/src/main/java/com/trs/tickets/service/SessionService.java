@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,8 +52,8 @@ public class SessionService {
     }
 
     public Session createSession(Long movieId, Long hallId, SessionDto sessionDto) {
-        Movie movie = movieRepository.findById(movieId).get();
-        Hall hall = hallRepository.findById(hallId).get();
+        Movie movie = movieRepository.findById(movieId).orElseThrow();
+        Hall hall = hallRepository.findById(hallId).orElseThrow();
         Session session = sessionMapper.convert(sessionDto);
 
         session.setMovie(movie);
@@ -81,9 +80,7 @@ public class SessionService {
     }
 
     public List<Session> getAllNotAvailableSessionsSortedByDateTime() {
-        List<Session> notAvailableSessionsOrderedByDateTime = sessionRepository.findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime.now());
-        notAvailableSessionsOrderedByDateTime.forEach(System.out::println);
-        return notAvailableSessionsOrderedByDateTime;
+        return sessionRepository.findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime.now());
     }
 
 }

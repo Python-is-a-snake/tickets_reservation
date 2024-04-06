@@ -30,9 +30,6 @@ public class Cinema extends BaseEntity {
     @Column(nullable = false)
     private String email;
 
-    //TODO implement min Age display
-//    private Short minimumAge;
-
     @ToString.Exclude
     @OneToMany(mappedBy = "cinema")
     private List<Hall> halls = new ArrayList<>();

@@ -2,7 +2,10 @@ package com.trs.tickets.service;
 
 import com.trs.tickets.mappers.MovieMapper;
 import com.trs.tickets.model.dto.MovieDto;
+import com.trs.tickets.model.dto.projection.MovieMostSessionsProjection;
+import com.trs.tickets.model.dto.projection.MovieSessionsProjection;
 import com.trs.tickets.model.entity.Movie;
+import com.trs.tickets.repository.ChartsRepository;
 import com.trs.tickets.repository.MovieRepository;
 import com.trs.tickets.repository.SessionRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -22,12 +24,11 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final SessionRepository sessionRepository;
     private final SessionService sessionService;
+    private final ChartsRepository chartsRepository;
     private final MovieMapper     movieMapper;
 
     public Page<MovieDto> getAllMovies(Integer page, Integer size) {
-
         Pageable pageable = PageRequest.of(page, size);
-
         return movieRepository.findAll(pageable).map(movieMapper::convert);
     }
 
@@ -69,5 +70,11 @@ public class MovieService {
         return entities.stream().map(movieMapper::convert).toList();
     }
 
-
+    public List<MovieMostSessionsProjection> getMoviesWithMostSessions() {
+        log.info("Searching 10 movies with most sessions");
+        List<MovieMostSessionsProjection> moviesWithMostSessions = movieRepository.findMoviesWithMostSessions();
+        log.info("Found {} values", moviesWithMostSessions.size());
+        moviesWithMostSessions.forEach(m -> System.out.println(m.getTitle() + " " + m.getSessionCount()));
+        return moviesWithMostSessions;
+    }
 }

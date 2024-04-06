@@ -1,12 +1,17 @@
 package com.trs.tickets.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -16,28 +21,34 @@ import java.util.*;
 @Entity
 public class Movie extends BaseEntity {
 
+    //TODO implement min Age display
+    //private Short minimumAge;
+
+//    @Column
+//    private Boolean isActive = true;
+
     @Column(nullable = false)
-    private String    title;
+    private String title;
 
     @Column(length = 1000)
-    private String    description;
+    private String description;
 
-    private String    genre;
+    private String genre;
 
-    private String    director;
+    private String director;
 
-    private String    actors;
+    private String actors;
 
-    private Integer   duration;
+    private Integer duration;
 
-    private String    country;
+    private String country;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate releaseDate;
 
-    private String    posterUrl;
+    private String posterUrl;
 
-    private String    trailerUrl;
+    private String trailerUrl;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     @ToString.Exclude

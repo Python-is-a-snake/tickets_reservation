@@ -42,7 +42,7 @@
 
           <h6>Displaying <div class="dropdown d-inline-block">
             <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
-                    data-toggle="dropdown" aria-haspopup="true" aria- expanded="false">page size</button>
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
               <a th:if="${totalItems >= 4}" th:href="@{/movies/all(title=${title == null ? '' : title}, page=${currentPage}, size=${4})}" class="dropdown-item" type="button">4</a>
               <a th:if="${totalItems >= 6}" th:href="@{/movies/all(title=${title == null ? '' : title}, page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
@@ -81,14 +81,14 @@
             <td th:text="${#temporals.format(movie.releaseDate, 'dd/MM/yyyy')}">RELEASE DATE</td>
             <td>
               <form method="get" th:action="@{/movies/{movieId}(movieId=${movie.id})}">
-                <button type="submit" class="btn btn-warning">
+                <button type="submit" class="btn btn-info">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>
               </form>
             </td>
             <td>
               <form method="get" th:action="@{/movies/edit/{movieId}(movieId=${movie.id})}">
-                <button type="submit" class="btn btn-info">
+                <button type="submit" class="btn btn-warning">
                   <i class='fa fa-edit'></i>
                 </button>
               </form>
