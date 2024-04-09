@@ -126,7 +126,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="posterUrl">Trailer Url</label>
+                            <label for="trailerUrl">Trailer Url</label>
                             <input type="text"
                                    class="form-control"
                                    id="trailerUrl"
@@ -135,6 +135,15 @@
                                    placeholder="Trailer Url (Embedded)">
                             <p th:if="${#fields.hasErrors('trailerUrl')}" class="text-danger"
                                th:errors="*{trailerUrl}"></p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="hidden"
+                                   class="form-control"
+                                   id="isActive"
+                                   name="isActive"
+                                   th:name="*{isActive}"
+                                   th:field="*{isActive}"
+                                   th:value="true">
                         </div>
                     </div>
                     <div class="row justify-content-center">

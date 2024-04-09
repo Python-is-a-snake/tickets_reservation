@@ -43,7 +43,7 @@ public class V2__data extends BaseJavaMigration {
         addHall(new HallDto(cinemaId, "3D Hall", HallType.HALL_3D));
         addHall(new HallDto(cinemaId, "IMAX Hall", HallType.HALL_IMAX));
         addMovies();
-        addSession(new SessionDto(1L, hallId, LocalDateTime.now().plusDays(10), List.of()));
+        addSession(new SessionDto(1L, hallId, true, LocalDateTime.now().plusDays(10), List.of()));
     }
 
     private long addCinema(CinemaDto cinemaDto) {

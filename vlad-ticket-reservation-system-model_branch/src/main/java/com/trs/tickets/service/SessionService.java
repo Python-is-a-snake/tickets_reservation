@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -77,6 +78,15 @@ public class SessionService {
         ticketRepository.deletePlacesBySessionId(sessionId);
 
         sessionRepository.deleteById(sessionId);
+    }
+
+    public void deactivateSession(Long sessionId) {
+//        ticketRepository.deleteTicketsBySessionId(sessionId);
+//        ticketRepository.deletePlacesBySessionId(sessionId);
+        Optional<Session> sessionOptional = sessionRepository.findById(sessionId);
+        Session session = sessionOptional.orElseThrow(() -> new NoSuchElementException("Unable to find Session with ID: " + sessionId));
+        session.setIsActive(false);
+        sessionRepository.save(session);
     }
 
     public List<Session> getAllNotAvailableSessionsSortedByDateTime() {

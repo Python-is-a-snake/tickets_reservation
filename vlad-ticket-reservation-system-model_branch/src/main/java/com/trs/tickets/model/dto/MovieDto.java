@@ -22,9 +22,6 @@ import java.util.stream.Collectors;
 @SuperBuilder
 public class MovieDto extends BaseDto {
 
-//    @NonNull
-//    private Boolean isActive = true;
-
     @NotEmpty(message = "Title can not be empty")
     @Length(min = 3, message = "Too short")
     private String    title;
@@ -62,6 +59,8 @@ public class MovieDto extends BaseDto {
     @URL(message = "Trailer Url must be an URL")
     private String    trailerUrl;
 
+    private Boolean isActive = true;
+
     private List<Session> sessions = new ArrayList<>();
 
     @Override
@@ -93,6 +92,7 @@ public class MovieDto extends BaseDto {
 
     public Map<LocalDate, List<Session>> getSessionsGroupedByDateTime() {
         return sessions.stream()
+                .filter(Session::getIsActive)
                 .sorted(Comparator.comparing(Session::getSessionDateTime))
                 .collect(Collectors.groupingBy((Session session) -> session.getSessionDateTime().toLocalDate(), TreeMap::new, Collectors.toList()));
     }

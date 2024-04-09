@@ -24,9 +24,6 @@ public class Movie extends BaseEntity {
     //TODO implement min Age display
     //private Short minimumAge;
 
-//    @Column
-//    private Boolean isActive = true;
-
     @Column(nullable = false)
     private String title;
 
@@ -49,6 +46,9 @@ public class Movie extends BaseEntity {
     private String posterUrl;
 
     private String trailerUrl;
+
+    @Column
+    private Boolean isActive;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     @ToString.Exclude

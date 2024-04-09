@@ -151,7 +151,7 @@ public class SessionController {
         SessionDto session = new SessionDto();
         model.addAttribute("movieSession", session);
         model.addAttribute("halls", hallService.getAllHalls());
-        model.addAttribute("movies", movieService.getAllMovies());
+        model.addAttribute("movies", movieService.getActiveMovies());
         return "admin/create-session-page";
     }
 
@@ -203,12 +203,17 @@ public class SessionController {
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String deleteSession(@PathVariable("id") Long id, HttpServletRequest request) {
-
         String referer = request.getHeader("Referer");
-
         sessionService.deleteSession(id);
         return "redirect:"+ referer;
     }
 
-
+    //delete Session
+    @PostMapping("/deactivate/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
+    public String deactivateSession(@PathVariable("id") Long id, HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+        sessionService.deactivateSession(id);
+        return "redirect:"+ referer;
+    }
 }

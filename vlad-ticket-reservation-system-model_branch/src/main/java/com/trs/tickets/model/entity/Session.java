@@ -19,7 +19,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 public class Session extends BaseEntity {
-
     @ManyToOne(optional = false)
     private Movie movie;
 
@@ -34,6 +33,9 @@ public class Session extends BaseEntity {
     @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Place> places = new ArrayList<>();
+
+    @Column
+    private Boolean isActive;
 
     public boolean isAvailable() {
         return LocalDateTime.now().isBefore(sessionDateTime);

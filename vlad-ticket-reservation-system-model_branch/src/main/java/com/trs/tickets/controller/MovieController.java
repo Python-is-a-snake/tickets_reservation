@@ -38,10 +38,10 @@ public class MovieController {
         Page<MovieDto> moviesPage;
 
         if(title == null || title.isBlank()){
-            moviesPage = movieService.getAllMovies(page, size);
+            moviesPage = movieService.getActiveMovies(page, size);
             model.addAttribute("title", null);
         }else {
-            moviesPage = movieService.getMoviesByTitle(title, page, size);
+            moviesPage = movieService.getActiveMoviesByTitle(title, page, size);
             model.addAttribute("title", title);
         }
 
@@ -52,6 +52,15 @@ public class MovieController {
         model.addAttribute("pageSize", size);
 
         return "main/movies-page";
+    }
+
+    @GetMapping("/{id}")
+    public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
+        MovieDto movie = movieService.getMovieById(id);
+        model.addAttribute("movie", movie);
+
+        model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
+        return "movie-session/id-movie-page";
     }
 
     //ADMIN
@@ -81,16 +90,6 @@ public class MovieController {
         model.addAttribute("pageSize", size);
 
         return "admin/admin-movies";
-    }
-
-    //
-    @GetMapping("/{id}")
-    public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
-        MovieDto movie = movieService.getMovieById(id);
-        model.addAttribute("movie", movie);
-
-        model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
-        return "movie-session/id-movie-page";
     }
 
     @GetMapping("/create")
@@ -139,6 +138,13 @@ public class MovieController {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
     public String deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovie(id);
+        return "redirect:/movies/all";
+    }
+
+    @PostMapping("/deactivate/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")
+    public String inactiveMovie(@PathVariable("id") Long id) {
+        movieService.deactivateMovie(id);
         return "redirect:/movies/all";
     }
 }

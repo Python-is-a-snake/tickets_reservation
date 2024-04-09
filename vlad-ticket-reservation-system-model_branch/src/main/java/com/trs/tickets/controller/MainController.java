@@ -26,4 +26,8 @@ public class MainController {
         return "contact-us-page";
     }
 
+    @GetMapping("/t")
+    public String template(){
+        return "template";
+    }
 }

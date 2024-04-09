@@ -32,6 +32,10 @@ public class ChartsService {
         return chartsRepository.findMoviesAndSessionCounts();
     }
 
+    public List<Integer> findInactiveSessionCounts(){
+        return chartsRepository.findInactiveSessionCounts();
+    }
+
     public List<MoviesTicketsBoughtThisMonthProjection> findTicketsBoughtForMoviesThisMonth() {
         final LocalDate now = LocalDate.now().plusDays(1);
         final LocalDate startOfMonth = now.withDayOfMonth(1);

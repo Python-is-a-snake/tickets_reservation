@@ -46,7 +46,7 @@ public class AdminDashboardController {
         Long newUsers = userService.getNewUsersOfThisMonth().stream().count();
         model.addAttribute("newUsers", newUsers);
 
-        //SECTION 4
+        //Movies with most Sessions - SECTION 4
         List<MovieMostSessionsProjection> moviesWithMostSessions = movieService.getMoviesWithMostSessions();
         model.addAttribute("moviesWithMostSessions", moviesWithMostSessions);
 
@@ -56,8 +56,11 @@ public class AdminDashboardController {
         //CHART 1
         //Displays movies titles and amount of sessions for each movie
         addChartMoviesSessionCountData(model);
+
         addChartCountBoughtTicketsForMoviesThisMonthData(model);
+
         addChartTicketsCountByHourData(model);
+
         addChartSessionsForDaysOfWeekData(model);
 
         return "/admin/test";
@@ -73,12 +76,15 @@ public class AdminDashboardController {
                 .map(MovieSessionsProjection::getSessionCount)
                 .toList();
 
+
         //Movies titles
         List<String> moviesSessionsPlotSessionsTitles = moviesSessionsCount.stream()
                 .map(MovieSessionsProjection::getTitle)
                 .toList();
 
         model.addAttribute("chart_moviesSessionsCount", moviesSessionsPlotSessionsAmount);//chart data
+        //Amount of Inactive sessions for each Movie
+        model.addAttribute("chart_moviesInactiveSessionsCount", chartsService.findInactiveSessionCounts());//chart inactive sessions data TODO
         model.addAttribute("chart_moviesSessionsTitles", moviesSessionsPlotSessionsTitles);//chart labels
     }
 

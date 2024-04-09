@@ -128,6 +128,16 @@
                  placeholder="Trailer Url (Embedded)">
           <p th:if="${#fields.hasErrors('trailerUrl')}" class="text-danger" th:errors="*{trailerUrl}"></p>
         </div>
+        <div class="form-group col-md-6">
+          <input type="hidden"
+                 class="form-control"
+                 id="isActive"
+                 name="isActive"
+                 th:value="true"
+                 th:attr="name='isActive'"
+                >
+        </div>
+
       </div>
       <button type="submit" class="btn btn-primary">Edit movie</button>
     </div>

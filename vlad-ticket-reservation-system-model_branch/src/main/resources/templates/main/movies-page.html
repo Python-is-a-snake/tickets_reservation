@@ -21,7 +21,6 @@
 <body class="d-flex flex-column h-100">
 <div layout:fragment="content">
 
-
     <main class="flex-shrink-0">
         <!-- Page Content-->
 
@@ -36,18 +35,29 @@
 
                         <h5 class="col">Found <span th:text="${totalItems}">count</span> Movies!</h5>
 
-                        <h5 class="col">Displaying <div class="dropdown d-inline-block">
-                                <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size</button>
+                        <h5 class="col">Displaying
+                            <div class="dropdown d-inline-block">
+                                <button th:text="${pageSize}" class="btn btn-light dropdown-toggle" type="button"
+                                        id="dropdownMenu2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">page size
+                                </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                                     <a th:if="${totalItems >= 4}"
                                        th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${4})}"
                                        class="dropdown-item" type="button">4</a>
-                                    <a th:if="${totalItems >= 6}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${6})}" class="dropdown-item" type="button">6</a>
-                                    <a th:if="${totalItems >= 8}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${8})}" class="dropdown-item" type="button">8</a>
-                                    <a th:if="${totalItems >= 12}" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${12})}" class="dropdown-item" type="button">12</a>
+                                    <a th:if="${totalItems >= 6}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${6})}"
+                                       class="dropdown-item" type="button">6</a>
+                                    <a th:if="${totalItems >= 8}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${8})}"
+                                       class="dropdown-item" type="button">8</a>
+                                    <a th:if="${totalItems >= 12}"
+                                       th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage}, size=${12})}"
+                                       class="dropdown-item" type="button">12</a>
                                 </div>
-                            </div> movies per page!</h5>
+                            </div>
+                            movies per page!
+                        </h5>
                         <hr>
                     </div>
 
@@ -61,6 +71,12 @@
                 <div class="row gx-5">
                     <div class="col-lg-6 mb-2" th:each="movie : ${movies}">
                         <div class="position-relative mb-5">
+
+                            <span th:if="${T(java.time.LocalDate).now().minusWeeks(1) < movie.releaseDate.plusWeeks(1)}"
+                                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+                                NEW!
+                            </span>
+
                             <img class="img-fluid rounded-3 mb-3 custom-image" th:src="${movie.posterUrl}"
                                  th:alt="${movie.title} + ' ' + Poster"
                                  th:href="@{/movies/{movieId}(movieId=${movie.id})}">
@@ -151,12 +167,14 @@
 
                         <!--NEXT PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage + 1 < totalPages ? 'enabled' : 'disabled'}">
-                            <a class="page-link" th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage + 1}, size=${pageSize})}">Next</a>
+                            <a class="page-link"
+                               th:href="@{/movies(title=${title == null ? '' : title}, page=${currentPage + 1}, size=${pageSize})}">Next</a>
                         </li>
 
                         <!--LAST PAGE BUTTON-->
                         <li class="page-item" th:classappend="${currentPage + 1 < totalPages ? 'enabled' : 'disabled'}">
-                            <a class="page-link" th:href="@{/movies(title=${title == null ? '' : title}, page=${totalPages - 1}, size=${pageSize})}">Last</a>
+                            <a class="page-link"
+                               th:href="@{/movies(title=${title == null ? '' : title}, page=${totalPages - 1}, size=${pageSize})}">Last</a>
                         </li>
 
                     </ul>

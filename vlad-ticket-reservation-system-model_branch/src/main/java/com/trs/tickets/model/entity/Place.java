@@ -14,8 +14,6 @@ import java.util.Objects;
 @AllArgsConstructor
 @Entity
 public class Place extends BaseEntity {
-//    @ManyToOne(optional = false)
-//    private Hall hall;
 
     @ManyToOne(optional = false)
     private Session session;

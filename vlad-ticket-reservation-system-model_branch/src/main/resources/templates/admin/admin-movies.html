@@ -57,22 +57,28 @@
         <table class="table table-hover">
           <thead>
           <tr>
+            <th scope="col">Archived?</th>
             <th scope="col">Title</th>
             <th scope="col">Genre</th>
             <th scope="col">Director</th>
             <th scope="col">Duration(minutes)</th>
             <th scope="col">Country</th>
             <th scope="col">Release date</th>
-            <th scope="col"><b>View</b></th>
-            <th scope="col"><b>Edit</b></th>
-            <th scope="col"><b>Delete</b></th>
+            <th scope="col"><b><i>View</i></b></th>
+            <th scope="col"><b><i>Edit</i></b></th>
+            <th scope="col"><b><i>Archive</i></b></th>
+            <th scope="col"><b><i>Delete</i></b></th>
           </tr>
           </thead>
           <tbody>
+
           <tr th:if="${#lists.isEmpty(movies)}">
             <td colspan="9" class="text-center table-warning">NO MOVIES WERE FOUND!</td>
           </tr>
+
           <tr th:each="movie : ${movies}">
+            <td class="justify-content-center" th:if="${not movie.isActive}"><button class="btn btn-danger"></button></td>
+            <td class="justify-content-center" th:if="${movie.isActive}"><button class="btn btn-success"></button></td>
             <td th:text="${movie.title}">Title</td>
             <td th:text="${movie.genre}">Genre</td>
             <td th:text="${movie.director}">Director</td>
@@ -88,8 +94,15 @@
             </td>
             <td>
               <form method="get" th:action="@{/movies/edit/{movieId}(movieId=${movie.id})}">
-                <button type="submit" class="btn btn-warning">
+                <button type="submit" class="btn btn-warning" th:classappend="${movie.isActive ? '' : 'disabled'}">
                   <i class='fa fa-edit'></i>
+                </button>
+              </form>
+            </td>
+            <td>
+              <form method="post" th:action="@{/movies/deactivate/{movieId}(movieId=${movie.id})}">
+                <button type="submit" class="btn btn-danger" th:classappend="${movie.isActive ? '' : 'disabled'}">
+                  <i class="bi bi-archive"></i>
                 </button>
               </form>
             </td>

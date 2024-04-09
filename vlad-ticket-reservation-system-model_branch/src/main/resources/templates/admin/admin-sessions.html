@@ -25,6 +25,9 @@
       <div class="container">
         <h3>Sessions</h3>
 
+        <p>Search on the page</p>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+
         <div th:if="${totalPages > 1}" class="row text-center">
 
           <p></p>
@@ -48,22 +51,27 @@
         <table class="table table-hover">
           <thead>
           <tr>
+            <th scope="col">Archived?</th>
             <th scope="col">Movie</th>
             <th scope="col">Hall Type</th>
             <th scope="col">Hall Name</th>
             <th scope="col">Date</th>
             <th scope="col">Time</th>
-            <th scope="col">Available</th>
-            <th scope="col"><b>View</b></th>
+            <th scope="col">Available?</th>
+            <th scope="col"><b><i>View</i></b></th>
 <!--            <th scope="col"><b>Edit</b></th>-->
-            <th scope="col"><b>Delete</b></th>
+            <th scope="col"><b><i>Archive</i></b></th>
+            <th scope="col"><b><i>Delete</i></b></th>
           </tr>
           </thead>
-          <tbody>
+
+          <tbody id="myTable">
           <tr th:if="${#lists.isEmpty(movieSessions)}">
             <td colspan="9" class="text-center table-warning">NO SESSIONS WERE FOUND!</td>
           </tr>
           <tr th:each="movieSession : ${movieSessions}">
+            <td class="justify-content-center" th:if="${not movieSession.isActive}"><button class="btn btn-danger"></button></td>
+            <td class="justify-content-center" th:if="${movieSession.isActive}"><button class="btn btn-success"></button></td>
             <td th:text="${movieSession.movie.title}">Movie Title</td>
             <td th:text="${movieSession.hall.type}">Hall Type</td>
             <td th:text="${movieSession.hall.name}">Hall name</td>
@@ -75,6 +83,13 @@
               <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
                 <button type="submit" class="btn btn-info">
                   <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </form>
+            </td>
+            <td>
+              <form method="post" th:action="@{/sessions/deactivate/{sessionId}(sessionId=${movieSession.id})}">
+                <button type="submit" class="btn btn-danger">
+                  <i class="bi bi-archive"></i>
                 </button>
               </form>
             </td>

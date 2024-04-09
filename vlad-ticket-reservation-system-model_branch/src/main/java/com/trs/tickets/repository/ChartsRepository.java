@@ -19,6 +19,9 @@ public interface ChartsRepository extends JpaRepository<Session, Long> {
     @Query(value = "SELECT m.title AS title, COUNT(s.id) AS sessionCount FROM movie m JOIN session s ON m.id = s.movie_id GROUP BY m.title ORDER BY m.title", nativeQuery = true)
     List<MovieSessionsProjection> findMoviesAndSessionCounts();
 
+    @Query(value = "SELECT COUNT(s.id) AS sessionCount FROM movie m JOIN session s ON m.id = s.movie_id WHERE s.is_active IS FALSE GROUP BY m.title ORDER BY m.title", nativeQuery = true)
+    List<Integer> findInactiveSessionCounts();
+
     @Query(value = "SELECT m.title AS title, COUNT(t.id) AS ticketsCount " +
             "FROM movie m " +
             "JOIN session s ON m.id = s.movie_id " +

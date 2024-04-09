@@ -1,9 +1,9 @@
 package com.trs.tickets.model.dto;
 
 import com.trs.tickets.model.entity.Place;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +16,7 @@ import java.util.List;
 public class SessionDto extends BaseDto {
     private Long movieId;
     private Long hallId;
+    private Boolean isActive = true;
 
     private LocalDateTime sessionDateTime;
 
