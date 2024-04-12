@@ -20,6 +20,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Place> findAllPlacesByHallId(@Param("hallId") Long hallId);
 
     Page<Ticket> findByUserUsername(String userName, Pageable pageable);
+    Page<Ticket> findByUserUsernameOrderByPurchaseDateDesc(String userName, Pageable pageable);
     List<Ticket> findAllByUserId(Long id);
     List<Ticket> findAllBySessionId(Long sessionId);
 //    List<Ticket> findByTicketCode(String ticketCode);

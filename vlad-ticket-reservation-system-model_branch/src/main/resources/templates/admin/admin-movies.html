@@ -10,6 +10,11 @@
     <title>Cinemagic | Movies</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <style>
+        button:disabled {
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -66,7 +71,7 @@
                 <table class="table table-hover text-center">
                     <thead>
                     <tr>
-                        <th scope="col">Archived?</th>
+                        <th scope="col">Displayed?</th>
                         <th scope="col">Title</th>
                         <th scope="col">Genre</th>
                         <th scope="col">Director</th>
@@ -224,5 +229,6 @@
         </section>
     </main>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </body>
 </html>

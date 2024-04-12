@@ -68,6 +68,13 @@ public class TicketService {
         return ticketRepository.findByUserUsername(userName, pageable);
     }
 
+    public Page<Ticket> findByUserNameOrderedByPurchaseTime(String userName, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+
+//        return ticketRepository.findByUserUsername(userName, pageable);
+        return ticketRepository.findByUserUsernameOrderByPurchaseDateDesc(userName, pageable);
+    }
+
 //    public String generateTicketCode() { todo: Implement in future
 //        String ticketCode = UUID.randomUUID().toString().substring(0, 10);
 //        List<Ticket> ticketsWithCodeCollision = ticketRepository.findByTicketCode(ticketCode);

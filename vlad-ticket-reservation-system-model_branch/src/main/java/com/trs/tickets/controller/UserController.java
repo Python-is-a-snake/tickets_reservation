@@ -34,7 +34,10 @@ public class UserController {
         page = pageSizeCheckerService.checkPage(page);
         size = pageSizeCheckerService.checkSize(size);
 
-        Page<Ticket> ticketsByUserNamePage = ticketService.findByUserName(authentication.getName(), page, size);
+        final String username = authentication.getName();
+
+//        Page<Ticket> ticketsByUserNamePage = ticketService.findByUserName(authentication.getName(), page, size);
+        Page<Ticket> ticketsByUserNamePage = ticketService.findByUserNameOrderedByPurchaseTime(username, page, size);
 
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
         model.addAttribute("tickets", ticketsByUserNamePage.getContent());
