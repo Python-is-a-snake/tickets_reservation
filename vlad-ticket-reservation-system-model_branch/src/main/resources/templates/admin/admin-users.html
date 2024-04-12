@@ -30,15 +30,17 @@
                         <button type="submit" class="btn btn-outline-primary">search</button>
                     </div>
                 </form>
-                <table class="table table-hover">
+                <table class="table table-hover text-center">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">Archived?</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
                         <th scope="col">Registration Date</th>
                         <th scope="col" sec:authorize="hasAuthority('CEO')"><b>Make Admin</b></th>
                         <th scope="col" sec:authorize="hasAuthority('CEO')"><b>Remove Admin</b></th>
+                        <th scope="col" sec:authorize="hasAuthority('CEO')"><b>Archive</b></th>
                         <th scope="col"><b>Ban(delete)</b></th>
                     </tr>
                     </thead>
@@ -48,27 +50,36 @@
                     </tr>
                     <tr th:each="user, stats : ${users}">
                         <th scope="row" th:text="${stats.index + 1}">Num</th>
+                        <td class="justify-content-center" th:if="${not user.isActive}"><button class="btn btn-danger"></button></td>
+                        <td class="justify-content-center" th:if="${user.isActive}"><button class="btn btn-success"></button></td>
                         <td th:text="${user.username}">Username</td>
                         <td th:text="${user.role}">User role</td>
                         <td th:text="${#temporals.format(user.registrationDate, 'dd/MM/yyyy')}"> REGISTRATION DATE</td>
                         <td sec:authorize="hasAuthority('CEO')">
                             <form method="post" th:action="@{/user/set-admin/{id}(id=${user.id})}">
                                 <button type="submit" class="btn btn-warning" th:classappend="${user.role.name() == T(com.trs.tickets.configs.Role).ADMIN.name()} ? 'disabled'">
-                                    <i class="fa fa-arrow-up"></i>
+                                    <i class="bi bi-person-fill-up"></i>
                                 </button>
                             </form>
                         </td>
                         <td sec:authorize="hasAuthority('CEO')">
                             <form method="post" th:action="@{/user/remove-admin/{id}(id=${user.id})}">
                                 <button type="submit" class="btn btn-info" th:classappend="${user.role.name() == T(com.trs.tickets.configs.Role).USER.name()} ? 'disabled'">
-                                    <i class="	fa fa-angle-double-down"></i>
+                                    <i class="bi bi-person-fill-down"></i>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" th:action="@{/user/deactivate/{id}(id=${user.id})}">
+                                <button type="submit" class="btn btn-danger" th:classappend="${user.role.name() == T(com.trs.tickets.configs.Role).USER.name()} ? 'disabled'">
+                                    <i class="bi bi-person-fill-slash"></i>
                                 </button>
                             </form>
                         </td>
                         <td>
                             <form method="post" th:action="@{/user/delete/{userId}(userId=${user.id})}">
                                 <button type="submit" class="btn btn-danger" th:classappend="${user.role.name() == T(com.trs.tickets.configs.Role).CEO.name()} ? 'disabled'">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <i class="bi bi-person-fill-x"></i>
                                 </button>
                             </form>
                         </td>

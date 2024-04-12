@@ -19,4 +19,6 @@ public class UserCreateDto {
     @NotBlank(message = "Can not be blank")
     @Length(min = 3, max = 120, message = "Too short password, should be more than 6 characters")
     String password;
+
+    private Boolean isActive = true;
 }

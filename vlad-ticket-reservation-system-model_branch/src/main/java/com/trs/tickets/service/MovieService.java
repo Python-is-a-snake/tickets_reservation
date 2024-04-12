@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -85,7 +86,8 @@ public class MovieService {
 
     public void deactivateMovie(Long id) {
         log.info("Deactivating Sessions by Movie ID: " + id);
-//        sessionRepository.findByMovieId(id).forEach(session -> sessionService.inactiveSession(session.getId()));
+        sessionRepository.findByMovieId(id).forEach(session -> sessionService.deactivateSession(session.getId()));
+        sessionRepository.findByMovieId(id).forEach(session -> session.setSessionDateTime(LocalDateTime.now().minusYears(1)));//set Date time to MIN to make Session Unavailable
         log.info("Finding Movie by ID: " + id);
         Optional<Movie> movieOpt = movieRepository.findById(id);
         Movie movie = movieOpt.orElseThrow(() -> new NoSuchElementException("Unable to find movie with ID " + id));

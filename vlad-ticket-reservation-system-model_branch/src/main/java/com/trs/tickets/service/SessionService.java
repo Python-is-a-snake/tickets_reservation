@@ -81,11 +81,10 @@ public class SessionService {
     }
 
     public void deactivateSession(Long sessionId) {
-//        ticketRepository.deleteTicketsBySessionId(sessionId);
-//        ticketRepository.deletePlacesBySessionId(sessionId);
         Optional<Session> sessionOptional = sessionRepository.findById(sessionId);
         Session session = sessionOptional.orElseThrow(() -> new NoSuchElementException("Unable to find Session with ID: " + sessionId));
         session.setIsActive(false);
+        session.setSessionDateTime(LocalDateTime.now().minusYears(1));//set Date time to MIN to make Session Unavailable
         sessionRepository.save(session);
     }
 

@@ -19,7 +19,8 @@ public class SecurityConfiguration {
             "/fonts/**",
             "/scripts/**",
             "/webjars/**",
-            "/js/**"
+            "/js/**",
+            "/static/**"
     };
 
     @Bean

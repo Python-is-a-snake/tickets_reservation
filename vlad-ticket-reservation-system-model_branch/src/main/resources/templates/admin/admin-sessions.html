@@ -9,9 +9,6 @@
   <title>Cinemagic | Sessions</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
-  <!-- Bootstrap icons-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- Core theme CSS (includes Bootstrap)-->
   <base href="/">
   <link th:href="@{css/styles.css}" rel="stylesheet">
 </head>
@@ -48,7 +45,7 @@
 
         </div>
 
-        <table class="table table-hover">
+        <table class="table table-hover text-center">
           <thead>
           <tr>
             <th scope="col">Archived?</th>
@@ -58,13 +55,9 @@
             <th scope="col">Date</th>
             <th scope="col">Time</th>
             <th scope="col">Available?</th>
-            <th scope="col"><b><i>View</i></b></th>
-<!--            <th scope="col"><b>Edit</b></th>-->
-            <th scope="col"><b><i>Archive</i></b></th>
-            <th scope="col"><b><i>Delete</i></b></th>
+            <th scope="col"><b><i>Actions</i></b></th>
           </tr>
           </thead>
-
           <tbody id="myTable">
           <tr th:if="${#lists.isEmpty(movieSessions)}">
             <td colspan="9" class="text-center table-warning">NO SESSIONS WERE FOUND!</td>
@@ -80,25 +73,30 @@
             <td th:if="${not movieSession.available}"><button class="btn btn-danger"></button></td>
             <td th:if="${movieSession.available}"><button class="btn btn-success"></button></td>
             <td>
-              <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
-                <button type="submit" class="btn btn-info">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </button>
-              </form>
-            </td>
-            <td>
-              <form method="post" th:action="@{/sessions/deactivate/{sessionId}(sessionId=${movieSession.id})}">
-                <button type="submit" class="btn btn-danger">
-                  <i class="bi bi-archive"></i>
-                </button>
-              </form>
-            </td>
-            <td>
-              <form method="post" th:action="@{/sessions/delete/{sessionId}(sessionId=${movieSession.id})}">
-                <button type="submit" class="btn btn-danger">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-              </form>
+              <div class="row">
+                <div class="col-3">
+                  <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
+                    <button type="submit" class="btn btn-info" th:classappend="${movieSession.isActive ? '' : 'disabled'}">
+                      <i class="bi bi-eye-fill"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="col-3">
+                  <form method="post" th:action="@{/sessions/deactivate/{sessionId}(sessionId=${movieSession.id})}">
+                    <button type="submit" class="btn btn-danger" th:classappend="${movieSession.isActive ? '' : 'disabled'}">
+                      <i class="bi bi-archive"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="col-3">
+                  <form method="post" th:action="@{/sessions/delete/{sessionId}(sessionId=${movieSession.id})}">
+                    <button type="submit" class="btn btn-danger" th:classappend="${movieSession.isActive ? 'disabled' : ''}">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </div>
+
+              </div>
             </td>
           </tr>
           </tbody>

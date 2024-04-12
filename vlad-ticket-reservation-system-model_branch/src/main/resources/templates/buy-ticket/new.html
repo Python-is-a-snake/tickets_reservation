@@ -1,271 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="template.html">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cinema Booking</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Seat Selection</title>
+<!--  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">-->
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-    * {
-      box-sizing: border-box;
-    }
-
-    * {
-      user-select: none;
-      -khtml-user-select: none;
-      -o-user-select: none;
-      -moz-user-select: -moz-none;
-      -webkit-user-select: none;
-    }
-
-    ::selection {
-      background: transparent;
-      color: inherit;
-    }
-    ::-moz-selection {
-      background: transparent;
-      color: inherit;
-    }
-
-    body {
-      font-family: 'Lato', 'sans-serif';
-      background-color: #242333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    .cinema-screen {
+      width: 100%;
+      height: 50px;
+      background-color: #666;
       color: #fff;
-      margin: 0;
+      text-align: center;
+      line-height: 50px;
+      font-size: 24px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
 
-    .movie-container label {
-      margin-right: 10px;
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .movie-container select {
-      padding: 5px;
-      border-radius: 4px;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      appearance: none;
+    .exit-sign {
+      position: absolute;
+      bottom: 10px; /* Changed to bottom */
+      width: 60px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      background-color: #0A0;
+      color: #FFF;
       font-size: 14px;
+      border-radius: 5px;
     }
 
-    .showcase {
-      border-radius: 7px;
+    .exit-sign.left {
+      left: 10px;
+    }
+
+    .exit-sign.right {
+      right: 10px;
+    }
+
+    #seat-map {
+      position: relative;
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+    }
+
+    .seat-row {
       display: flex;
-      padding: 15px;
-      background-color: rgba(0, 0, 0, 0.5);
-      list-style: none;
-      font-weight: 500;
-      margin: 20px 0;
-      color: #777;
+      justify-content: center; /* Center alignment of seats */
+      margin-bottom: 10px;     /* Space between rows */
     }
 
-    .showcase li {
-      margin: 0 10px;
-    }
-
-    .showcase li small {
-      margin-left: 3px;
+    .row-number {
+      color: #FFF;                /* White color for visibility */
+      font-weight: bold;          /* Make text bold */
+      font-size: 16px;            /* Increase font size */
+      padding-right: 10px;        /* Space between row number and seats */
+      display: flex;              /* Use flexbox for vertical center alignment */
+      align-items: center;        /* Align text vertically in center */
+      height: 40px;               /* Ensure sufficient height for alignment */
     }
 
     .seat {
-      height: 13px;
-      width: 13px;
-      background-color: #777;
-      display: inline-block;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-
-    .seat.selected {
-      background-color: rgb(115, 115, 253);
-    }
-
-    .seat.occupied {
-      background-color: #fff;
-    }
-
-    .container {
-      width: 200px;
-      perspective: 1000px;
-    }
-
-    .container .screen {
-      width: 100%;
-      height: 90px;
-      background-color: #fff;
-      transform: rotateX(-45deg);
-      -webkit-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
-      -moz-box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
-      box-shadow: 0px 0px 7px 0px rgba(255, 255, 255, 1);
-      margin: 10px 0;
-    }
-
-    .row .seat:nth-of-type(2) {
-      margin-right: 10px;
-    }
-
-    .row .seat:nth-last-of-type(2) {
-      margin-left: 10px;
-    }
-
-    .container .seat {
-      margin-left: 2px;
-    }
-
-    .container .seat:not(.occupied):hover {
-      transform: scale(1.2);
       cursor: pointer;
+      height: 30px;
+      width: 30px;
+      margin: 3px;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 5px;      /* Rounded corners for seats */
+      border: 1px solid #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s; /* Smooth transition for color change */
     }
 
-    .text span {
-      color: rgb(115, 115, 253);
+    .available {
+      background-color: #fff;
     }
 
+    .selected {
+      background-color: #FF9100;
+    }
+
+    .unavailable {
+      background-color: #F44336;
+      cursor: not-allowed;
+    }
+
+    /*NEW*/
+    #ticket-sidebar {
+      width: 250px;            /* Width of the sidebar */
+      position: fixed;         /* Fixed position */
+      top: 56px;               /* Adjust this value to match your navbar's height */
+      right: 0;                /* Positioning it on the right */
+      height: calc(100% - 56px); /* Height calculation to prevent overlay */
+      background-color: #f0f0f0; /* Background color */
+      overflow-y: auto;        /* Allow scrolling */
+      transform: translateX(100%); /* Start off-screen (hidden to the right) */
+      transition: transform 0.3s ease-in-out; /* Smooth transition for sliding in and out */
+      z-index: 1040;           /* Ensure it is above other content but below modal overlays if necessary */
+    }
+
+    .ticket-box {
+      padding: 10px;
+      margin: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
-<body class="bg-dark text-white">
-<div class="movie-container">
-  <label>Pick a movie</label>
-  <select name="" id="movie">
-    <option value="12">Star Wars - The Return of the Jedi ($12)</option>
-    <option value="10">Fast and Furious - The Last Ride ($10)</option>
-    <option value="5">Cadaver ($5)</option>
-    <option value="8">Jurasic World ($8)</option>
-  </select>
+<body>
+<div layout:fragment="content">
+
+<main class="flex-shrink-0">
+  <!-- Page Content-->
+  <section class="py-5">
+    <div class="container">
+      <h3>Session for "<span th:text="${movie.title}">Title</span>"</h3>
+      <input type="hidden" id="session-id" th:value="${movieSession.id}"/>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"> <h5><b>When: </b><i th:text="${#temporals.format(movieSession.sessionDateTime, 'EEEE, dd.MM.yyyy, HH:mm')}"></i></h5></li>
+        <li class="list-group-item"> <h5><b>Hall: </b><i th:text="${hall.type}"></i> "<span th:text="${hall.name}"></span>"</h5></li>
+      </ul>
+      <div class="container">
+        <div id="seat-map">
+          <div class="cinema-screen">SCREEN</div>  <!-- Cinema screen imitation -->
+          <div class="exit-sign left">EXIT</div>   <!-- Left EXIT sign -->
+          <div class="exit-sign right">EXIT</div>  <!-- Right EXIT sign -->
+          <!-- Using flexbox to ensure seats are aligned horizontally -->
+          <div class="seat-row" th:each="entry : ${places}">
+            <div class="row-number" th:text="${entry.key}">Row #</div> <!-- Row number styled -->
+
+            <div th:each="place : ${entry.value}"
+                 class="seat"
+                 th:classappend="${#lists.contains(takenPlaces, place) ? 'unavailable' : 'available'}"
+                 th:text="${place.number}"
+                 th:attr="data-place-id=${place.id}, data-row=${place.row}, data-number=${place.number}, data-type=${place.getPlaceType()}, data-price=${place.getPlaceType().getPrice()}">Seat №</div>
+          </div>
+        </div>
+        <button id="confirm-selection" class="btn btn-primary mt-4">Confirm Selection</button>
+        <button id="clear-selections" class="btn btn-secondary mt-4">Clear Selections</button>
+      </div>
+    </div>
+  </section>
+  <div id="ticket-sidebar"></div>
+  <section class="py-5 bg-light">
+    <div class="container px-5 my-5">
+      <h2 class="display-4 fw-bolder mb-4">Have any ideas or advices?</h2>
+      <a class="btn btn-lg btn-primary" href="/contact-us">Contact us</a>
+    </div>
+  </section>
+</main>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.seat.available').on('click', function() {
+        $(this).toggleClass('selected');
+        updateSidebar($(this));  // Pass the clicked element to the function
+      });
+
+      $('#confirm-selection').click(function () {
+        var selectedSeats = $('.seat.selected').map(function () {
+          return $(this).data('place-id');
+        }).get();
+
+        if (selectedSeats.length > 0) {
+          $.ajax({
+            url: '/tickets/do_purchase',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+              sessionId: $('#session-id').val(),
+              placeIds: selectedSeats
+            }),
+            success: function(response) {
+              window.location.href = '/user/profile';
+            },
+            error: function(xhr, status, error) {
+              console.error("Error submitting seats: ", error);
+            }
+          });
+        } else {
+          alert("Please select at least one seat.");
+        }
+      });
+
+      $('#clear-selections').click(function () {
+        $('.seat.selected').removeClass('selected');
+        updateSidebar();
+      });
+
+      function updateSidebar(clickedSeat) {
+        $('#ticket-sidebar').empty();
+        var selectedSeats = $('.seat.selected').map(function () {
+          return {
+            id: $(this).data('place-id'),
+            row: $(this).data('row'),
+            number: $(this).data('number'),
+            type: $(this).data('type'),
+            price: $(this).data('price')
+          };
+        }).get();
+
+        if (selectedSeats.length > 0) {
+          $('#ticket-sidebar').css('transform', 'translateX(0)');
+          $.each(selectedSeats, function(i, seat) {
+            $('#ticket-sidebar').append('<div class="ticket-box">Seat # ' + seat.number + ' Row # ' + seat.row + '<br>Type: ' + seat.type + ' <hr> Price: ' + seat.price + '₴</div>');
+          });
+        } else {
+          $('#ticket-sidebar').css('transform', 'translateX(100%)');
+        }
+      }
+      // function updateSidebar(clickedSeat) {
+      //   $('#ticket-sidebar').empty();
+      //   var selectedSeats = $('.seat.selected').map(function () {
+      //     return $(this).data('place-id');
+      //   }).get();
+      //
+      //   if (selectedSeats.length > 0) {
+      //     $('#ticket-sidebar').css('transform', 'translateX(0)');
+      //     $.each(selectedSeats, function(i, placeId) {
+      //       var seatNumber = $('.seat[data-place-id="' + placeId + '"]').text();
+      //       $('#ticket-sidebar').append('<div class="ticket-box">Ticket for Seat: ' + seatNumber + '</div>');
+      //     });
+      //   } else {
+      //     $('#ticket-sidebar').css('transform', 'translateX(100%)');
+      //   }
+      // }
+
+    });
+
+  </script>
+
 </div>
-
-<ul class="showcase">
-  <li>
-    <div class="seat"></div>
-    <small>N/A</small>
-  </li>
-  <li>
-    <div class="seat selected"></div>
-    <small>Selected</small>
-  </li>
-  <li>
-    <div class="seat occupied"></div>
-    <small>Occupied</small>
-  </li>
-
-</ul>
-
-<div class="container">
-  <div class="screen"></div>
-  <div class="row">
-    <div class="seat occupied"></div>
-    <div class="seat occupied"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-  </div>
-  <div class="row">
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat occupied"></div>
-  </div>
-  <div class="row">
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat occupied"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-  </div>
-  <div class="row">
-    <div class="seat "></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-  </div>
-  <div class="row">
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat"></div>
-    <div class="seat occupied"></div>
-    <div class="seat occupied"></div>
-  </div>
-
-</div>
-
-<p class="text">You have selected <span id="seatsSelected">0</span> seats for the price of $<span
-        id="totalPrice">0</span></p>
-
-<!-- Optional JavaScript -->
-<script>
-  const movieSelected = document.getElementById('movie');
-  const seatsSelected = document.getElementById('seatsSelected');
-  const totalPrice = document.getElementById('totalPrice');
-  const container = document.querySelector('.container');
-
-  const updatePrice = () => {
-    const selectedSeats = document.querySelectorAll(
-            '.container .seat.selected:not(.occupied)'
-    );
-    const selectedSeatsCount = selectedSeats.length;
-
-    totalPrice.innerText = selectedSeatsCount * +movieSelected.value;
-    seatsSelected.innerText = selectedSeatsCount;
-  };
-
-  const selectSeat = (seat) => {
-    seat.classList.toggle('selected');
-    updatePrice();
-  };
-
-  movieSelected.addEventListener('change', () => {
-    console.log('change');
-    updatePrice();
-  });
-
-  container.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (
-            e.target.classList.contains('seat') &&
-            !e.target.classList.contains('occupied')
-    ) {
-      selectSeat(e.target);
-    }
-  });
-</script>
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

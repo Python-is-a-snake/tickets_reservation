@@ -42,31 +42,41 @@ public class SessionController {
 
     private final PageSizeCheckerService pageSizeCheckerService;
 
+
     // USER
 
     //get page with seats display
+//    @GetMapping("/buy-tickets/{sessionId}")
+//    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'CEO')")
+//    public String getSessionPage(@PathVariable("sessionId") Long sessionId, Model model) {
+//        SessionDto session = sessionService.getSessionById(sessionId);
+//        MovieDto movie = movieService.getMovieById(session.getMovieId());
+//        Hall hall = hallService.getHallById(session.getHallId());
+//
+//        model.addAttribute("movieSession", session);
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("hall", hall);
+//
+//        Map<Integer, List<Place>> places = session.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
+//        model.addAttribute("places", places);
+//
+//        List<Place> takenPlaces = ticketService.findTakenPlacesByHallId(hall.getId());
+//        model.addAttribute("takenPlaces", takenPlaces);
+//        return "buy-ticket/buy-tickets-page";
+//    }
+
     @GetMapping("/buy-tickets/{sessionId}")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'CEO')")
-    public String getSessionPage(@PathVariable("sessionId") Long sessionId, Model model) {
-        SessionDto session = sessionService.getSessionById(sessionId);
-        MovieDto movie = movieService.getMovieById(session.getMovieId());
-        Hall hall = hallService.getHallById(session.getHallId());
+    public String getSessionPageNew(@PathVariable("sessionId") Long sessionId, Model model, Authentication authentication) {
 
-        model.addAttribute("movieSession", session);
-        model.addAttribute("movie", movie);
-        model.addAttribute("hall", hall);
+        //CEO and Admins should NOT be able to buy ticket
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for(GrantedAuthority authority : authorities){
+            if(authority.getAuthority().equals("CEO") || authority.getAuthority().equals("ADMIN")){
+                throw new AccessDeniedException("Admin or CEO can not buy a ticket!");
+            }
+        }
 
-        Map<Integer, List<Place>> places = session.getPlaces().stream().collect(Collectors.groupingBy(Place::getRow));
-        model.addAttribute("places", places);
-
-        List<Place> takenPlaces = ticketService.findTakenPlacesByHallId(hall.getId());
-        model.addAttribute("takenPlaces", takenPlaces);
-        return "buy-ticket/buy-tickets-page";
-    }
-
-    @GetMapping("/new/{sessionId}")
-    @PreAuthorize("hasAnyAuthority('USER', 'ADMIN', 'CEO')")
-    public String getSessionPageNew(@PathVariable("sessionId") Long sessionId, Model model) {
         SessionDto session = sessionService.getSessionById(sessionId);
         MovieDto movie = movieService.getMovieById(session.getMovieId());
         Hall hall = hallService.getHallById(session.getHallId());
@@ -91,10 +101,8 @@ public class SessionController {
                                 Model model,
                                 Authentication authentication) {
 
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-
         //CEO and Admins should NOT be able to buy ticket
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for(GrantedAuthority authority : authorities){
             if(authority.getAuthority().equals("CEO") || authority.getAuthority().equals("ADMIN")){
                 throw new AccessDeniedException("Admin or CEO can not buy a ticket!");

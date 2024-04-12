@@ -1,6 +1,5 @@
 package com.trs.tickets.controller;
 
-import com.trs.tickets.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-
-    private final SessionService sessionService;
-
     @GetMapping("/")
     public String redirectToMainPage() {
         return "redirect:/movies";
@@ -29,5 +25,10 @@ public class MainController {
     @GetMapping("/t")
     public String template(){
         return "template";
+    }
+
+    @GetMapping("/n")
+    public String seats(){
+        return "buy-ticket/new";
     }
 }
