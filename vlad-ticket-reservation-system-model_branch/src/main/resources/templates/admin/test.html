@@ -21,12 +21,6 @@
             overflow-y: auto;
         }
 
-        /*!* Set fixed height for sections *!*/
-        /*.section {*/
-        /*    height: calc(50vh - 1rem); !* Adjust as needed *!*/
-        /*    overflow-y: auto;*/
-        /*}*/
-
         /* Set fixed height for sections and make them flex containers */
         .section {
             height: calc(50vh - 1rem); /* Adjust as needed */
@@ -53,13 +47,6 @@
             max-width: calc(100% - 280px); /* Adjust the total width minus sidebar width */
             padding: 20px; /* Optional: Adds padding inside the container */
         }
-
-        /*.custom-container {*/
-        /*    max-width: 1800px; !* Adjust as needed *!*/
-        /*    margin-left: auto;*/
-        /*    margin-right: auto;*/
-        /*}*/
-
     </style>
 <!--    CHARTS-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -231,7 +218,7 @@
                             <td>
                                 <form method="get" th:action="@{/movies/{movieId}(movieId=${movie.getId()})}">
                                     <button type="submit" class="btn btn-info">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                        <i class="bi bi-eye-fill"></i>
                                     </button>
                                 </form>
                             </td>

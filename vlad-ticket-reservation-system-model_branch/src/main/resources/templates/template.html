@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
@@ -12,7 +11,7 @@
     <title>Cinemagic</title>
 
     <!-- BOOTSTRAP CSS-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <!--BOOTSTRAP ICONS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Favicon-->
@@ -22,147 +21,143 @@
     <link th:href="@{css/styles.css}" rel="stylesheet">
 
     <style>
-        .navbar.fixed-top {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
+        body {
+            padding-top: 70px; /* Adjust this value based on your navbar's height */
         }
 
-        .navbar.sticky-top {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-        }
-        /* Adjust sidebar width if necessary */
         .sidebar {
-            width: 280px;
             position: fixed;
-            height: 100%;
-            color: white;
+            top: 56px; /* Height of the navbar */
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #343a40; /* Dark shade for sidebar */
+            z-index: 1000;
         }
 
-        /* Adjust margin-top to prevent content from being hidden under the navbar */
-        main {
-            margin-top: 56px; /* Adjust this value according to your navbar's height */
+        .sidebar-divider {
+            border-top: 5px solid rgba(255, 255, 255, 0.1) !important; /* Ensure the border is white */
+            margin: 5px 0; /* Adjust spacing as needed */
+            background-color: white; /* Change the background color to white */
         }
 
-        .nav-link svg {
-            fill: white;
+        .container-main {
+            width: 100%; /* Use max-width if you want a limit */
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .container-main {
+                padding-right: 30px;
+                padding-left: 30px;
+            }
+        }
+
+        .nav-link {
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: #495057;
         }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container px-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
         <a class="navbar-brand" href="/movies"><b>Cinemagic</b></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/movies">Movies</a></li>
                 <li class="nav-item"><a class="nav-link" href="/movies">By Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="/movies/recommended">Recommended</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Recommended</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contact-us">Contact us</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Account: <b
-                            th:text="${#authentication.name}"></b></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Account: <b th:text="${#authentication.name}"></b></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
-                        <li>
-                            <a sec:authorize="!isAuthenticated" class="dropdown-item" th:href="@{/login}">Log in</a>
-                        </li>
-                        <li>
-                            <form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated">
-                                <button class="dropdown-item" th:href="@{/logout}" type="submit">Log out</button>
-                            </form>
-                        </li>
+                        <li><a sec:authorize="!isAuthenticated" class="dropdown-item" th:href="@{/login}">Log in</a></li>
+                        <li><form method="post" th:action="@{/logout}" sec:authorize="isAuthenticated"><button class="dropdown-item" type="submit">Log out</button></form></li>
                         <li><a class="dropdown-item" th:href="@{/user/profile}">Profile</a></li>
                     </ul>
                 </li>
             </ul>
-            <!--        Search film form-->
             <form th:action="@{/movies}" method="get" class="form-inline d-flex justify-content-end">
-                <input class="form-control mr-sm-2" type="search" placeholder="Find your magic movie..."
-                       aria-label="Search"
-                       name="title">
+                <input class="form-control mr-sm-2" type="search" placeholder="Find your magic movie..." aria-label="Search" name="title">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-
     </div>
 </nav>
+
 <!-- Sidebar -->
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" sec:authorize="hasAnyAuthority('CEO', 'ADMIN')">
-    <br>
+<div sec:authorize="hasAnyAuthority('CEO', 'ADMIN')" class="sidebar">
+    <div class="px-3 py-4">
+        <h5 class="text-white">Admin Panel</h5>
+    </div>
+    <hr class="sidebar-divider">
+    <!-- Navigation -->
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/movies/all"><i class="bi bi-film"></i> View movies</a>
+            <a href="/movies/all" class="nav-link text-white">
+                <i class="bi bi-film"></i> &#160;
+                View Movies
+            </a>
         </li>
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/movies/create"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-window-plus" viewBox="0 0 16 16">
-                <path d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1M4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
-                <path d="M0 4a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v4a.5.5 0 0 1-1 0V7H1v5a1 1 0 0 0 1 1h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-2zm1 2h13V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z"/>
-                <path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-3.5-2a.5.5 0 0 0-.5.5v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1a.5.5 0 0 0-.5-.5"/>
-            </svg> Create new movie</a>
+            <a href="/movies/create" class="nav-link text-white">
+                <i class="bi bi-plus-square"></i> &#160;
+                Create New Movie
+            </a>
         </li>
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/sessions/all"><i class="bi bi-view-list"></i> View sessions</a>
+            <a href="/sessions/all" class="nav-link text-white">
+                <i class="bi bi-calendar-event"></i> &#160;
+                View Sessions
+            </a>
         </li>
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/sessions/create"><i class="bi bi-calendar2-plus"></i> Create new session</a>
+            <a href="/sessions/create" class="nav-link text-white">
+                <i class="bi bi-calendar-plus"></i> &#160;
+                Create New Session
+            </a>
         </li>
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/user/all"><i class="bi bi-people"></i> View users</a>
+            <a href="/user/all" class="nav-link text-white">
+                <i class="bi bi-people"></i> &#160;
+                View Users
+            </a>
         </li>
         <li class="nav-item">
-            <hr>
-            <a class="nav-link text-white" href="/user/all"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
-                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
-                <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
-            </svg> Reports</a>
-            <hr>
+            <a href="/user/reports" class="nav-link text-white">
+                <i class="bi bi-graph-up"></i> &#160;
+                Reports
+            </a>
         </li>
     </ul>
-    <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
-           data-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>mdo</strong>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-    </div>
+    <hr class="dropdown-divider bg-light">
 </div>
 
-<!-- Page Content -->
-<main class="flex-shrink-0">
-    <div layout:fragment="content">
+<!-- Main Content -->
+<div class="container-main">
+    <main>
+        <div layout:fragment="content">
+            <!-- Main content goes here -->
+        </div>
+    </main>
+</div>
 
-    </div>
-</main>
-
-<!-- Footer-->
 <footer class="bg-dark py-4 mt-auto">
-    <div class="container px-5">
+    <div class="container">
         <div class="row align-items-center justify-content-between flex-column flex-sm-row">
             <div class="col-auto">
                 <div class="small m-0 text-white">Cinemagic © 2024</div>
@@ -178,11 +173,17 @@
     </div>
 </footer>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('.navbar-toggler').click(function() {
+            $('.sidebar').toggleClass('collapsed');
+        });
+    });
+</script>
 <script>
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {

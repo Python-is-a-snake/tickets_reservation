@@ -46,21 +46,46 @@
       box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
     }
 
-    .seat-row {
+    .row-number {
+      width: 40px;                /* Fixed width to accommodate up to three-digit numbers */
+      flex-shrink: 0;             /* Prevent flex item from shrinking */
+      color: #FFF;
+      font-weight: bold;
+      font-size: 16px;
+      padding-right: 10px;
       display: flex;
-      justify-content: center; /* Center alignment of seats */
-      margin-bottom: 10px;     /* Space between rows */
+      align-items: center;
+      height: 40px;
     }
 
-    .row-number {
-      color: #FFF;                /* White color for visibility */
-      font-weight: bold;          /* Make text bold */
-      font-size: 16px;            /* Increase font size */
-      padding-right: 10px;        /* Space between row number and seats */
-      display: flex;              /* Use flexbox for vertical center alignment */
-      align-items: center;        /* Align text vertically in center */
-      height: 40px;               /* Ensure sufficient height for alignment */
+    .seat-row {
+      display: flex;
+      justify-content: center; /* Adjust this to center the entire row content */
+      margin-bottom: 10px;
     }
+
+    .seat-container {
+      display: flex;
+      justify-content: center; /* Centering seats within the container */
+      flex-grow: 1;  /* Allow the container to take up remaining space */
+    }
+
+
+    /*.seat-row {*/
+    /*  display: flex;*/
+    /*  justify-content: center; !* Center alignment of seats *!*/
+    /*  margin-bottom: 10px;     !* Space between rows *!*/
+    /*}*/
+
+    /*.row-number {*/
+    /*  color: #FFF;                !* White color for visibility *!*/
+    /*  font-weight: bold;          !* Make text bold *!*/
+    /*  font-size: 16px;            !* Increase font size *!*/
+    /*  padding-right: 10px;        !* Space between row number and seats *!*/
+    /*  display: flex;              !* Use flexbox for vertical center alignment *!*/
+    /*  align-items: center;        !* Align text vertically in center *!*/
+    /*  height: 40px;               !* Ensure sufficient height for alignment *!*/
+    /*}*/
 
     .seat {
       cursor: pointer;
@@ -90,7 +115,6 @@
       cursor: not-allowed;
     }
 
-    /*NEW*/
     #ticket-sidebar {
       width: 250px;            /* Width of the sidebar */
       position: fixed;         /* Fixed position */
@@ -131,15 +155,15 @@
           <div class="cinema-screen">SCREEN</div>  <!-- Cinema screen imitation -->
           <div class="exit-sign left">EXIT</div>   <!-- Left EXIT sign -->
           <div class="exit-sign right">EXIT</div>  <!-- Right EXIT sign -->
-          <!-- Using flexbox to ensure seats are aligned horizontally -->
-          <div class="seat-row" th:each="entry : ${places}">
-            <div class="row-number" th:text="${entry.key}">Row #</div> <!-- Row number styled -->
 
-            <div th:each="place : ${entry.value}"
-                 class="seat"
-                 th:classappend="${#lists.contains(takenPlaces, place) ? 'unavailable' : 'available'}"
-                 th:text="${place.number}"
-                 th:attr="data-place-id=${place.id}, data-row=${place.row}, data-number=${place.number}, data-type=${place.getPlaceType()}, data-price=${place.getPlaceType().getPrice()}">Seat №</div>
+          <div class="seat-row" th:each="entry : ${places}">
+            <div class="row-number" th:text="${entry.key}">Row #</div>
+            <div class="seat-container">
+              <div th:each="place : ${entry.value}" class="seat"
+                   th:classappend="${#lists.contains(takenPlaces, place) ? 'unavailable' : 'available'}"
+                   th:text="${place.number}"
+                   th:attr="data-place-id=${place.id}, data-row=${place.row}, data-number=${place.number}, data-type=${place.getPlaceType()}, data-price=${place.getPlaceType().getPrice()}">Seat №</div>
+            </div>
           </div>
         </div>
         <button id="confirm-selection" class="btn btn-primary mt-4">Confirm Selection</button>
@@ -209,29 +233,12 @@
         if (selectedSeats.length > 0) {
           $('#ticket-sidebar').css('transform', 'translateX(0)');
           $.each(selectedSeats, function(i, seat) {
-            $('#ticket-sidebar').append('<div class="ticket-box">Seat # ' + seat.number + ' Row # ' + seat.row + '<br>Type: ' + seat.type + ' <hr> Price: ' + seat.price + '₴</div>');
+            $('#ticket-sidebar').append('<div class="ticket-box">Row # ' + seat.row + ' Seat # ' + seat.number + '<br>Type: ' + seat.type + ' <hr> Price: ' + seat.price + '₴</div>');
           });
         } else {
           $('#ticket-sidebar').css('transform', 'translateX(100%)');
         }
       }
-      // function updateSidebar(clickedSeat) {
-      //   $('#ticket-sidebar').empty();
-      //   var selectedSeats = $('.seat.selected').map(function () {
-      //     return $(this).data('place-id');
-      //   }).get();
-      //
-      //   if (selectedSeats.length > 0) {
-      //     $('#ticket-sidebar').css('transform', 'translateX(0)');
-      //     $.each(selectedSeats, function(i, placeId) {
-      //       var seatNumber = $('.seat[data-place-id="' + placeId + '"]').text();
-      //       $('#ticket-sidebar').append('<div class="ticket-box">Ticket for Seat: ' + seatNumber + '</div>');
-      //     });
-      //   } else {
-      //     $('#ticket-sidebar').css('transform', 'translateX(100%)');
-      //   }
-      // }
-
     });
 
   </script>
