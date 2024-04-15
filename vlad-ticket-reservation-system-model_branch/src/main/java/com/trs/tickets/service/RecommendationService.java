@@ -1,5 +1,7 @@
 package com.trs.tickets.service;
 
+import com.trs.tickets.model.entity.Movie;
+import com.trs.tickets.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -21,10 +23,11 @@ import java.util.List;
 public class RecommendationService {
     private static final int NEIGHBORHOOD_SIZE = 10;
     private static final int RECOMMENDATIONS_AMOUNT = 10;
+    private final MovieRepository movieRepository;
 
     private final DataSource dataSource;
 
-    public List<RecommendedItem> recommendMoviesForUser(Long userID) {
+    public List<Movie> recommendMoviesForUser(Long userID) {
         try {
 
             DataModel datamodel = new MySQLJDBCDataModel(dataSource, "rating", "user_id", "movie_id", "score", null);
@@ -36,12 +39,14 @@ public class RecommendationService {
             UserBasedRecommender recommender = new GenericUserBasedRecommender(datamodel, userneighborhood, usersimilarity);
 
             System.out.println("Most similar users IDs: " + Arrays.toString(recommender.mostSimilarUserIDs(userID, RECOMMENDATIONS_AMOUNT)));
+
             List<RecommendedItem> recommendations = recommender.recommend(userID, RECOMMENDATIONS_AMOUNT);
 
-            for (RecommendedItem recommendation : recommendations) {
-                System.out.println(recommendation);
+            if(recommendations.size() < RECOMMENDATIONS_AMOUNT){
+                return movieRepository.find10MoviesWithMostScore();
             }
-            return recommendations;
+
+            return recommendations.stream().map(recommendedItem -> movieRepository.findById(recommendedItem.getItemID()).orElseThrow()).toList();
 
         } catch (Exception e) {
             e.printStackTrace();

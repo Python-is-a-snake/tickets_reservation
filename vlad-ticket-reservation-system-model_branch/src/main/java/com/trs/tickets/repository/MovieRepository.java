@@ -18,6 +18,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     Page<Movie> findByTitleContainingIgnoreCaseAndIsActiveTrue(String title, Pageable pageable);
     List<Movie> findByTitleContainingIgnoreCase(String title);
 
+    @Query(value = "SELECT * from movie JOIN rating r on movie.id = r.movie_id ORDER BY score DESC LIMIT 10", nativeQuery = true)
+    List<Movie> find10MoviesWithMostScore();
+
     //For ADMIN page
     Page<Movie> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 
