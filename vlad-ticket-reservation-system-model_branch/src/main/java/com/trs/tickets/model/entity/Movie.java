@@ -54,6 +54,10 @@ public class Movie extends BaseEntity {
     @ToString.Exclude
     private List<Session> sessions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Rating> ratings = new ArrayList<>();
+
     @Override
     public int hashCode() {
         return getClass().hashCode();

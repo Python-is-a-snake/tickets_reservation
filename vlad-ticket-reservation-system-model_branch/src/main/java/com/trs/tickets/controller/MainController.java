@@ -21,14 +21,4 @@ public class MainController {
     public String contactUsPage() {
         return "contact-us-page";
     }
-
-    @GetMapping("/t")
-    public String template(){
-        return "template";
-    }
-
-    @GetMapping("/n")
-    public String seats(){
-        return "buy-ticket/new";
-    }
 }

@@ -11,7 +11,7 @@
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
     <style>
-        button:disabled {
+        .unaclickable {
             cursor: not-allowed;
         }
     </style>
@@ -103,7 +103,7 @@
                         <td>
                             <div class="row">
                                 <div class="col-3">
-                                    <form method="get" th:action="@{/movies/{movieId}(movieId=${movie.id})}">
+                                    <form method="get" th:action="@{/movies/{movieId}(movieId=${movie.id})}" th:classappend="${movie.isActive ? '' : 'unaclickable'}">
                                         <button type="submit" class="btn btn-info"
                                                 th:classappend="${movie.isActive ? '' : 'disabled'}">
                                             <i class="bi bi-eye-fill"></i>
@@ -111,7 +111,7 @@
                                     </form>
                                 </div>
                                 <div class="col-3">
-                                    <form method="get" th:action="@{/movies/edit/{movieId}(movieId=${movie.id})}">
+                                    <form method="get" th:action="@{/movies/edit/{movieId}(movieId=${movie.id})}" th:classappend="${movie.isActive ? '' : 'unaclickable'}">
                                         <button type="submit" class="btn btn-warning"
                                                 th:classappend="${movie.isActive ? '' : 'disabled'}">
                                             <i class="bi bi-pencil-square"></i>
@@ -119,7 +119,7 @@
                                     </form>
                                 </div>
                                 <div class="col-3">
-                                    <form method="post" th:action="@{/movies/deactivate/{movieId}(movieId=${movie.id})}">
+                                    <form method="post" th:action="@{/movies/deactivate/{movieId}(movieId=${movie.id})}" th:classappend="${movie.isActive ? '' : 'unaclickable'}">
                                         <button type="submit" class="btn btn-danger"
                                                 th:classappend="${movie.isActive ? '' : 'disabled'}">
                                             <i class="bi bi-archive"></i>

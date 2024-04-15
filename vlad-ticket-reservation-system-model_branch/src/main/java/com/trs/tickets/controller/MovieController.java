@@ -1,16 +1,20 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.MovieDto;
+import com.trs.tickets.repository.UserRepository;
 import com.trs.tickets.service.MovieService;
 import com.trs.tickets.service.PageSizeCheckerService;
+import com.trs.tickets.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.extras.springsecurity6.auth.Authorization;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +24,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
+    private final UserRepository userRepository;
     private final PageSizeCheckerService pageSizeCheckerService;
 
     //USER & Anonymous User
@@ -29,7 +34,8 @@ public class MovieController {
     public String getMovies(Model model,
                                @RequestParam(name = "title", required = false) String title,
                                @RequestParam(name = "page", defaultValue = "0") Integer page,
-                               @RequestParam(name = "size", defaultValue = "6") Integer size
+                               @RequestParam(name = "size", defaultValue = "6") Integer size,
+                            Authentication authentication
                                ) {
 
         page = pageSizeCheckerService.checkPage(page);
@@ -44,6 +50,8 @@ public class MovieController {
             moviesPage = movieService.getActiveMoviesByTitle(title, page, size);
             model.addAttribute("title", title);
         }
+
+        model.addAttribute("userId", userRepository.findByUsernameContainingIgnoreCase(authentication.getName()).getId());
 
         model.addAttribute("movies", moviesPage.getContent());
         model.addAttribute("currentPage", moviesPage.getNumber());

@@ -44,6 +44,10 @@ public class SessionService {
         return sessionRepository.findAll();
     }
 
+    public List<Session> getAllActiveSessions() {
+        return sessionRepository.findAll().stream().filter(Session::getIsActive).toList();
+    }
+
     public SessionDto getSessionById(Long id) {
         Optional<Session> session = sessionRepository.findById(id);
         if(session.isEmpty()){
@@ -89,7 +93,7 @@ public class SessionService {
     }
 
     public List<Session> getAllNotAvailableSessionsSortedByDateTime() {
-        return sessionRepository.findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime.now());
+        return sessionRepository.findAllBySessionDateTimeLessThanAndIsActiveTrueOrderBySessionDateTimeAsc(LocalDateTime.now());
     }
 
 }

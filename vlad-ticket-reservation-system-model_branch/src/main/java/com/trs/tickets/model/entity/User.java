@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,6 +33,10 @@ public class User extends BaseEntity {
     private Boolean isActive;
 
     private LocalDate registrationDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Rating> ratings = new ArrayList<>();
 
     @PrePersist
     private void init() {

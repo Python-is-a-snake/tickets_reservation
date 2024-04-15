@@ -31,19 +31,19 @@ public class AdminDashboardController {
 
         //data for 4 cards - SECTIONS 2 - 3
         //count total movies amount
-        Long totalMovies = movieService.getAllMovies().stream().count();
+        Integer totalMovies = movieService.getAllMovies().size();
         model.addAttribute("totalMovies", totalMovies);
 
         //count total sessions amount
-        Long totalSessions = sessionService.getAllSessions().stream().count();
+        Integer totalSessions = sessionService.getAllSessions().size();
         model.addAttribute("totalSessions", totalSessions);
 
         //count total users amount
-        Long totalUsers = userService.getAllUsers().stream().count();
+        Integer totalUsers = userService.getAllUsers().size();
         model.addAttribute("totalUsers", totalUsers);
 
         //count new users amount of this Month
-        Long newUsers = userService.getNewUsersOfThisMonth().stream().count();
+        Integer newUsers = userService.getNewUsersOfThisMonth().size();
         model.addAttribute("newUsers", newUsers);
 
         //Movies with most Sessions - SECTION 4
@@ -56,11 +56,11 @@ public class AdminDashboardController {
         //CHART 1
         //Displays movies titles and amount of sessions for each movie
         addChartMoviesSessionCountData(model);
-
+        //CHART 2
         addChartCountBoughtTicketsForMoviesThisMonthData(model);
-
+        //CHART 3
         addChartTicketsCountByHourData(model);
-
+        //CHART 4
         addChartSessionsForDaysOfWeekData(model);
 
         return "/admin/test";

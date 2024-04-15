@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface ChartsRepository extends JpaRepository<Session, Long> {
 
-    @Query(value = "SELECT m.title AS title, COUNT(s.id) AS sessionCount FROM movie m JOIN session s ON m.id = s.movie_id GROUP BY m.title ORDER BY m.title", nativeQuery = true)
+    @Query(value = "SELECT m.title AS title, COUNT(s.id) AS sessionCount FROM movie m JOIN session s ON m.id = s.movie_id WHERE m.is_active IS TRUE GROUP BY m.title ORDER BY m.title", nativeQuery = true)
     List<MovieSessionsProjection> findMoviesAndSessionCounts();
 
     @Query(value = "SELECT COUNT(s.id) AS sessionCount FROM movie m JOIN session s ON m.id = s.movie_id WHERE s.is_active IS FALSE GROUP BY m.title ORDER BY m.title", nativeQuery = true)
@@ -54,11 +54,11 @@ public interface ChartsRepository extends JpaRepository<Session, Long> {
             "  END AS dayOfWeek," +
             "  COUNT(*) AS sessionsCount" +
             " FROM session s" +
-            " WHERE s.session_date_time BETWEEN :startOfMonth AND :now " +
+            " WHERE s.is_active IS TRUE AND s.session_date_time BETWEEN :startOfMonth AND :endOfMonth " +
             " GROUP BY DAYOFWEEK(s.session_date_time)" +
             " ORDER BY CASE DAYOFWEEK(s.session_date_time)" +
             "         WHEN 2 THEN 1" +
             "         ELSE DAYOFWEEK(s.session_date_time) END", nativeQuery = true)
-    List<SessionsByDayOfWeekProjection> findSessionsForDaysOfWeek(@Param("startOfMonth") LocalDate startOfMonth, @Param("now") LocalDate now);
+    List<SessionsByDayOfWeekProjection> findSessionsForDaysOfWeek(@Param("startOfMonth") LocalDate startOfMonth, @Param("endOfMonth") LocalDate endOfMonth);
 
 }

@@ -10,6 +10,11 @@
     <title>Cinemagic | Movies</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" th:href="@{assets/favicon.ico}">
+    <style>
+        .ontop{
+            z-index: 1000; !important;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -23,6 +28,8 @@
                     <h1 class="fw-bolder">CINEMAGIC</h1>
                     <p class="lead fw-normal text-muted mb-0">Movies magic starts here!</p>
                     <hr>
+
+                    <a th:href="@{/user/{userId}/recommendations(userId=${userId})}">RECOMMENDED</a>
 
                     <div th:if="${totalPages > 1}" class="row text-center">
 
@@ -64,28 +71,36 @@
                 <div class="row gx-5">
                     <div class="col-lg-6 mb-2" th:each="movie : ${movies}">
                         <div class="position-relative mb-5">
-
                             <span th:if="${T(java.time.LocalDate).now().minusWeeks(1) < movie.releaseDate.plusWeeks(1)}"
-                                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+                                  class="position-absolute top-0 start-0 translate-middle badge rounded-pill text-bg-danger z-3 ontop">
                                 NEW!
                             </span>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a  th:href="@{/movies/{movieId}(movieId=${movie.id})}">
+                                    <img class="img-fluid rounded-3 mb-3 custom-image" th:src="${movie.posterUrl}"
+                                         th:alt="${movie.title} + ' ' + Poster"
+                                         th:href="@{/movies/{movieId}(movieId=${movie.id})}">
+                                    </a>
+                                </div>
 
-                            <img class="img-fluid rounded-3 mb-3 custom-image" th:src="${movie.posterUrl}"
-                                 th:alt="${movie.title} + ' ' + Poster"
-                                 th:href="@{/movies/{movieId}(movieId=${movie.id})}">
-                            <b><a class="h3 fw-bolder text-decoration-none link-dark stretched-link"
-                                  th:href="@{/movies/{movieId}(movieId=${movie.id})}"
-                                  th:text="${movie.title}">MOVIE TITLE</a></b><br>
-                            <a class="h3 fw-light text-decoration-none link-dark stretched-link"
-                               th:href="@{/movies/{movieId}(movieId=${movie.id})}"
-                               th:text="${movie.description}">MOVIE DESC</a>
-                        </div>
-                        <div class="d-flex align-items-start" sec:authorize="hasAnyAuthority('CEO', 'ADMIN')">
-                            <a class="btn btn-warning me-2" th:href="@{/movies/edit/{movieId}(movieId=${movie.id})}"
-                               role="button">Edit</a>
-                            <form th:action="@{/movies/delete/{movieId}(movieId=${movie.id})}" method="post">
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
+                                <div class="col-6">
+                                    <b><a class="h3 fw-bolder text-decoration-none link-dark stretched-link"  style="word-wrap: break-word;"
+                                           th:href="@{/movies/{movieId}(movieId=${movie.id})}"
+                                           th:text="${movie.title}">MOVIE TITLE</a></b>
+                                    <br>
+                                    <a class="h3 fw-light text-decoration-none link-dark stretched-link"  style="word-wrap: break-word;"
+                                       th:href="@{/movies/{movieId}(movieId=${movie.id})}"
+                                       th:text="${movie.description}">MOVIE DESC</a>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start" sec:authorize="hasAnyAuthority('CEO', 'ADMIN')">
+                                <a class="btn btn-warning me-2" th:href="@{/movies/edit/{movieId}(movieId=${movie.id})}"
+                                   role="button">Edit</a>
+                                <form th:action="@{/movies/delete/{movieId}(movieId=${movie.id})}" method="post">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

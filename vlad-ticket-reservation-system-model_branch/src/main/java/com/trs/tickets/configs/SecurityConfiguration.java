@@ -31,13 +31,12 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests().requestMatchers(staticResources).permitAll();
 
         http.authorizeHttpRequests().requestMatchers("/register", "/movies/**",
-                "/", "/contact-us", "/error", "/test", "/doRegister", "/t").permitAll();
+                "/", "/contact-us", "/error", "/test", "/doRegister").permitAll();
 
         http.authorizeHttpRequests().anyRequest().authenticated();
         
         http.formLogin(login -> login
                 .loginPage("/login")
-//                .defaultSuccessUrl("/movies", true)
                 .permitAll());
 
         http.logout().permitAll();

@@ -47,9 +47,11 @@ public class ChartsService {
     }
 
     public List<SessionsByDayOfWeekProjection> findSessionsForDaysOfWeek(){
-        final LocalDate now = LocalDate.now().plusDays(1);
+        final LocalDate now = LocalDate.now();
         final LocalDate startOfMonth = now.withDayOfMonth(1);
-        return chartsRepository.findSessionsForDaysOfWeek(startOfMonth, now);
+        final LocalDate endOfMonth = now.withDayOfMonth(now.lengthOfMonth()).plusDays(1);
+        System.out.println("Searching sessions this month (sessionDateTime between : " + startOfMonth + " " + endOfMonth);
+        return chartsRepository.findSessionsForDaysOfWeek(startOfMonth, endOfMonth);
     }
 
 

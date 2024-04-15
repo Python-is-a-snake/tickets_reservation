@@ -21,7 +21,7 @@ public interface SessionRepository extends JpaRepository<Session, Long> {
             "GROUP BY h.name")
     List<Map<String, Object>> countSessionsByHall();
 
-    List<Session> findAllBySessionDateTimeLessThanOrderBySessionDateTimeAsc(LocalDateTime localDateTime);
+    List<Session> findAllBySessionDateTimeLessThanAndIsActiveTrueOrderBySessionDateTimeAsc(LocalDateTime localDateTime);
 
     Page<Session> findAllByOrderBySessionDateTimeDesc(Pageable pageable);
 

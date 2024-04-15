@@ -47,6 +47,7 @@ public class LoginRegisterController {
             model.addAttribute("bindingResult", bindingResult);
             return "account/register-page";
         }
+        userCreateDto.setIsActive(true);
 
         userService.addUser(userCreateDto);
         return "redirect:/login";

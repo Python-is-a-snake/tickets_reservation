@@ -54,6 +54,7 @@ public class UserService implements UserDetailsService {
 
     public UserDto addUser(UserCreateDto userCreateDto) {
         User user = createMapper.convert(userCreateDto);
+        user.setIsActive(true);
         return userMapper.convert(userRepository.save(user));
     }
 

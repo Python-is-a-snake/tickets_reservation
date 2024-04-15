@@ -107,7 +107,6 @@ public class MovieService {
         log.info("Searching 10 movies with most sessions");
         List<MovieMostSessionsProjection> moviesWithMostSessions = movieRepository.findMoviesWithMostSessions();
         log.info("Found {} values", moviesWithMostSessions.size());
-        moviesWithMostSessions.forEach(m -> System.out.println(m.getTitle() + " " + m.getSessionCount()));
         return moviesWithMostSessions;
     }
 }

@@ -21,7 +21,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     //For ADMIN page
     Page<Movie> findByTitleContainingIgnoreCase(String title, Pageable pageable);
 
-    @Query("SELECT m.id AS id, m.title AS title, COUNT(s.id) as sessionCount FROM Movie m JOIN Session s ON m.id = s.movie.id GROUP BY m.title ORDER BY COUNT(s.id) DESC LIMIT 10")
+    @Query("SELECT m.id AS id, m.title AS title, COUNT(s.id) as sessionCount FROM Movie m JOIN Session s ON m.id = s.movie.id WHERE s.isActive GROUP BY m.title ORDER BY COUNT(s.id) DESC LIMIT 10")
     List<MovieMostSessionsProjection> findMoviesWithMostSessions();
 
 }

@@ -36,7 +36,6 @@ public class UserController {
 
         final String username = authentication.getName();
 
-//        Page<Ticket> ticketsByUserNamePage = ticketService.findByUserName(authentication.getName(), page, size);
         Page<Ticket> ticketsByUserNamePage = ticketService.findByUserNameOrderedByPurchaseTime(username, page, size);
 
         model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
