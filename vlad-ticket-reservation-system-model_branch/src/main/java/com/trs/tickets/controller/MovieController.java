@@ -1,9 +1,12 @@
 package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.MovieDto;
+import com.trs.tickets.model.entity.Rating;
+import com.trs.tickets.repository.RatingRepository;
 import com.trs.tickets.repository.UserRepository;
 import com.trs.tickets.service.MovieService;
 import com.trs.tickets.service.PageSizeCheckerService;
+import com.trs.tickets.service.RatingService;
 import com.trs.tickets.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +21,16 @@ import org.thymeleaf.extras.springsecurity6.auth.Authorization;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/movies")
 @RequiredArgsConstructor
 public class MovieController {
     private final MovieService movieService;
-    private final UserRepository userRepository;
+    private final UserService userService;
+    private final RatingService ratingService;
     private final PageSizeCheckerService pageSizeCheckerService;
 
     //USER & Anonymous User
@@ -50,9 +56,6 @@ public class MovieController {
             moviesPage = movieService.getActiveMoviesByTitle(title, page, size);
             model.addAttribute("title", title);
         }
-
-        model.addAttribute("userId", userRepository.findByUsernameContainingIgnoreCase(authentication.getName()).getId());
-
         model.addAttribute("movies", moviesPage.getContent());
         model.addAttribute("currentPage", moviesPage.getNumber());
         model.addAttribute("totalItems", moviesPage.getTotalElements());
@@ -62,13 +65,36 @@ public class MovieController {
         return "main/movies-page";
     }
 
-    @GetMapping("/{id}")
-    public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
-        MovieDto movie = movieService.getMovieById(id);
-        model.addAttribute("movie", movie);
+//    @GetMapping("/{id}")
+//    public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
+//        MovieDto movie = movieService.getMovieById(id);
+//        model.addAttribute("movie", movie);
+//
+//        model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
+//        return "movie-session/id-movie-page";
+//    }
 
+
+    @GetMapping("/{id}")
+    public String getMovieInfoPage(@PathVariable("id") Long id, Model model, Authentication authentication) {
+        MovieDto movie = movieService.getMovieById(id);
+        List<Rating> ratingsForCurrentMovie = ratingService.findByMovieId(movie.getId());
+
+        model.addAttribute("ratings", ratingsForCurrentMovie);
+        model.addAttribute("movie", movie);
         model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
-        return "movie-session/id-movie-page";
+
+        if(authentication == null){
+            model.addAttribute("userId", null);
+            model.addAttribute("currentUserRating", null);
+        }else {
+            Long userId = userService.getUserByUsername(authentication.getName()).getId();
+            model.addAttribute("userId", userId);
+            model.addAttribute("username", userService.getUserById(userId).getUsername());
+            model.addAttribute("currentUserRating", ratingService.findByUserAndMovieId(userId, movie.getId()).getScore());
+        }
+
+        return "movie-session/new_id_movie";
     }
 
     //ADMIN

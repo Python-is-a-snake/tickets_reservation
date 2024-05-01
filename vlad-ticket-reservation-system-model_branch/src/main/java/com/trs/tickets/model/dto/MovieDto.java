@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class MovieDto extends BaseDto {
 
     @NotEmpty(message = "Title can not be empty")
-    @Length(min = 3, max = 15, message = "Too short or too long")
+    @Length(min = 3, max = 50, message = "Too short or too long")
     private String    title;
 
     @Length(max = 240, min = 10, message = "Too long or too short")

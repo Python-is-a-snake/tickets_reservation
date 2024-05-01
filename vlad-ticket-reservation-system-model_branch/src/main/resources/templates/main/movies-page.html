@@ -29,8 +29,6 @@
                     <p class="lead fw-normal text-muted mb-0">Movies magic starts here!</p>
                     <hr>
 
-                    <a th:href="@{/user/{userId}/recommendations(userId=${userId})}">RECOMMENDED</a>
-
                     <div th:if="${totalPages > 1}" class="row text-center">
 
                         <h5 class="col">Found <span th:text="${totalItems}">count</span> Movies!</h5>

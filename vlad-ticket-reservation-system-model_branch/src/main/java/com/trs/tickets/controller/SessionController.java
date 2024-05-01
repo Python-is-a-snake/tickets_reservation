@@ -20,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -128,9 +127,11 @@ public class SessionController {
 
         return "buy-ticket/ticket-purchase-page";
     }
+    /*
+    ********************************************************************************************************************
+     */
 
     // ADMIN
-
     //view all Sessions page (with buttons to VIEW, EDIT, DELETE)
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CEO')")

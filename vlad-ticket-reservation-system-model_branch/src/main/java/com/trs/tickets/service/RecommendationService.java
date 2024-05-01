@@ -29,18 +29,16 @@ public class RecommendationService {
 
     public List<Movie> recommendMoviesForUser(Long userID) {
         try {
-
             DataModel datamodel = new MySQLJDBCDataModel(dataSource, "rating", "user_id", "movie_id", "score", null);
 
             UserSimilarity usersimilarity = new PearsonCorrelationSimilarity(datamodel);
-
             UserNeighborhood userneighborhood = new NearestNUserNeighborhood(NEIGHBORHOOD_SIZE, usersimilarity, datamodel);
-
             UserBasedRecommender recommender = new GenericUserBasedRecommender(datamodel, userneighborhood, usersimilarity);
 
             System.out.println("Most similar users IDs: " + Arrays.toString(recommender.mostSimilarUserIDs(userID, RECOMMENDATIONS_AMOUNT)));
-
             List<RecommendedItem> recommendations = recommender.recommend(userID, RECOMMENDATIONS_AMOUNT);
+
+            recommendations.forEach(recommendedItem -> System.out.println("Recommended Movie ID:" + recommendedItem.getItemID()));
 
             if(recommendations.size() < RECOMMENDATIONS_AMOUNT){
                 return movieRepository.find10MoviesWithMostScore();

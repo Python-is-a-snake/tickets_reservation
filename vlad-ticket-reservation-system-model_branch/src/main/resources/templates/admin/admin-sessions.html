@@ -74,21 +74,14 @@
             <td th:if="${movieSession.available}"><button class="btn btn-success"></button></td>
             <td>
               <div class="row">
-                <div class="col-3">
-                  <form method="get" th:action="@{/sessions/buy-tickets/{sessionId}(sessionId=${movieSession.id})}">
-                    <button type="submit" class="btn btn-info" th:classappend="${movieSession.isActive ? '' : 'disabled'}">
-                      <i class="bi bi-eye-fill"></i>
-                    </button>
-                  </form>
-                </div>
-                <div class="col-3">
+                <div class="col-6">
                   <form method="post" th:action="@{/sessions/deactivate/{sessionId}(sessionId=${movieSession.id})}">
                     <button type="submit" class="btn btn-danger" th:classappend="${movieSession.isActive ? '' : 'disabled'}">
                       <i class="bi bi-archive"></i>
                     </button>
                   </form>
                 </div>
-                <div class="col-3">
+                <div class="col-6">
                   <form method="post" th:action="@{/sessions/delete/{sessionId}(sessionId=${movieSession.id})}">
                     <button type="submit" class="btn btn-danger" th:classappend="${movieSession.isActive ? 'disabled' : ''}">
                       <i class="bi bi-trash"></i>
