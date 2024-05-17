@@ -2,8 +2,6 @@ package com.trs.tickets.controller;
 
 import com.trs.tickets.model.dto.MovieDto;
 import com.trs.tickets.model.entity.Rating;
-import com.trs.tickets.repository.RatingRepository;
-import com.trs.tickets.repository.UserRepository;
 import com.trs.tickets.service.MovieService;
 import com.trs.tickets.service.PageSizeCheckerService;
 import com.trs.tickets.service.RatingService;
@@ -17,11 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.extras.springsecurity6.auth.Authorization;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,7 +33,7 @@ public class MovieController {
 
     //view All movies - MAIN PAGE
     @GetMapping
-    public String getMovies(Model model,
+    public String getMoviesPage(Model model,
                                @RequestParam(name = "title", required = false) String title,
                                @RequestParam(name = "page", defaultValue = "0") Integer page,
                                @RequestParam(name = "size", defaultValue = "6") Integer size,
@@ -65,16 +61,6 @@ public class MovieController {
         return "main/movies-page";
     }
 
-//    @GetMapping("/{id}")
-//    public String getMovieInfoPage(@PathVariable("id") Long id, Model model) {
-//        MovieDto movie = movieService.getMovieById(id);
-//        model.addAttribute("movie", movie);
-//
-//        model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
-//        return "movie-session/id-movie-page";
-//    }
-
-
     @GetMapping("/{id}")
     public String getMovieInfoPage(@PathVariable("id") Long id, Model model, Authentication authentication) {
         MovieDto movie = movieService.getMovieById(id);
@@ -84,15 +70,21 @@ public class MovieController {
         model.addAttribute("movie", movie);
         model.addAttribute("sessions", movie.getSessionsGroupedByDateTime());
 
+        //to avoid Thymeleaf fail if userId and currentUserRating are NOT set
         if(authentication == null){
             model.addAttribute("userId", null);
             model.addAttribute("currentUserRating", null);
         }else {
-            Long userId = userService.getUserByUsername(authentication.getName()).getId();
+            Long userId = userService.findByUsername(authentication.getName()).getId();
             model.addAttribute("userId", userId);
             model.addAttribute("username", userService.getUserById(userId).getUsername());
             model.addAttribute("currentUserRating", ratingService.findByUserAndMovieId(userId, movie.getId()).getScore());
         }
+
+        //rating card
+        model.addAttribute("avgRating", ratingService.getAverageRatingForMovie(movie.getId()));
+        model.addAttribute("scoresMap", ratingService.getScoresCountMapForMovie(movie.getId()));
+        model.addAttribute("scoresCountTotal", ratingService.findByMovieId(movie.getId()).size());
 
         return "movie-session/new_id_movie";
     }

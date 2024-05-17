@@ -32,11 +32,12 @@ public class TicketController {
     }
 
     @PostMapping("/do_purchase")
-    public String purchaseTickets(@RequestBody TicketPurchaseRequest request, Authentication authentication) {
+    public String purchaseTickets(@RequestBody TicketPurchaseRequest request,
+                                  Authentication authentication) {
         // Check that the user is allowed to buy tickets
         String username = authentication.getName();
         System.out.println("USERNAME: " + username);
-        UserDto user = userService.getUserByUsername(username);
+        UserDto user = userService.findByUsername(username);
 
         // You might want to validate the request here (e.g., check that the seats are available)
 

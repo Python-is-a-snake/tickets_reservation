@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +61,17 @@ public class RatingService {
 
         log.info("Saving Rating: {}", ratingDto);
         return ratingRepository.save(rating);
+    }
+
+    public Double getAverageRatingForMovie(Long movieId) {
+        List<Rating> ratingsForMovie = findByMovieId(movieId);
+        double scoreSum = ratingsForMovie.stream().mapToInt(Rating::getScore).sum();
+        int scoreCount = ratingsForMovie.size();
+        return scoreSum / scoreCount;
+    }
+
+    public Map<Short, Long> getScoresCountMapForMovie(Long movieId){
+        List<Rating> ratingsForMovie = findByMovieId(movieId);
+        return ratingsForMovie.stream().collect(Collectors.groupingBy(Rating::getScore, Collectors.counting()));
     }
 }

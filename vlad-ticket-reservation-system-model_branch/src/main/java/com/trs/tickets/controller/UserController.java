@@ -27,7 +27,8 @@ public class UserController {
 
     //USER
     @GetMapping("/profile")
-    public String profilePage(Model model, Authentication authentication,
+    public String profilePage(Model model,
+                              Authentication authentication,
                               @RequestParam(name = "page", defaultValue = "0") Integer page,
                               @RequestParam(name = "size", defaultValue = "6") Integer size) {
 
@@ -38,7 +39,7 @@ public class UserController {
 
         Page<Ticket> ticketsByUserNamePage = ticketService.findByUserNameOrderedByPurchaseTime(username, page, size);
 
-        model.addAttribute("user", userService.getUserByUsername(authentication.getName()));
+        model.addAttribute("user", userService.findByUsername(authentication.getName()));
         model.addAttribute("tickets", ticketsByUserNamePage.getContent());
         model.addAttribute("currentPage", ticketsByUserNamePage.getNumber());
         model.addAttribute("totalItems", ticketsByUserNamePage.getTotalElements());

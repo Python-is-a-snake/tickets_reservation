@@ -17,7 +17,7 @@ public class RecommendationController {
 
     @GetMapping("/recommendations")
     public String getRecommendedMovies(Model model, Authentication authentication) {
-        Long userId = userService.getUserByUsername(authentication.getName()).getId();
+        Long userId = userService.findByUsername(authentication.getName()).getId();
         model.addAttribute("movies", recommendationService.recommendMoviesForUser(userId));// 10 recommendations
         return "main/movies-page";
     }

@@ -3,10 +3,7 @@ package com.trs.tickets.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +27,8 @@ public class Session extends BaseEntity {
     private LocalDateTime sessionDateTime;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(mappedBy = "session", cascade = CascadeType.DETACH)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Place> places = new ArrayList<>();
 
     @Column

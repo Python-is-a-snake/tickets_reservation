@@ -10,22 +10,22 @@ import com.trs.tickets.model.dto.UserDto;
 import com.trs.tickets.model.entity.Ticket;
 import com.trs.tickets.model.entity.User;
 import com.trs.tickets.repository.TicketRepository;
+import com.trs.tickets.repository.TokenRepository;
 import com.trs.tickets.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.util.Streamable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -33,8 +33,10 @@ import java.util.stream.Stream;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
+    private final TokenRepository tokenRepository;
     private final UserCreateDtoMapper createMapper;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll().stream().map(userMapper::convert).toList();
@@ -69,13 +71,22 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("Loading User with username: " + username);
-        return userRepository.findByUsername(username).map(user -> new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), List.of(user.getRole()))).orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
+        return userRepository.findByUsername(username).map(user ->
+                new org.springframework.security.core.userdetails.User(user.getUsername(),
+                        user.getPassword(),
+                        List.of(user.getRole())))
+                .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
     }
 
-    public UserDto getUserByUsername(String username) {
-        log.info("Finding User with username: " + username);
+    public UserDto findByUsername(String username) {
+        log.info("Finding UserDto with username: " + username);
         User user = userRepository.findByUsernameContainingIgnoreCase(username);
         return userMapper.convert(user);
+    }
+
+    public User findUserByUsername(String username) {
+        log.info("Finding User with username: " + username);
+        return userRepository.findByUsernameContainingIgnoreCase(username);
     }
 
     public boolean usernameIsUnique(String username) {
@@ -84,7 +95,6 @@ public class UserService implements UserDetailsService {
 
     public Page<UserDto> getAllUsersExcept(String username, Integer page, Integer size) {
 //        List<UserDto> list = userRepository.findAll().stream().filter(user -> !user.getUsername().equals(username)).map(userMapper::convert).toList();
-
         Pageable pageable = PageRequest.of(page, size);
         return userRepository.findByUsernameNotIn(List.of(username), pageable).map(userMapper::convert);
     }
@@ -92,9 +102,7 @@ public class UserService implements UserDetailsService {
     public Page<UserDto> getUserByUsernameExcept(String username, String currentUserName, Integer page, Integer size) {
         log.info("Finding User with username: " + username + " except for " + currentUserName);
 //        return userRepository.findByUsernameContainingIgnoreCase(username).stream().filter(user -> !user.getUsername().equals(currentUserName)).map(userMapper::convert).toList();
-
         Pageable pageable = PageRequest.of(page, size);
-
         return userRepository.findByUsernameContainingIgnoreCaseAndUsernameNotIn(username, List.of(currentUserName),  pageable).map(userMapper::convert);
     }
 
@@ -102,6 +110,14 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findById(id).get();
         user.setRole(role);
         userRepository.save(user);
+    }
+
+    public void resetPassword(UserCreateDto userDto){
+        User user = userRepository.findByUsernameContainingIgnoreCase(userDto.getUsername());
+        log.info("Found user to reset password: {}", user);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userRepository.save(user);
+        tokenRepository.deleteByUser(user);
     }
 
     public boolean isEmailCorrect(UserCreateDto userDto){

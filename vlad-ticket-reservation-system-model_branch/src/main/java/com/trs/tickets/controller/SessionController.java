@@ -110,7 +110,7 @@ public class SessionController {
 
         SessionDto session = sessionService.getSessionById(sessionId);
         Place place = placeService.getPlaceById(placeId);
-        UserDto user = userService.getUserByUsername(authentication.getName());
+        UserDto user = userService.findByUsername(authentication.getName());
         TicketDto ticket = new TicketDto();
 
         ticket.setSessionId(session.getId());
@@ -170,7 +170,8 @@ public class SessionController {
     public String createSessionPost(@Valid @ModelAttribute("movieSession") SessionDto session,
                                   @RequestParam(name = "movieId") Long movieId,
                                   @RequestParam("hallId") Long hallId,
-                                  BindingResult bindingResult, Model model) {
+                                  BindingResult bindingResult,
+                                  Model model) {
 
         if(session.getSessionDateTime() == null){
             bindingResult.addError(new FieldError("movieSession", "sessionDateTime", "Session Date and Time can not be empty!"));
